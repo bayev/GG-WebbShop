@@ -27,6 +27,7 @@ namespace DbPrototype
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ProductCategory>().HasKey(sc => new { sc.ProductId, sc.CategoryId });
+            modelBuilder.Entity<CartToProduct>().HasKey(sc => new { sc.ProductId, sc.CartId });
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -37,6 +38,7 @@ namespace DbPrototype
         public DbSet<Sale> Sales { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<CartToProduct> CartToProducts { get; set; }
 
     }
 }

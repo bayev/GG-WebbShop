@@ -18,5 +18,6 @@ namespace DbPrototype.Models.Entities
         public string Size { get; set; }
 
         public IList<ProductCategory> ProductCategories { get; set; }
+        public IList<CartToProduct> CartToProducts { get; set; }
     }
 }
