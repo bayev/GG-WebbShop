@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace DbPrototype
 {
@@ -43,6 +44,22 @@ namespace DbPrototype
                 context.Add(product1);
                 context.SaveChanges();
             }
+        }
+        public static List<Product> ReadProduct()
+        {
+            List<Product> products = new List<Product>();
+
+            using (var context = new AppDbContext())
+            {
+                var resultData = context.Products;
+
+                foreach (var item in resultData)
+                {
+                    products.Add(item);
+                }
+            }
+
+            return products;
         }
     }
 }
