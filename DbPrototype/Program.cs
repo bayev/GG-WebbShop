@@ -13,6 +13,10 @@ namespace DbPrototype
             CRUD.ReadProducts();
             CRUD.UpdateProduct();
             //CRUD.DeleteProduct(int.Parse(Console.ReadLine()));
+
+            //SeedDB();
         }
+
+        
     }
 }
