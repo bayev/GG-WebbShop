@@ -10,7 +10,9 @@ namespace DbPrototype
         static void Main(string[] args)
         {
             //CRUD.CreateProduct();
-            //CRUD.ReadProduct();
+            CRUD.ReadProducts();
+            //CRUD.UpdateProduct();
+            //CRUD.DeleteProduct(int.Parse(Console.ReadLine()));
         }
     }
 }
