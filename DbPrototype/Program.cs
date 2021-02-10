@@ -11,7 +11,7 @@ namespace DbPrototype
         {
             //CRUD.CreateProduct();
             CRUD.ReadProducts();
-            //CRUD.UpdateProduct();
+            CRUD.UpdateProduct();
             //CRUD.DeleteProduct(int.Parse(Console.ReadLine()));
         }
     }

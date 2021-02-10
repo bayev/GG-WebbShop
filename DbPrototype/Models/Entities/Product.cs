@@ -16,6 +16,7 @@ namespace DbPrototype.Models.Entities
         public DateTime CreateDate { get; set; }
         public int Stock { get; set; }
         public string Size { get; set; }
+        public string Brand { get; set; }
 
         public IList<ProductCategory> ProductCategories { get; set; }
         public IList<CartToProduct> CartToProducts { get; set; }

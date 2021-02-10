@@ -33,6 +33,9 @@ namespace DbPrototype
                 Console.Write("Category : ");
                 product1.Category = Console.ReadLine();
 
+                Console.Write("Brand : ");
+                product1.Brand = Console.ReadLine();
+
                 product1.CreateDate = DateTime.Now;
 
                 Console.Write("How many : ");
@@ -76,6 +79,8 @@ namespace DbPrototype
                     result.Name = Console.ReadLine();
                     Console.Write("New price: ");
                     result.Price = decimal.Parse(Console.ReadLine());
+                    Console.Write("New Brand: ");
+                    result.Brand = Console.ReadLine();
                     Console.Write("New Description: ");
                     result.Description = Console.ReadLine();
                     result.Image = null;
