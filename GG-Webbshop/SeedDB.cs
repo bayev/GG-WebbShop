@@ -1,30 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GG_Webbshop.Pages
+namespace GG_Webbshop
 {
-    public class IndexModel : PageModel
+    public class SeedDB
     {
+        
         private readonly GG_Webbshop.AppDbContext _context;
 
-        private readonly ILogger<IndexModel> _logger;
-
-        public IndexModel(ILogger<IndexModel> logger, AppDbContext context)
+        public SeedDB(GG_Webbshop.AppDbContext context)
         {
-            _logger = logger;
             _context = context;
-        }
-        public IEnumerable<Product> Products { get; set; }
-
-        public void OnGet()
-        {
-            //Seed();
-            Products = _context.Products;
         }
         public void Seed()
         {
@@ -91,40 +80,40 @@ namespace GG_Webbshop.Pages
             product5.Brand = "Rain";
 
             Product product6 = new Product();
-            product6.Name = "Tiger of Sweden Blazer";
-            product6.Price = 2499;
-            product6.Weight = 500;
-            product6.Description = "Med en blazer från Tiger of Sweden kan du vara säker på att du håll stilen både till fest och vardag. Gjord i kvalitetsmaterial med bekväm passform.";
-            product6.Image = "TigerBlazer.jpg";
-            product6.Category = "Blazer";
-            product6.CreateDate = DateTime.Now;
-            product6.Stock = 5;
-            product6.Size = "M";
-            product6.Brand = "Tiger of Sweden";
+            product5.Name = "Tiger of Sweden Blazer";
+            product5.Price = 2499;
+            product5.Weight = 500;
+            product5.Description = "Med en blazer från Tiger of Sweden kan du vara säker på att du håll stilen både till fest och vardag. Gjord i kvalitetsmaterial med bekväm passform.";
+            product5.Image = "TigerBlazer.jpg";
+            product5.Category = "Blazer";
+            product5.CreateDate = DateTime.Now;
+            product5.Stock = 5;
+            product5.Size = "M";
+            product5.Brand = "Tiger of Sweden";
 
             Product product7 = new Product();
-            product7.Name = "Dolce & Gabbana Chinos";
-            product7.Price = 1199;
-            product7.Weight = 350;
-            product7.Description = "Säkra stilen med grå-rutiga chinos från [brand] med skön passform och kvalitetsmaterial.";
-            product7.Image = "DolceNgabbanaChinos.jpg";
-            product7.Category = "Pants";
-            product7.CreateDate = DateTime.Now;
-            product7.Stock = 5;
-            product7.Size = "L";
-            product7.Brand = "Dolce & Gabbana";
+            product6.Name = "Dolce & Gabbana Chinos";
+            product6.Price = 1199;
+            product6.Weight = 350;
+            product6.Description = "Säkra stilen med grå-rutiga chinos från [brand] med skön passform och kvalitetsmaterial.";
+            product6.Image = "DolceNgabbanaChinos.jpg";
+            product6.Category = "Pants";
+            product6.CreateDate = DateTime.Now;
+            product6.Stock = 5;
+            product6.Size = "L";
+            product6.Brand = "Dolce & Gabbana";
 
             Product product8 = new Product();
-            product8.Name = "Plånbok från Hugo Boss";
-            product8.Price = 699;
-            product8.Weight = 50;
-            product8.Description = "Med en plånbok från Hugo Boss kommer du inte dra dig från att vara en gentleman och betala notan. Allt för att visa upp denna stilrena, praktiska plånbok med plats för alla dina kort och kontanter.";
-            product8.Image = "HugoBossWallet.jpg";
-            product8.Category = "Accessories";
-            product8.CreateDate = DateTime.Now;
-            product8.Stock = 10;
-            product8.Size = null;
-            product8.Brand = "Hugo Boss";
+            product7.Name = "Plånbok från Hugo Boss";
+            product7.Price = 699;
+            product7.Weight = 50;
+            product7.Description = "Med en plånbok från Hugo Boss kommer du inte dra dig från att vara en gentleman och betala notan. Allt för att visa upp denna stilrena, praktiska plånbok med plats för alla dina kort och kontanter.";
+            product7.Image = "HugoBossWallet.jpg";
+            product7.Category = "Accessories";
+            product7.CreateDate = DateTime.Now;
+            product7.Stock = 10;
+            product7.Size = null;
+            product7.Brand = "Hugo Boss";
 
             Product product9 = new Product();
             product9.Name = "Manschettknappar från Skultuna";

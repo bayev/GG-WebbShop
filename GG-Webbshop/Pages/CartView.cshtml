@@ -1,0 +1,106 @@
+﻿@page
+@model GG_Webbshop.Pages.CartViewModel
+@{
+}
+<div class="px-4 px-lg-0">
+
+
+    <div class="pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+
+                    <!-- Shopping cart table -->
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="border-0 bg-light">
+                                        <div class="p-2 px-3 text-uppercase">Produkter</div>
+                                    </th>
+                                    <th scope="col" class="border-0 bg-light">
+                                        <div class="py-2 text-uppercase">Pris</div>
+                                    </th>
+                                    <th scope="col" class="border-0 bg-light">
+                                        <div class="py-2 text-uppercase">Antal</div>
+                                    </th>
+                                    <th scope="col" class="border-0 bg-light">
+                                        <div class="py-2 text-uppercase">Ta bort</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row" class="border-0">
+                                        <div class="p-2">
+                                            <img src="~/img/MorrisSweater.jpg" alt="" width="70" class="img-fluid rounded shadow-sm">
+                                            <div class="ml-3 d-inline-block align-middle">
+                                                <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Morris Pullove</a></h5><span class="text-muted font-weight-normal font-italic d-block">Kategori: Tröja</span>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td class="border-0 align-middle"><strong>799.00</strong></td>
+                                    <td class="border-0 align-middle" style="padding-left: 30px;"><strong>2</strong></td>
+                                    <td class="border-0 align-middle"><a href="#" class="text-dark" style="padding-left: 25px;"><i class="bi bi-trash"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="p-2">
+                                            <img src="~/img/CkSweater.jpg" alt="" width="70" class="img-fluid rounded shadow-sm">
+                                            <div class="ml-3 d-inline-block align-middle">
+                                                <h5 class="mb-0"><a href="#" class="text-dark d-inline-block">Calvin Klein tröja</a></h5><span class="text-muted font-weight-normal font-italic">Kategori: Tröja</span>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td class="align-middle"><strong>799.00</strong></td>
+                                    <td class="align-middle" style="padding-left: 30px;"><strong>1</strong></td>
+                                    <td class="align-middle">
+                                        <a href="#" class="text-dark" style="padding-left: 25px;"><i class="bi bi-trash"></i></a>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- End -->
+                </div>
+            </div>
+
+            <div class="row py-5 p-4 bg-white rounded shadow-sm">
+                <div class="col-lg-6">
+                    <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Rabatt kod</div>
+                    <div class="p-4">
+                        <p class="font-italic mb-4">Om du har en rabatt kod, vänligen skriv in den här</p>
+                        <div class="input-group mb-4 border rounded-pill p-2">
+                            <input type="text" placeholder="Apply coupon" aria-describedby="button-addon3" class="form-control border-0">
+                            <div class="input-group-append border-0">
+                                <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Aktivera</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Meddelande till oss</div>
+                    <div class="p-4">
+                        <p class="font-italic mb-4">Information till säljare, ange här</p>
+                        <textarea name="" cols="30" rows="2" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Total </div>
+                    <div class="p-4">
+                        <p class="font-italic mb-4">Fraktkostnaden tillkommer senare.</p>
+                        <ul class="list-unstyled mb-4">
+                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Exkl. Moms </strong><strong>1590.00</strong></li>
+                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Frakt</strong><strong>55.00</strong></li>
+                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Moms</strong><strong>25%</strong></li>
+                            <li class="d-flex justify-content-between py-3 border-bottom">
+                                <strong class="text-muted">Total</strong>
+                                <h5 class="font-weight-bold">2200.00</h5>
+                            </li>
+                        </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Betala</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
