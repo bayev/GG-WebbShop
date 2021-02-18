@@ -10,21 +10,18 @@ namespace GG_Webbshop.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly GG_Webbshop.AppDbContext _context;
 
         private readonly ILogger<IndexModel> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger, AppDbContext context)
+        public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
-            _context = context;
         }
         public IEnumerable<Product> Products { get; set; }
 
         public void OnGet()
         {
             //Seed();
-            Products = _context.Products;
         }
         public void Seed()
         {
@@ -148,12 +145,12 @@ namespace GG_Webbshop.Pages
             seedList.Add(product8);
             seedList.Add(product9);
 
-            foreach (var item in seedList)
-            {
-                _context.Add(item);
-            }
+            //foreach (var item in seedList)
+            //{
+            //    _context.Add(item);
+            //}
 
-            _context.SaveChanges();
+            //_context.SaveChanges();
         }
     }
 }

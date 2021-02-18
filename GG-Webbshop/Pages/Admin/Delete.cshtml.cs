@@ -11,11 +11,10 @@ namespace GG_Webbshop.Pages.Admin
 {
     public class DeleteModel : PageModel
     {
-        private readonly GG_Webbshop.AppDbContext _context;
 
-        public DeleteModel(GG_Webbshop.AppDbContext context)
+        public DeleteModel()
         {
-            _context = context;
+
         }
 
         [BindProperty]
@@ -28,7 +27,6 @@ namespace GG_Webbshop.Pages.Admin
                 return NotFound();
             }
 
-            Product = await _context.Products.FirstOrDefaultAsync(m => m.Id == id);
 
             if (Product == null)
             {
@@ -44,13 +42,7 @@ namespace GG_Webbshop.Pages.Admin
                 return NotFound();
             }
 
-            Product = await _context.Products.FindAsync(id);
 
-            if (Product != null)
-            {
-                _context.Products.Remove(Product);
-                await _context.SaveChangesAsync();
-            }
 
             return RedirectToPage("./Index");
         }

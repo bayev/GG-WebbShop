@@ -6,23 +6,35 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using GG_Webbshop;
+using GG_Webbshop.Helper;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace GG_Webbshop.Pages.Admin
 {
     public class IndexModel : PageModel
     {
-        private readonly GG_Webbshop.AppDbContext _context;
-
-        public IndexModel(GG_Webbshop.AppDbContext context)
+        ProductAPI _api = new ProductAPI();
+        public IndexModel()
         {
-            _context = context;
+           
         }
 
         public IList<Product> Product { get;set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            Product = await _context.Products.ToListAsync();
+            HttpClient client = _api.Initial();
+            HttpResponseMessage res = await client.GetAsync("Products/all");
+            if (res.IsSuccessStatusCode)
+            {
+               var result = res.Content.ReadAsStringAsync().Result;
+
+               Product = JsonConvert.DeserializeObject<IList<Product>>(result);
+                
+            }
+
+            return Page();
         }
     }
 }

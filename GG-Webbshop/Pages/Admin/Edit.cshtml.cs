@@ -12,11 +12,9 @@ namespace GG_Webbshop.Pages.Admin
 {
     public class EditModel : PageModel
     {
-        private readonly GG_Webbshop.AppDbContext _context;
-
-        public EditModel(GG_Webbshop.AppDbContext context)
+        public EditModel()
         {
-            _context = context;
+ 
         }
 
         [BindProperty]
@@ -29,7 +27,7 @@ namespace GG_Webbshop.Pages.Admin
                 return NotFound();
             }
 
-            Product = await _context.Products.FirstOrDefaultAsync(m => m.Id == id);
+        
 
             if (Product == null)
             {
@@ -47,30 +45,11 @@ namespace GG_Webbshop.Pages.Admin
                 return Page();
             }
 
-            _context.Attach(Product).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductExists(Product.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+           
 
             return RedirectToPage("./Index");
         }
 
-        private bool ProductExists(int id)
-        {
-            return _context.Products.Any(e => e.Id == id);
-        }
+
     }
 }

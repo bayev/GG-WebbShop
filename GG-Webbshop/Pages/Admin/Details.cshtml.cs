@@ -11,11 +11,10 @@ namespace GG_Webbshop.Pages.Admin
 {
     public class DetailsModel : PageModel
     {
-        private readonly GG_Webbshop.AppDbContext _context;
 
-        public DetailsModel(GG_Webbshop.AppDbContext context)
+        public DetailsModel()
         {
-            _context = context;
+            
         }
 
         public Product Product { get; set; }
@@ -27,7 +26,7 @@ namespace GG_Webbshop.Pages.Admin
                 return NotFound();
             }
 
-            Product = await _context.Products.FirstOrDefaultAsync(m => m.Id == id);
+            
 
             if (Product == null)
             {
