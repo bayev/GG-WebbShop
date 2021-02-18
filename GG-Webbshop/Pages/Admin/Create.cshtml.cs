@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace GG_Webbshop.Pages.Admin
@@ -45,14 +46,14 @@ namespace GG_Webbshop.Pages.Admin
                     {"Size", $"{Product.Size}"},
                     {"Brand", $"{Product.Brand}"}
                  };
-            var json = JsonConvert.SerializeObject(values, Formatting.Indented);
-            var stringContent = new StringContent(json);
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string payload = JsonConvert.SerializeObject(values);
 
-            HttpResponseMessage res = await client.PostAsync("Products/create", stringContent);
+            var content = new StringContent(payload, Encoding.UTF8, "application/json");
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            HttpResponseMessage response = await client.PostAsync("Products/create", content);
 
-
-            return RedirectToPage("./Index");
+            return Page();
+            //return RedirectToPage("./Index");
 
         }
     }
