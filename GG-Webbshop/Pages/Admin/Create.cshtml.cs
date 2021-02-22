@@ -49,11 +49,10 @@ namespace GG_Webbshop.Pages.Admin
             string payload = JsonConvert.SerializeObject(values);
 
             var content = new StringContent(payload, Encoding.UTF8, "application/json");
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             HttpResponseMessage response = await client.PostAsync("Products/create", content);
 
-            return Page();
-            //return RedirectToPage("./Index");
+            
+            return RedirectToPage("./Index");
 
         }
     }
