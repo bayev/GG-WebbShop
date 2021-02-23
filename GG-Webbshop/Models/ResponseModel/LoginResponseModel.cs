@@ -10,10 +10,4 @@ namespace GG_Webbshop.Models
         public string Token { get; set; }
         public string Expires { get; set; }
     }
-
-    public class LoginModel
-    {
-        public string user { get; set; }
-        public string password { get; set; }
-    }
 }

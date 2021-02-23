@@ -11,6 +11,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.Text;
 using System.Net.Http.Headers;
+using RestSharp;
 
 namespace GG_Webbshop.Pages.Admin
 {
@@ -29,27 +30,52 @@ namespace GG_Webbshop.Pages.Admin
 
         public async Task<IActionResult> OnGetAsync()
         {
-            // Get value in session
+
             byte[] tokenByte;
-
-
             HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
-
             string token = Encoding.ASCII.GetString(tokenByte);
 
-            HttpClient client = _api.Initial();
-
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-            HttpResponseMessage res = await client.GetAsync("Products/all");
-
-
-            if (res.IsSuccessStatusCode)
+            if (!String.IsNullOrEmpty(token))
             {
-               var result = res.Content.ReadAsStringAsync().Result;
+                RestClient client = new RestClient("https://localhost:44309/products/all");
+                RestRequest request = new RestRequest
+                {
+                    Method = Method.GET
+                };
+                request.Parameters.Clear();
+                request.AddHeader("Authorization", $"bearer {token}");
 
-               Product = JsonConvert.DeserializeObject<IList<Product>>(result);
-                
+                IRestResponse response = client.Execute(request);
+
+
+                //var payload = new
+                //{
+                //    user = "admin",
+                //    password = "AdminPass1!"
+
+                //};
+
+                //request.AddParameter("application/json", payload, ParameterType.RequestBody);
+
+
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    var model = AllProductsResponseModel.FromJson(response.Content);
+
+
+                    foreach (var product in model)
+                    {
+
+                        string x = product.Description;
+
+                    }
+                }
+                else
+                {
+
+
+
+                }
             }
 
             return Page();
