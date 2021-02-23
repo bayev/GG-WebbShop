@@ -38,10 +38,20 @@
                 <input asp-for="Product.Image" class="form-control" />
                 <span asp-validation-for="Product.Image" class="text-danger"></span>
             </div>
+            @*<div class="form-group">
+            <label asp-for="Product.Category" class="control-label"></label>
+            <input asp-for="Product.Category" class="form-control" />
+            <span asp-validation-for="Product.Category" class="text-danger"></span>
+        </div>*@
             <div class="form-group">
-                <label asp-for="Product.Category" class="control-label"></label>
-                <input asp-for="Product.Category" class="form-control" />
-                <span asp-validation-for="Product.Category" class="text-danger"></span>
+                <label for="exampleFormControlSelect1">Category</label>
+                <select asp-for="Product.Category"class="form-control" id="exampleFormControlSelect1">
+                    <option>T-Shirt</option>
+                    <option>Sweatshirt</option>
+                    <option>Pants</option>
+                    <option>Accessories</option>
+                    <option>Blazers</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Product.CreateDate" class="control-label"></label>
