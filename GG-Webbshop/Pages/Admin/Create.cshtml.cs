@@ -30,7 +30,7 @@ namespace GG_Webbshop.Pages.Admin
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            //FUNKAR EJ JUST NU :(
+           
             HttpClient client = _api.Initial();
             var values = new Dictionary<string, string>()
                  {
