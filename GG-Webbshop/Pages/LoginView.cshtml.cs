@@ -37,7 +37,7 @@ namespace GG_Webbshop.Pages
             var content = new StringContent(payload, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await client.PostAsync("auth/login", content);
             string result = response.Content.ReadAsStringAsync().Result;
-            LoginViewModel alalal = JsonConvert.DeserializeObject<LoginViewModel>(result);
+             //alalal = JsonConvert.DeserializeObject<>(result);
             //string deserialized = JsonConvert.DeserializeObject<string>(result);
             //NEXT: Deserialize token från result. Använd till productscontroller på något vis, ev. user.
 
