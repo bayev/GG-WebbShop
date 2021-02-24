@@ -17,20 +17,14 @@ namespace GG_Webbshop.Pages.Admin
 {
     public class IndexModel : PageModel
     {
-        ProductAPI _api = new ProductAPI();
+        public AllProductsResponseModel[] Product { get; set; }
         public IndexModel()
         {
-           
-
-
 
         }
 
-        public IList<Product> Product { get;set; }
-
         public async Task<IActionResult> OnGetAsync()
         {
-
             byte[] tokenByte;
             HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
             string token = Encoding.ASCII.GetString(tokenByte);
@@ -47,33 +41,16 @@ namespace GG_Webbshop.Pages.Admin
 
                 IRestResponse response = client.Execute(request);
 
-
-                //var payload = new
-                //{
-                //    user = "admin",
-                //    password = "AdminPass1!"
-
-                //};
-
-                //request.AddParameter("application/json", payload, ParameterType.RequestBody);
-
-
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     var model = AllProductsResponseModel.FromJson(response.Content);
 
-
-                    foreach (var product in model)
-                    {
-
-                        string x = product.Description;
-
-                    }
+                    Product = model;
                 }
                 else
                 {
 
-
+                    return NotFound();
 
                 }
             }
