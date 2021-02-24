@@ -9,22 +9,21 @@ using GG_Webbshop;
 using GG_Webbshop.Helper;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.Text;
+using RestSharp;
 
 namespace GG_Webbshop.Pages.Admin
 {
     public class DeleteModel : PageModel
     {
-        ProductAPI _api = new ProductAPI();
         [BindProperty(SupportsGet = true)]
         public string Id { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public AllProductsResponseModel Product { get; set; }
         public DeleteModel()
         {
 
         }
-
-        [BindProperty]
-        public Product Product { get; set; }
-
         public async Task<IActionResult> OnGetAsync(string id) //HÄMTA PRODUCT HÄR
         {
             id = Id;
@@ -32,36 +31,64 @@ namespace GG_Webbshop.Pages.Admin
             {
                 return NotFound();
             }
-            HttpClient client = _api.Initial();
-            HttpResponseMessage res = await client.GetAsync($"Products/get/{id}");
-            if (res.IsSuccessStatusCode)
+            byte[] tokenByte;
+            HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
+            string token = Encoding.ASCII.GetString(tokenByte);
+
+            if (!String.IsNullOrEmpty(token))
             {
-                var result = res.Content.ReadAsStringAsync().Result;
+                RestClient client = new RestClient($"https://localhost:44309/products/get/{id}");
+                RestRequest request = new RestRequest
+                {
+                    Method = Method.GET
+                };
+                request.Parameters.Clear();
+                request.AddHeader("Authorization", $"bearer {token}");
 
-                Product = JsonConvert.DeserializeObject<Product>(result);
+                IRestResponse response = client.Execute(request);
 
-            }
-
-            if (Product == null)
-            {
-                return NotFound();
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    var model = AllProductsResponseModel.FromJsonSingle(response.Content);
+                    Product = model;
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
             return Page();
         }
-
-        public async Task<IActionResult> OnPostAsync(string id) //DELETE PRODUCT HÄR
+        public async Task<IActionResult> OnPostAsync(string id)
         {
             id = Id;
-            HttpClient client = _api.Initial();
-            HttpResponseMessage response = await client.DeleteAsync($"products/delete/{Id}");
-            if (id == null)
+
+            byte[] tokenByte;
+            HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
+            string token = Encoding.ASCII.GetString(tokenByte);
+
+            if (!String.IsNullOrEmpty(token))
             {
-                return NotFound();
+                RestClient client = new RestClient($"https://localhost:44309/products/delete/{id}");
+                RestRequest request = new RestRequest
+                {
+                    Method = Method.DELETE
+                };
+
+                request.Parameters.Clear();
+                request.AddHeader("Authorization", $"bearer {token}");
+
+                IRestResponse response = client.Execute(request);
+
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    return RedirectToPage("./index");
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
-
-
-
-
             return RedirectToPage("./Index");
         }
     }
