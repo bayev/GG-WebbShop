@@ -6,31 +6,51 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using GG_Webbshop;
+using System.Text;
+using RestSharp;
 
 namespace GG_Webbshop.Pages.Admin
 {
     public class DetailsModel : PageModel
     {
-
+        [BindProperty(SupportsGet = true)]
+        public string Id { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public AllProductsResponseModel Product { get; set; }
         public DetailsModel()
         {
             
         }
 
-        public Product Product { get; set; }
-
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string id) //HÄMTA PRODUCT HÄR
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
+            id = Id;
             
+            byte[] tokenByte;
+            HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
+            string token = Encoding.ASCII.GetString(tokenByte);
 
-            if (Product == null)
+            if (!String.IsNullOrEmpty(token))
             {
-                return NotFound();
+                RestClient client = new RestClient($"https://localhost:44309/products/get/{id}");
+                RestRequest request = new RestRequest
+                {
+                    Method = Method.GET
+                };
+                request.Parameters.Clear();
+                request.AddHeader("Authorization", $"bearer {token}");
+
+                IRestResponse response = client.Execute(request);
+
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    var model = AllProductsResponseModel.FromJsonSingle(response.Content);
+                    Product = model;
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
             return Page();
         }

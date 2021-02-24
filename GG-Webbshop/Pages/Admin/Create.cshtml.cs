@@ -62,7 +62,6 @@ namespace GG_Webbshop.Pages.Admin
                 request.AddHeader("Authorization", $"bearer {token}");
                 request.AddJsonBody(values);
 
-
                 IRestResponse response = client.Execute(request);
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -72,16 +71,10 @@ namespace GG_Webbshop.Pages.Admin
                 }
                 else
                 {
-
                     return NotFound();
-
                 }
             }
-
            return Page();
-
-            
-
         }
     }
 }
