@@ -54,6 +54,7 @@ namespace GG_Webbshop
     public partial class AllProductsResponseModel
     {
         public static AllProductsResponseModel[] FromJson(string json) => JsonConvert.DeserializeObject<AllProductsResponseModel[]>(json, GG_Webbshop.Converter.Settings);
+        public static AllProductsResponseModel FromJsonSingle(string json) => JsonConvert.DeserializeObject<AllProductsResponseModel>(json, GG_Webbshop.Converter.Settings);
     }
 
     public static class Serialize
