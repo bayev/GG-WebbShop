@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
+using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -30,8 +32,6 @@ namespace GG_Webbshop.Pages.Admin
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-           
-            HttpClient client = _api.Initial();
             var values = new Dictionary<string, string>()
                  {
                     {"Id", $"{Product.Id}"},
@@ -46,13 +46,41 @@ namespace GG_Webbshop.Pages.Admin
                     {"Size", $"{Product.Size}"},
                     {"Brand", $"{Product.Brand}"}
                  };
-            string payload = JsonConvert.SerializeObject(values);
 
-            var content = new StringContent(payload, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync("Products/create", content);
+            byte[] tokenByte;
+            HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
+            string token = Encoding.ASCII.GetString(tokenByte);
+
+            if (!String.IsNullOrEmpty(token))
+            {
+                RestClient client = new RestClient("https://localhost:44309/products/create");
+                RestRequest request = new RestRequest
+                {
+                    Method = Method.POST
+                };
+                request.Parameters.Clear();
+                request.AddHeader("Authorization", $"bearer {token}");
+                request.AddJsonBody(values);
+
+
+                IRestResponse response = client.Execute(request);
+
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    //var model = AllProductsResponseModel.FromJson(response.Content);
+                    return RedirectToPage("./Index");
+                }
+                else
+                {
+
+                    return NotFound();
+
+                }
+            }
+
+           return Page();
 
             
-            return RedirectToPage("./Index");
 
         }
     }
