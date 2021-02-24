@@ -11,21 +11,20 @@ using GG_Webbshop.Helper;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Text;
+using RestSharp;
 
 namespace GG_Webbshop.Pages.Admin
 {
     public class EditModel : PageModel
     {
-        ProductAPI _api = new ProductAPI();
         [BindProperty(SupportsGet = true)]
         public string Id { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public AllProductsResponseModel Product { get; set; }
         public EditModel()
         {
 
         }
-
-        [BindProperty]
-        public Product Product { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id) //HÄMTA PRODUCT HÄR
         {
@@ -34,18 +33,31 @@ namespace GG_Webbshop.Pages.Admin
             {
                 return NotFound();
             }
-            HttpClient client = _api.Initial();
-            HttpResponseMessage res = await client.GetAsync($"Products/get/{id}");
-            if (res.IsSuccessStatusCode)
-            {
-                var result = res.Content.ReadAsStringAsync().Result;
+            byte[] tokenByte;
+            HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
+            string token = Encoding.ASCII.GetString(tokenByte);
 
-                Product = JsonConvert.DeserializeObject<Product>(result);
-            }
-
-            if (Product == null)
+            if (!String.IsNullOrEmpty(token))
             {
-                return NotFound();
+                RestClient client = new RestClient($"https://localhost:44309/products/get/{id}");
+                RestRequest request = new RestRequest
+                {
+                    Method = Method.GET
+                };
+                request.Parameters.Clear();
+                request.AddHeader("Authorization", $"bearer {token}");
+
+                IRestResponse response = client.Execute(request);
+
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    var model = AllProductsResponseModel.FromJsonSingle(response.Content);
+                    Product = model;
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
             return Page();
         }
@@ -53,8 +65,6 @@ namespace GG_Webbshop.Pages.Admin
         public async Task<IActionResult> OnPostAsync(string id)
         {
             id = Id;
-
-            HttpClient client = _api.Initial();
             var values = new Dictionary<string, string>()
                  {
                     {"Id", $"{id}"},
@@ -69,13 +79,36 @@ namespace GG_Webbshop.Pages.Admin
                     {"Size", $"{Product.Size}"},
                     {"Brand", $"{Product.Brand}"}
                  };
-            string payload = JsonConvert.SerializeObject(values);
 
-            var content = new StringContent(payload, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync($"Products/update/{id}", content);
+            byte[] tokenByte;
+            HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
+            string token = Encoding.ASCII.GetString(tokenByte);
 
+            if (!String.IsNullOrEmpty(token))
+            {
+                RestClient client = new RestClient($"https://localhost:44309/products/update/{id}");
+                RestRequest request = new RestRequest
+                {
+                    Method = Method.PUT
+                };
+
+                request.Parameters.Clear();
+                request.AddHeader("Authorization", $"bearer {token}");
+                request.AddJsonBody(values);
+                request.AddParameter("application/json", values, ParameterType.RequestBody);
+
+                IRestResponse response = client.Execute(request);
+
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    return RedirectToPage("./index");
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
             return RedirectToPage("./Index");
-
         }
     }
 }
