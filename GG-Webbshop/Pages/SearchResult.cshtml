@@ -4,73 +4,79 @@
 
 }
 
-<h1>Search result</h1>
-
+<h1>Antal sökträffar: @Model.ProductResultCount.ToString()</h1>
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <h1>@Model.Message</h1>
+}
+<h4>Produkter</h4>
+@foreach (var item in Model.Product)
+{
     <div>
-        <h4>Products</h4>
         <hr />
         <dl class="row">
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Product.Name)
+                @Html.DisplayNameFor(model => item.Name)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Product.Name)
+                @Html.DisplayFor(model => item.Name)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Product.Price)
+                @Html.DisplayNameFor(model => item.Price)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Product.Price)
+                @Html.DisplayFor(model => item.Price)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Product.Weight)
+                @Html.DisplayNameFor(model => item.Weight)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Product.Weight)
+                @Html.DisplayFor(model => item.Weight)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Product.Description)
+                @Html.DisplayNameFor(model => item.Description)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Product.Description)
+                @Html.DisplayFor(model => item.Description)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Product.Image)
+                @Html.DisplayNameFor(model => item.Image)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Product.Image)
+                @Html.DisplayFor(model => item.Image)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Product.Category)
+                @Html.DisplayNameFor(model => item.Category)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Product.Category)
+                @Html.DisplayFor(model => item.Category)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Product.CreateDate)
+                @Html.DisplayNameFor(model => item.CreateDate)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Product.CreateDate)
+                @Html.DisplayFor(model => item.CreateDate)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Product.Stock)
+                @Html.DisplayNameFor(model => item.Stock)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Product.Stock)
+                @Html.DisplayFor(model => item.Stock)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Product.Size)
+                @Html.DisplayNameFor(model => item.Size)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Product.Size)
+                @Html.DisplayFor(model => item.Size)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Product.Brand)
+                @Html.DisplayNameFor(model => item.Brand)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Product.Brand)
+                @Html.DisplayFor(model => item.Brand)
             </dd>
         </dl>
     </div>
+}
 
 
