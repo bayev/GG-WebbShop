@@ -19,13 +19,13 @@ namespace GG_Webbshop.Pages.Admin
         public AllProductsResponseModel Product { get; set; }
         public DetailsModel()
         {
-            
+
         }
 
         public async Task<IActionResult> OnGetAsync(string id) //HÄMTA PRODUCT HÄR
         {
             id = Id;
-            
+
             byte[] tokenByte;
             HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
             string token = Encoding.ASCII.GetString(tokenByte);
