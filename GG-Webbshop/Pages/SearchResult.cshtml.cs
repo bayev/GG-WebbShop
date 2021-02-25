@@ -9,35 +9,31 @@ namespace GG_Webbshop.Pages
 {
     public class SearchResultModel : PageModel
     {
-
         [BindProperty(SupportsGet = true)]
-        public string Id { get; set; }
+        public string QueryString { get; set; }
         [BindProperty(SupportsGet = true)]
         public AllProductsResponseModel Product { get; set; }
         public SearchResultModel()
         {
         }
 
-        public async Task<IActionResult> OnGetAsync(string id) //HÄMTA PRODUCT HÄR
+        public async Task<IActionResult> OnGetAsync(string queryString) //HÄMTA PRODUCT HÄR
         {
-            id = Id;
-            if (id == null)
+            queryString = QueryString;
+            if (queryString == null)
             {
-                return await NotFound();
+                return NotFound();
             }
-            byte[] tokenByte;
-            HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
-            string token = Encoding.ASCII.GetString(tokenByte);
+            //byte[] tokenByte;
+            //HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
+            //string token = Encoding.ASCII.GetString(tokenByte);
 
-            if (!String.IsNullOrEmpty(token))
-            {
-                RestClient client = new RestClient($"https://localhost:44309/products/get/{id}");
+                RestClient client = new RestClient($"https://localhost:44309/query/search/{queryString}");
                 RestRequest request = new RestRequest
                 {
                     Method = Method.GET
                 };
                 request.Parameters.Clear();
-                request.AddHeader("Authorization", $"bearer {token}");
 
                 IRestResponse response = client.Execute(request);
 
@@ -48,15 +44,10 @@ namespace GG_Webbshop.Pages
                 }
                 else
                 {
-                    return await NotFound();
+                    return NotFound();
                 }
-            }
+            
             return Page();
-        }
-
-        Task<IActionResult> NotFound()
-        {
-            throw new NotImplementedException();
         }
     }
 }
