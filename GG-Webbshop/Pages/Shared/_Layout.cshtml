@@ -39,18 +39,16 @@
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn" onclick="setUrl();">Sök</button>
                     </div>
                     <a href="/CartView" class="nav-link" id="shopping-cart"><i class="bi bi-minecart"></i> Varukorg</a>
-                    @*@using GG_Webbshop.Pages
-        @{ TokenChecker token = new TokenChecker();}
-        @{bool returnTokenValue = token.CheckIfValid(); }
-        @if (returnTokenValue == true)
-        {
-            <a href="/LogInView" class="nav-link" id="logg-in-icon"><i class="bi bi-door-open"></i> Logga in</a>
-        }
-        @if (returnTokenValue == false)
-        {
-            <a href="/LogInView" class="nav-link" id="logg-in-icon"><i class="bi bi-door-open"></i> Logga ut</a>
-        }*@
-                <a href="/LogInView" class="nav-link" id="logg-in-icon"><i class="bi bi-door-open"></i> Logga in</a> 
+                    @using GG_Webbshop.Pages
+                    @{bool returnTokenValue = TokenChecker.UserStatus;}
+                    @if (returnTokenValue == false)
+                    {
+                         <a href="/LogInView" class="nav-link" id="logg-in-icon"><i class="bi bi-door-open"></i> Logga in</a>
+                    }
+                    @if (returnTokenValue == true)
+                    {
+                         <a href="/LogOut" class="nav-link" id="logg-in-icon"><i class="bi bi-door-open"></i> Logga ut</a>
+                    }
                 </div>
             </nav>
         </header>

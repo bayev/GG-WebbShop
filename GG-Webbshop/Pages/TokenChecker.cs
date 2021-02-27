@@ -9,30 +9,17 @@ using System.Threading.Tasks;
 
 namespace GG_Webbshop.Pages
 {
-    public class TokenChecker : PageModel
+    public static class TokenChecker
     {
-        //public bool CheckIfValid()
-        //{
-
-        //    bool validToken;
-            
-        //    byte[] tokenByte;
-        //    HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
-        //    string token = Encoding.ASCII.GetString(tokenByte);
-
-        //    if (!String.IsNullOrEmpty(token))
-        //        validToken = true;
-        //    else
-        //        validToken = false;
-
-        //    return validToken;
-        //}
-        //public IActionResult LogOutSessionClear()
-        //{
-
-        //    HttpContext.Session.Clear();
-        //    return RedirectToPage("/index");
-        //}
-
+        public static bool UserStatus { get; set; }
+        
+        public static void SetLoggedIn()
+        {
+            UserStatus = true;
+        }
+        public static void SetLoggedOut()
+        {
+            UserStatus = false;
+        }
     }
 }

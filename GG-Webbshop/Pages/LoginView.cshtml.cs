@@ -58,7 +58,10 @@ namespace GG_Webbshop.Pages
             byte[] tokenInByte = Encoding.ASCII.GetBytes(result.Token);
             HttpContext.Session.Set(ToolBox.TokenName, tokenInByte);
 
-
+            if (response.IsSuccessStatusCode)
+                TokenChecker.UserStatus = true;
+            else
+                TokenChecker.UserStatus = false;
 
             //NEXT: Deserialize token från result. Använd till productscontroller på något vis, ev. user.
 
