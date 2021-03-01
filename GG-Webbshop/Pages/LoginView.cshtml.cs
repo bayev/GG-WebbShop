@@ -21,6 +21,9 @@ namespace GG_Webbshop.Pages
         public string UserName { get; set; }
         [BindProperty]
         public string Password { get; set; }
+       
+       
+
 
 
         public string SessionInfoToken { get; private set;}
@@ -53,7 +56,7 @@ namespace GG_Webbshop.Pages
 
             LoginResponseModel result = JsonConvert.DeserializeObject<LoginResponseModel>(request);
 
-
+            TokenChecker.UserName = userName;
             // Set value in session
             byte[] tokenInByte = Encoding.ASCII.GetBytes(result.Token);
             HttpContext.Session.Set(ToolBox.TokenName, tokenInByte);

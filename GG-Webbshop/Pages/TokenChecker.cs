@@ -12,7 +12,8 @@ namespace GG_Webbshop.Pages
     public static class TokenChecker
     {
         public static bool UserStatus { get; set; }
-        
+        public static string UserName { get; set; }
+
         public static void SetLoggedIn()
         {
             UserStatus = true;
@@ -21,5 +22,8 @@ namespace GG_Webbshop.Pages
         {
             UserStatus = false;
         }
+     
+
     }
+    
 }
