@@ -18,7 +18,6 @@ namespace GG_Webbshop.Pages.Admin
         {
 
         }
-
         public IActionResult OnGet()
         {
             try

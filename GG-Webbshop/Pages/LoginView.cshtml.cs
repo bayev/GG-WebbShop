@@ -20,25 +20,16 @@ namespace GG_Webbshop.Pages
         [BindProperty]
         public string UserName { get; set; }
         [BindProperty]
-        public string Password { get; set; }
-       
+        public string Password { get; set; }      
         public string Message { get; set; }
-
-
-
-
-
-        public string SessionInfoToken { get; private set;}
-        
+        public string SessionInfoToken { get; private set;}    
         public void OnGet()
         {
         }
-
         public async Task<IActionResult>OnPostAsync(string userName, string password)
         {
             userName = UserName;
             password = Password;
-
 
             HttpClient client = _api.Initial();
 

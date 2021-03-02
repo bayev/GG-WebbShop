@@ -22,7 +22,6 @@ namespace GG_Webbshop.Pages.Admin
         {
 
         }
-
         public async Task<IActionResult> OnGetAsync()
         {
             try
@@ -59,10 +58,7 @@ namespace GG_Webbshop.Pages.Admin
             catch (Exception)
             {
                 return RedirectToPage("/error");
-            }
-            
-
-            
+            }           
         }
     }
 }
