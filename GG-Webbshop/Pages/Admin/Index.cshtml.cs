@@ -25,36 +25,44 @@ namespace GG_Webbshop.Pages.Admin
 
         public async Task<IActionResult> OnGetAsync()
         {
-            byte[] tokenByte;
-            HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
-            string token = Encoding.ASCII.GetString(tokenByte);
-
-            if (!String.IsNullOrEmpty(token))
+            try
             {
-                RestClient client = new RestClient("https://localhost:44309/products/all");
-                RestRequest request = new RestRequest
+                byte[] tokenByte;
+                HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
+                string token = Encoding.ASCII.GetString(tokenByte);
+                if (!String.IsNullOrEmpty(token))
                 {
-                    Method = Method.GET
-                };
-                request.Parameters.Clear();
-                request.AddHeader("Authorization", $"bearer {token}");
+                    RestClient client = new RestClient("https://localhost:44309/products/all");
+                    RestRequest request = new RestRequest
+                    {
+                        Method = Method.GET
+                    };
+                    request.Parameters.Clear();
+                    request.AddHeader("Authorization", $"bearer {token}");
 
-                IRestResponse response = client.Execute(request);
+                    IRestResponse response = client.Execute(request);
 
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    var model = AllProductsResponseModel.FromJson(response.Content);
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var model = AllProductsResponseModel.FromJson(response.Content);
 
-                    Product = model;
+                        Product = model;
+                        return Page();
+                    }
+                    else
+                    {
+                        return RedirectToPage("/error");
+                    }
                 }
-                else
-                {
-
-                    return NotFound();
-
-                }
+                return RedirectToPage("/index");
             }
-            return Page();
+            catch (Exception)
+            {
+                return RedirectToPage("/error");
+            }
+            
+
+            
         }
     }
 }

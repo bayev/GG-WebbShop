@@ -22,7 +22,9 @@ namespace GG_Webbshop.Pages
         [BindProperty]
         public string Password { get; set; }
        
-       
+        public string Message { get; set; }
+
+
 
 
 
@@ -53,23 +55,30 @@ namespace GG_Webbshop.Pages
             HttpResponseMessage response = await client.PostAsync("auth/login", content);
 
             string request = response.Content.ReadAsStringAsync().Result;
-
-            LoginResponseModel result = JsonConvert.DeserializeObject<LoginResponseModel>(request);
-
-            TokenChecker.UserName = userName;
-            // Set value in session
-            byte[] tokenInByte = Encoding.ASCII.GetBytes(result.Token);
-            HttpContext.Session.Set(ToolBox.TokenName, tokenInByte);
-
+            if(request == "No user or password matched, try again.")
+            {
+                Message = "Fel e-post/användarnamn eller lösenord, försök igen.";
+                return Page();
+            }
+            else if(request == "No such user exists")
+            {
+                Message = "Ingen sådan användare finns registrerad.";
+                return Page();
+            }
+            else
+            {
+                LoginResponseModel result = JsonConvert.DeserializeObject<LoginResponseModel>(request);
+                TokenChecker.UserName = userName;
+                // Set value in session
+                byte[] tokenInByte = Encoding.ASCII.GetBytes(result.Token);
+                HttpContext.Session.Set(ToolBox.TokenName, tokenInByte);
+            }
             if (response.IsSuccessStatusCode)
                 TokenChecker.UserStatus = true;
             else
                 TokenChecker.UserStatus = false;
 
-            //NEXT: Deserialize token från result. Använd till productscontroller på något vis, ev. user.
-
-
-            return RedirectToPage("/admin/index");
+            return RedirectToPage("/index");
 
         }
     }

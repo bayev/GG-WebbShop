@@ -14,7 +14,6 @@ namespace GG_Webbshop.Pages.Admin
 {
     public class CreateModel : PageModel
     {
-        ProductAPI _api = new ProductAPI();
         public CreateModel()
         {
 
@@ -22,6 +21,37 @@ namespace GG_Webbshop.Pages.Admin
 
         public IActionResult OnGet()
         {
+            try
+            {
+                byte[] tokenByte;
+                HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
+                string token = Encoding.ASCII.GetString(tokenByte);
+                if (!String.IsNullOrEmpty(token))
+                {
+                    RestClient client = new RestClient("https://localhost:44309/products/all");
+                    RestRequest request = new RestRequest
+                    {
+                        Method = Method.GET
+                    };
+                    request.Parameters.Clear();
+                    request.AddHeader("Authorization", $"bearer {token}");
+
+                    IRestResponse response = client.Execute(request);
+
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        return Page();
+                    }
+                    else
+                    {
+                        return RedirectToPage("/error");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return RedirectToPage("/error");
+            }
             return Page();
         }
 
@@ -66,15 +96,14 @@ namespace GG_Webbshop.Pages.Admin
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    //var model = AllProductsResponseModel.FromJson(response.Content);
                     return RedirectToPage("./Index");
                 }
                 else
                 {
-                    return NotFound();
+                    return RedirectToPage("/error");
                 }
             }
-           return Page();
+            return Page();
         }
     }
 }

@@ -20,7 +20,7 @@
                                     <div class="form-label-group">
                                         <label for="Password" class="control-label"></label>
                                         <input asp-for="Password" type="password" id="inputPassword" class="form-control" placeholder="Användarnamn">
-
+                                        @if (!string.IsNullOrEmpty(Model.Message)) {<p>@Model.Message</p> }
                                     </div>
                                     <div class="custom-control custom-checkbox mb-3">
                                         <input type="checkbox" class="custom-control-input" id="customCheck1">
