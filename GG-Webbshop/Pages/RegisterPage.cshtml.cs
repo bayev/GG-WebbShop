@@ -21,15 +21,14 @@ namespace GG_Webbshop.Pages
         {
             var values = new Dictionary<string, string>()
                  {
-                    {"Id", $"{User.Id}"},
-                    {"Name", $"{User.FullName}"},
-                    {"Addresses", $"{User.Addresses}"},
-                    {"BillingAddress", $"{User.BillingAddress}"},
-                    {"Country", $"{User.Country}"},
-                    {"Email", $"{User.Email}"},
-                    {"Phone", $"{User.Phone}"},
-                    {"Password", $"{User.Password}"},
-                    {"DefaultShippingAddress", $"{User.DefaultShippingAddress}"}
+                    {"username", $"{User.Username}"},
+                    {"email", $"{User.Email}"},
+                    {"password", $"{User.Password}"},
+                    {"fullName", $"{User.FullName}"},
+                    {"billingAddress", $"{User.BillingAddress}"},
+                    {"defaultShippingAddress", $"{User.DefaultShippingAddress}"},
+                    {"country", $"{User.Country}"},
+                    {"phone", $"{User.Phone}"}
                  };
 
             RestClient client = new RestClient("https://localhost:44309/auth/register");
@@ -53,6 +52,7 @@ namespace GG_Webbshop.Pages
                 TokenChecker.UserStatus = false;
                 return RedirectToPage("/index");
             }
+
         }
     }
 
