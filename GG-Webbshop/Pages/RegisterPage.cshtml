@@ -4,16 +4,16 @@
 }
 
 
-<h1><i>Register page</i></h1>
+<h1><i>Registrera användare</i></h1>
 
-<h4><i>Personal information</i></h4>
+<h4><i>Personlig information</i></h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label class="control-label">Full name</label>
+                <label class="control-label">Fullständigt namn</label>
                 <input asp-for="User.FullName" class="form-control" />
                 <span asp-validation-for="User.FullName" class="text-danger"></span>
             </div>
@@ -23,37 +23,37 @@
                 <span asp-validation-for="User.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="User.Password" class="control-label"></label>
+                <label class="control-label">Lösenord</label>
                 <input asp-for="User.Password" class="form-control" />
                 <span asp-validation-for="User.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">Billing Address</label>
+                <label class="control-label">Faktureringsadress</label>
                 <input asp-for="User.BillingAddress" class="form-control" />
                 <span asp-validation-for="User.BillingAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">DefaultShippingAddress</label>
+                <label class="control-label">Leveransadress</label>
                 <input asp-for="User.DefaultShippingAddress" class="form-control" />
                 <span asp-validation-for="User.DefaultShippingAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="User.Country" class="control-label"></label>
+                <label  class="control-label">Land</label>
                 <input asp-for="User.Country" class="form-control" />
                 <span asp-validation-for="User.Country" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">Phonenumber</label>
+                <label class="control-label">Telefonnummer</label>
                 <input asp-for="User.Phone" class="form-control" />
                 <span asp-validation-for="User.Phone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Register" class="btn btn-primary" />
+                <input type="submit" value="Registrera" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="Index">Tillbaks till startsidan</a>
 </div>

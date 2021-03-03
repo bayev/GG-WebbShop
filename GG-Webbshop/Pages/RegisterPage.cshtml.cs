@@ -32,7 +32,7 @@ namespace GG_Webbshop.Pages
                     {"DefaultShippingAddress", $"{User.DefaultShippingAddress}"}
                  };
 
-            RestClient client = new RestClient("https://localhost:44309/user/create");
+            RestClient client = new RestClient("https://localhost:44309/auth/register");
             RestRequest request = new RestRequest
             {
                 Method = Method.POST
@@ -45,11 +45,13 @@ namespace GG_Webbshop.Pages
 
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                return RedirectToPage("./Index");
+                TokenChecker.UserStatus = true;
+                return RedirectToPage("/Index");
             }
             else
             {
-                return RedirectToPage("/error");
+                TokenChecker.UserStatus = false;
+                return RedirectToPage("/index");
             }
         }
     }
