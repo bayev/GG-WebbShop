@@ -14,6 +14,7 @@ namespace GG_Webbshop.Pages
 
         [BindProperty]
         public User User { get; set; }
+        public string ValidMailMessage { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -21,17 +22,21 @@ namespace GG_Webbshop.Pages
         {
             var values = new Dictionary<string, string>()
                  {
-                    {"Id", $"{User.Id}"},
-                    {"Name", $"{User.FullName}"},
-                    {"Addresses", $"{User.Addresses}"},
-                    {"BillingAddress", $"{User.BillingAddress}"},
-                    {"Country", $"{User.Country}"},
-                    {"Email", $"{User.Email}"},
-                    {"Phone", $"{User.Phone}"},
-                    {"Password", $"{User.Password}"},
-                    {"DefaultShippingAddress", $"{User.DefaultShippingAddress}"}
+                    {"username", $"{User.Username}"},
+                    {"email", $"{User.Email}"},
+                    {"password", $"{User.Password}"},
+                    {"fullName", $"{User.FullName}"},
+                    {"billingAddress", $"{User.BillingAddress}"},
+                    {"defaultShippingAddress", $"{User.DefaultShippingAddress}"},
+                    {"country", $"{User.Country}"},
+                    {"phone", $"{User.Phone}"}
                  };
-
+            bool validMail = ToolBox.IsValidEmail(User.Email);
+            if(!validMail)
+            {
+                ValidMailMessage = "Ange en riktig e-post, tack!";
+                return Page();
+            }
             RestClient client = new RestClient("https://localhost:44309/auth/register");
             RestRequest request = new RestRequest
             {
@@ -53,6 +58,7 @@ namespace GG_Webbshop.Pages
                 TokenChecker.UserStatus = false;
                 return RedirectToPage("/index");
             }
+
         }
     }
 
