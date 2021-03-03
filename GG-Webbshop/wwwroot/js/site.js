@@ -6,6 +6,3 @@ function setUrl() {
     window.location.href = 'SearchResult?id=' + document.getElementById('searchInput').value;
 };
 
-function setUrlRegPage() {
-    window.location.href = 
-}
