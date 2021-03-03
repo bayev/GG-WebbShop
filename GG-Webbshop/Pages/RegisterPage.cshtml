@@ -21,6 +21,7 @@
                 <label asp-for="User.Email" class="control-label"></label>
                 <input asp-for="User.Email" class="form-control" />
                 <span asp-validation-for="User.Email" class="text-danger"></span>
+                @if (!string.IsNullOrEmpty(Model.ValidMailMessage)) {@Model.ValidMailMessage}
             </div>
             <div class="form-group">
                 <label class="control-label">Lösenord</label>
