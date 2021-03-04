@@ -9,12 +9,10 @@ using RestSharp;
 
 namespace GG_Webbshop.Pages.Admin
 {
-    public class RegisterAdminViewModel : PageModel
+    public class DeleteAdminViewModel : PageModel
     {
-        [BindProperty]
-        public User User { get; set; }
-        public string ValidMailMessage { get; set; }
-        public async Task<IActionResult> OnGetAsync()
+
+        public async Task<IActionResult> OnGet()
         {
             try
             {
@@ -49,56 +47,38 @@ namespace GG_Webbshop.Pages.Admin
             }
             return Page();
         }
-
         public async Task<IActionResult> OnPostAsync()
         {
-            try
+
+            byte[] tokenByte;
+            HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
+            string token = Encoding.ASCII.GetString(tokenByte);
+
+            if (!String.IsNullOrEmpty(token))
             {
-                byte[] tokenByte;
-                HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
-                string token = Encoding.ASCII.GetString(tokenByte);
-                var values = new Dictionary<string, string>()
-                 {
-                    {"username", $"{User.Username}"},
-                    {"email", $"{User.Email}"},
-                    {"password", $"{User.Password}"},
-                 };
-                bool validMail = ToolBox.IsValidEmail(User.Email);
-                if (!validMail)
-                {
-                    ValidMailMessage = "Ange en riktig e-post, tack!";
-                    return Page();
-                }
-                RestClient client = new RestClient("https://localhost:44309/auth/adminregister");
+                RestClient client = new RestClient($"https://localhost:44309/auth/admindelete");
                 RestRequest request = new RestRequest
                 {
-                    Method = Method.POST
+                    Method = Method.DELETE
                 };
+
                 request.Parameters.Clear();
                 request.AddHeader("Authorization", $"bearer {token}");
-                request.AddJsonBody(values);
 
                 IRestResponse response = client.Execute(request);
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    TokenChecker.UserStatus = true;
-                    return RedirectToPage("./index");
+                    TokenChecker.UserStatus = false;
+                    return RedirectToPage("/LogOut");
+                    
                 }
                 else
                 {
-                    TokenChecker.UserStatus = false;
                     return RedirectToPage("/error");
                 }
             }
-            catch (Exception)
-            {
-
-                return RedirectToPage("/error");
-            }
-
-
+            return RedirectToPage("./Index");
         }
     }
-    
 }
