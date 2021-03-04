@@ -1,0 +1,11 @@
+﻿body {
+}
+
+#img-iconSize {
+    padding: .25rem;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: .25rem;
+    max-width: 250px;
+    max-height: 150px;
+}
