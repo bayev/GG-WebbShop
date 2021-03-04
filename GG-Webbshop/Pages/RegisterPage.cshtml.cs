@@ -43,14 +43,15 @@ namespace GG_Webbshop.Pages
                 Method = Method.POST
             };
             request.Parameters.Clear();
-            //request.AddHeader("Authorization", $"bearer {token}");
             request.AddJsonBody(values);
 
             IRestResponse response = client.Execute(request);
 
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
+
                 TokenChecker.UserStatus = true;
+                TokenChecker.UserName = User.Username;
                 return RedirectToPage("/Index");
             }
             else
