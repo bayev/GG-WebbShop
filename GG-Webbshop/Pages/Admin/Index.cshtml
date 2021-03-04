@@ -5,46 +5,49 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
+<h1>Startsida administratör</h1>
+<a  asp-page="./RegisterAdminView">Skapa adminstratörkonto</a>
 
 @ViewBag.Token
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create">Lägg till ny produkt</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Product[0].Name)
+                Bild
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product[0].Price)
+                Namn
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product[0].Weight)
+                Pris
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product[0].Description)
+                Vikt
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product[0].Image)
+                Beskrivning
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product[0].Category)
+                Bildurl
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product[0].CreateDate)
+                Kategori
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product[0].Stock)
+                Skapad
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product[0].Size)
+                Lagerstatus
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product[0].Brand)
+                Storlek
+            </th>
+            <th>
+                Märke
             </th>
             <th></th>
         </tr>
@@ -52,6 +55,9 @@
     <tbody>
 @foreach (var item in Model.Product) {
         <tr>
+            <td>
+                <img class="img-fluid img-thumbnail rounded product-image" src="~/img/@Html.DisplayFor(modelItem => item.Image)">
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -83,9 +89,9 @@
                 @Html.DisplayFor(modelItem => item.Brand)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Ändra</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Detaljer</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Radera</a>
             
             </td>
         </tr>

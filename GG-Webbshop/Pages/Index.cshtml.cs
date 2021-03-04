@@ -22,7 +22,6 @@ namespace GG_Webbshop.Pages
         {
             try
             {
-
                 RestClient client = new RestClient("https://localhost:44309/Query/all");
                 RestRequest request = new RestRequest
                 {
