@@ -1,0 +1,50 @@
+﻿@page
+@model GG_Webbshop.Pages.UserPageModel
+@{
+}
+<h1><i>Min sida</i></h1>
+
+<h4><i>Min information</i></h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <p class="control-label">Användarnamn</p>
+                <p asp-for="User.Username"></p>
+            </div>
+            <div class="form-group">
+                <p asp-for="User.Email" class="control-label"></p>
+                <p asp-for="User.Email" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Lösenord</label>
+                <p asp-for="User.Password" class="form-control"  />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Fullständigt namn</label>
+                <p asp-for="User.FullName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Faktureringsadress</label>
+                <p asp-for="User.BillingAddress" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Leveransadress</label>
+                <p asp-for="User.DefaultShippingAddress" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Land</label>
+                <p asp-for="User.Country" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Telefonnummer</label>
+                <p asp-for="User.Phone" class="form-control" />
+            </div>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Tillbaks till startsidan</a>
+</div>
