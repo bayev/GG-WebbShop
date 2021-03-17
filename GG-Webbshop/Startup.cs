@@ -26,8 +26,14 @@ namespace GG_Webbshop
         {
             services.AddRazorPages();
 
-            services.AddDbContext<AppDbContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("sqlConnection")));
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = ".GGwebshop.Session";
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+                options.Cookie.IsEssential = true;
+
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,11 +51,22 @@ namespace GG_Webbshop
             }
 
             app.UseHttpsRedirection();
+
+            // home/products
+
             app.UseStaticFiles();
+
+            // img/beach.jpg
+            // css/style.css
 
             app.UseRouting();
 
+            // login/profile
+
             app.UseAuthorization();
+
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

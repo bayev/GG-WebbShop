@@ -40,9 +40,14 @@
                 <span asp-validation-for="Product.Image" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Product.Category" class="control-label"></label>
-                <input asp-for="Product.Category" class="form-control" />
-                <span asp-validation-for="Product.Category" class="text-danger"></span>
+                <label for="exampleFormControlSelect1">Category</label>
+                <select asp-for="Product.Category" class="form-control" id="exampleFormControlSelect1">
+                    <option>T-Shirt</option>
+                    <option>Sweatshirt</option>
+                    <option>Pants</option>
+                    <option>Accessories</option>
+                    <option>Blazers</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Product.CreateDate" class="control-label"></label>
@@ -55,9 +60,14 @@
                 <span asp-validation-for="Product.Stock" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Product.Size" class="control-label"></label>
-                <input asp-for="Product.Size" class="form-control" />
-                <span asp-validation-for="Product.Size" class="text-danger"></span>
+                <label for="exampleFormControlSelect1">Size</label>
+                <select asp-for="Product.Size" class="form-control" id="exampleFormControlSelect1">
+                    <option>XS</option>
+                    <option>S</option>
+                    <option>M</option>
+                    <option>L</option>
+                    <option>XL</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Product.Brand" class="control-label"></label>
@@ -72,7 +82,7 @@
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Index">Tillbaka till startsidan för administratörer</a>
 </div>
 
 @section Scripts {

@@ -1,45 +1,29 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using GG_Webbshop;
-using GG_Webbshop.Helper;
-using System.Net.Http;
-using Newtonsoft.Json;
-using System.Text;
 using RestSharp;
 
 namespace GG_Webbshop.Pages.Admin
 {
-    public class DeleteModel : PageModel
+    public class RegisterAdminViewModel : PageModel
     {
-        [BindProperty(SupportsGet = true)]
-        public string Id { get; set; }
-        [BindProperty(SupportsGet = true)]
-        public AllProductsResponseModel Product { get; set; }
-        public DeleteModel()
-        {
-
-        }
-        public async Task<IActionResult> OnGetAsync(string id) //HÄMTA PRODUCT HÄR
+        [BindProperty]
+        public User User { get; set; }
+        public string ValidMailMessage { get; set; }
+        public async Task<IActionResult> OnGetAsync()
         {
             try
             {
-                id = Id;
-                if (id == null)
-                {
-                    return RedirectToPage("/error");
-                }
                 byte[] tokenByte;
                 HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
                 string token = Encoding.ASCII.GetString(tokenByte);
-
                 if (!String.IsNullOrEmpty(token))
                 {
-                    RestClient client = new RestClient($"https://localhost:44309/products/get/{id}");
+                    RestClient client = new RestClient("https://localhost:44309/products/all");
                     RestRequest request = new RestRequest
                     {
                         Method = Method.GET
@@ -51,8 +35,6 @@ namespace GG_Webbshop.Pages.Admin
 
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        var model = AllProductsResponseModel.FromJsonSingle(response.Content);
-                        Product = model;
                         return Page();
                     }
                     else
@@ -60,46 +42,63 @@ namespace GG_Webbshop.Pages.Admin
                         return RedirectToPage("/error");
                     }
                 }
-                return RedirectToPage("/index");
             }
             catch (Exception)
             {
                 return RedirectToPage("/error");
             }
-
-
+            return Page();
         }
-        public async Task<IActionResult> OnPostAsync(string id)
+
+        public async Task<IActionResult> OnPostAsync()
         {
-            id = Id;
-
-            byte[] tokenByte;
-            HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
-            string token = Encoding.ASCII.GetString(tokenByte);
-
-            if (!String.IsNullOrEmpty(token))
+            try
             {
-                RestClient client = new RestClient($"https://localhost:44309/products/delete/{id}");
+                byte[] tokenByte;
+                HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
+                string token = Encoding.ASCII.GetString(tokenByte);
+                var values = new Dictionary<string, string>()
+                 {
+                    {"username", $"{User.Username}"},
+                    {"email", $"{User.Email}"},
+                    {"password", $"{User.Password}"},
+                 };
+                bool validMail = ToolBox.IsValidEmail(User.Email);
+                if (!validMail)
+                {
+                    ValidMailMessage = "Ange en riktig e-post, tack!";
+                    return Page();
+                }
+                RestClient client = new RestClient("https://localhost:44309/auth/adminregister");
                 RestRequest request = new RestRequest
                 {
-                    Method = Method.DELETE
+                    Method = Method.POST
                 };
-
                 request.Parameters.Clear();
                 request.AddHeader("Authorization", $"bearer {token}");
+                request.AddJsonBody(values);
 
                 IRestResponse response = client.Execute(request);
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
+                    TokenChecker.UserStatus = true;
                     return RedirectToPage("./index");
                 }
                 else
                 {
-                    return NotFound();
+                    TokenChecker.UserStatus = false;
+                    return RedirectToPage("/error");
                 }
             }
-            return RedirectToPage("./Index");
+            catch (Exception)
+            {
+
+                return RedirectToPage("/error");
+            }
+
+
         }
     }
+    
 }

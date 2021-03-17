@@ -8,28 +8,6 @@
 
     <div class="row">
 
-        @*<div class="col-lg-3">
-
-            <h1 class="my-4">Grevens Garderob</h1>
-            <div class="list-group">
-                <a href="#" class="list-group-item">Cloth</a>
-                <a href="#" class="list-group-item">Accessories</a>
-                <a href="#" class="list-group-item">Category 3</a>
-            </div>
-            <div class="dropdown">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown link
-                </a>
-
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </div>
-        </div>*@
-        <!-- /.col-lg-3 -->
-
         <div class="col-lg-12">
 
             <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
@@ -65,13 +43,14 @@
                     <div class="col-lg-4 col-md-6 mb-4">
 
                         <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="~/img/@Model.Products.ToList()[0].Image" alt=""></a>
+                           
+                            <a href="/ProductView?Id=@Model.Product[0].Id"><img class="card-img-top" src="~/img/@Model.Product[0].Image" alt=""></a>
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <a href="#">@Model.Products.ToList()[0].Name</a>
+                                    <a href="/ProductView?Id=@Model.Product[0].Id">@Model.Product[0].Name</a>
                                 </h4>
-                                <h5>@Model.Products.ToList()[0].Price kr</h5>
-                                <p class="card-text">@Model.Products.ToList()[0].Description</p>
+                                <h5>@Model.Product[0].Price :-</h5>
+                                <p class="card-text">@Model.Product[0].Description</p>
                             </div>
                             <div class="card-footer">
                                 <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -81,13 +60,13 @@
 
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="~/img/@Model.Products.ToList()[1].Image" alt=""></a>
+                            <a href="/ProductView?Id=@Model.Product[1].Id"><img class="card-img-top" src="~/img/@Model.Product[1].Image" alt=""></a>
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <a href="#">@Model.Products.ToList()[1].Name</a>
+                                    <a href="/ProductView?Id=@Model.Product[1].Id">@Model.Product[1].Name</a>
                                 </h4>
-                                <h5>@Model.Products.ToList()[1].Price kr</h5>
-                                <p class="card-text">@Model.Products.ToList()[1].Description</p>
+                                <h5>@Model.Product[1].Price :-</h5>
+                                <p class="card-text">@Model.Product[1].Description</p>
                             </div>
                             <div class="card-footer">
                                 <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -97,13 +76,13 @@
 
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="~/img/@Model.Products.ToList()[2].Image" alt=""></a>
+                            <a href="/ProductView?Id=@Model.Product[2].Id"><img class="card-img-top" src="~/img/@Model.Product[2].Image" alt=""></a>
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <a href="#">@Model.Products.ToList()[2].Name</a>
+                                    <a href="/ProductView?Id=@Model.Product[2].Id">@Model.Product[2].Name</a>
                                 </h4>
-                                <h5>@Model.Products.ToList()[2].Price kr</h5>
-                                <p class="card-text">@Model.Products.ToList()[2].Description</p>
+                                <h5> @Model.Product[2].Price :-</h5>
+                                <p class="card-text">@Model.Product[2].Description</p>
                             </div>
                             <div class="card-footer">
                                 <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -116,13 +95,13 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="~/img/@Model.Products.ToList()[3].Image" alt=""></a>
+                            <a href="/ProductView?Id=@Model.Product[3].Id"><img class="card-img-top" src="~/img/@Model.Product[3].Image" alt=""></a>
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <a href="#">@Model.Products.ToList()[3].Name</a>
+                                    <a href="/ProductView?Id=@Model.Product[3].Id">@Model.Product[3].Name</a>
                                 </h4>
-                                <h5>@Model.Products.ToList()[3].Price kr</h5>
-                                <p class="card-text">@Model.Products.ToList()[3].Description</p>
+                                <h5>@Model.Product[3].Price :-</h5>
+                                <p class="card-text">@Model.Product[3].Description</p>
                             </div>
                             <div class="card-footer">
                                 <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -132,13 +111,13 @@
 
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="~/img/@Model.Products.ToList()[4].Image" alt=""></a>
+                            <a href="/ProductView?Id=@Model.Product[4].Id"><img class="card-img-top" src="~/img/@Model.Product[4].Image" alt=""></a>
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <a href="#">@Model.Products.ToList()[4].Name</a>
+                                    <a href="/ProductView?Id=@Model.Product[4].Id">@Model.Product[4].Name</a>
                                 </h4>
-                                <h5>@Model.Products.ToList()[4].Price kr</h5>
-                                <p class="card-text">@Model.Products.ToList()[4].Description</p>
+                                <h5>@Model.Product[4].Price :-</h5>
+                                <p class="card-text">@Model.Product[4].Description</p>
                             </div>
                             <div class="card-footer">
                                 <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -148,13 +127,13 @@
 
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="~/img/@Model.Products.ToList()[5].Image" alt=""></a>
+                            <a href="/ProductView?Id=@Model.Product[5].Id"><img class="card-img-top" src="~/img/@Model.Product[5].Image" alt=""></a>
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <a href="#">@Model.Products.ToList()[5].Name</a>
+                                    <a href="/ProductView?Id=@Model.Product[5].Id">@Model.Product[5].Name</a>
                                 </h4>
-                                <h5>@Model.Products.ToList()[5].Price kr</h5>
-                                <p class="card-text">@Model.Products.ToList()[5].Description</p>
+                                <h5>@Model.Product[5].Price :-</h5>
+                                <p class="card-text">@Model.Product[5].Description</p>
                             </div>
                             <div class="card-footer">
                                 <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -166,13 +145,13 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="~/img/@Model.Products.ToList()[6].Image" alt=""></a>
+                            <a href="/ProductView?Id=@Model.Product[6].Id"><img class="card-img-top" src="~/img/@Model.Product[6].Image" alt=""></a>
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <a href="#">@Model.Products.ToList()[6].Name</a>
+                                    <a href="/ProductView?Id=@Model.Product[6].Id">@Model.Product[6].Name</a>
                                 </h4>
-                                <h5>@Model.Products.ToList()[6].Price kr</h5>
-                                <p class="card-text">@Model.Products.ToList()[6].Description</p>
+                                <h5>@Model.Product[6].Price :-</h5>
+                                <p class="card-text">@Model.Product[6].Description</p>
                             </div>
                             <div class="card-footer">
                                 <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -182,13 +161,13 @@
 
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="~/img/@Model.Products.ToList()[7].Image" alt=""></a>
+                            <a href="/ProductView?Id=@Model.Product[7].Id"><img class="card-img-top" src="~/img/@Model.Product[7].Image" alt=""></a>
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <a href="#">@Model.Products.ToList()[7].Name</a>
+                                    <a href="/ProductView?Id=@Model.Product[7].Id">@Model.Product[7].Name</a>
                                 </h4>
-                                <h5>@Model.Products.ToList()[7].Price kr</h5>
-                                <p class="card-text">@Model.Products.ToList()[7].Description</p>
+                                <h5>@Model.Product[7].Price :-</h5>
+                                <p class="card-text">@Model.Product[7].Description</p>
                             </div>
                             <div class="card-footer">
                                 <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -198,13 +177,13 @@
 
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="~/img/@Model.Products.ToList()[8].Image" alt=""></a>
+                            <a href="/ProductView?Id=@Model.Product[8].Id"><img class="card-img-top" src="~/img/@Model.Product[8].Image" alt=""></a>
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <a href="#">@Model.Products.ToList()[8].Name</a>
+                                    <a href="/ProductView?Id=@Model.Product[8].Id">@Model.Product[8].Name</a>
                                 </h4>
-                                <h5>@Model.Products.ToList()[8].Price kr</h5>
-                                <p class="card-text">@Model.Products.ToList()[8].Description</p>
+                                <h5>@Model.Product[8].Price :-</h5>
+                                <p class="card-text">@Model.Product[8].Description</p>
                             </div>
                             <div class="card-footer">
                                 <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>

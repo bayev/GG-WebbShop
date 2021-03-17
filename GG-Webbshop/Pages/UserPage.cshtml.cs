@@ -1,28 +1,23 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using GG_Webbshop.Models.ResponseModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using GG_Webbshop;
-using System.Text;
 using RestSharp;
 
-namespace GG_Webbshop.Pages.Admin
+namespace GG_Webbshop.Pages
 {
-    public class DetailsModel : PageModel
+    public class UserPageModel : PageModel
     {
         [BindProperty(SupportsGet = true)]
         public string Id { get; set; }
         [BindProperty(SupportsGet = true)]
-        public AllProductsResponseModel Product { get; set; }
-        public DetailsModel()
-        {
+        public UserLoginResponseModel user { get; set; }
 
-        }
-
-        public async Task<IActionResult> OnGetAsync(string id) //HÃ„MTA PRODUCT HÃ„R
+        public async Task<IActionResult> OnGetAsync(string id) //HÄMTA PRODUCT HÄR
         {
             id = Id;
 
@@ -32,7 +27,7 @@ namespace GG_Webbshop.Pages.Admin
 
             if (!String.IsNullOrEmpty(token))
             {
-                RestClient client = new RestClient($"https://localhost:44309/products/get/{id}");
+                RestClient client = new RestClient($"https://localhost:44309/user/get/{id}");
                 RestRequest request = new RestRequest
                 {
                     Method = Method.GET
@@ -44,8 +39,8 @@ namespace GG_Webbshop.Pages.Admin
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    var model = AllProductsResponseModel.FromJsonSingle(response.Content);
-                    Product = model;
+                    var model = UserLoginResponseModel.FromJsonSingle(response.Content);
+                    user = model;
                 }
                 else
                 {

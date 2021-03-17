@@ -1,28 +1,18 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using GG_Webbshop;
-using GG_Webbshop.Helper;
-using System.Net.Http;
-using Newtonsoft.Json;
-using System.Text;
-using System.Net.Http.Headers;
 using RestSharp;
 
 namespace GG_Webbshop.Pages.Admin
 {
-    public class IndexModel : PageModel
+    public class DeleteAdminViewModel : PageModel
     {
-        public AllProductsResponseModel[] Product { get; set; }
-        public IndexModel()
-        {
 
-        }
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGet()
         {
             try
             {
@@ -43,9 +33,6 @@ namespace GG_Webbshop.Pages.Admin
 
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        var model = AllProductsResponseModel.FromJson(response.Content);
-
-                        Product = model;
                         return Page();
                     }
                     else
@@ -53,12 +40,45 @@ namespace GG_Webbshop.Pages.Admin
                         return RedirectToPage("/error");
                     }
                 }
-                return RedirectToPage("/index");
             }
             catch (Exception)
             {
                 return RedirectToPage("/error");
-            }           
+            }
+            return Page();
+        }
+        public async Task<IActionResult> OnPostAsync()
+        {
+
+            byte[] tokenByte;
+            HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
+            string token = Encoding.ASCII.GetString(tokenByte);
+
+            if (!String.IsNullOrEmpty(token))
+            {
+                RestClient client = new RestClient($"https://localhost:44309/auth/admindelete");
+                RestRequest request = new RestRequest
+                {
+                    Method = Method.DELETE
+                };
+
+                request.Parameters.Clear();
+                request.AddHeader("Authorization", $"bearer {token}");
+
+                IRestResponse response = client.Execute(request);
+
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    TokenChecker.UserStatus = false;
+                    return RedirectToPage("/LogOut");
+                    
+                }
+                else
+                {
+                    return RedirectToPage("/error");
+                }
+            }
+            return RedirectToPage("./Index");
         }
     }
 }

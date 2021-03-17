@@ -1,0 +1,49 @@
+﻿@page
+@model GG_Webbshop.Pages.SearchResultModel
+@{
+
+}
+
+<h1>Antal sökträffar: @Model.ProductResultCount.ToString()</h1>
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <h1>@Model.Message</h1>
+}
+<h4>Produkter</h4>
+
+<div class="container mt-5 mb-5">
+    <div class="d-flex justify-content-start row">
+        <div class="col-md-10">
+            @foreach (var item1 in Model.Product)
+            {
+                <div class="row p-2 bg-white border rounded">
+                    <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="~/img/@Html.DisplayFor(model => item1.Image)"></div>
+                    <div class="col-md-6 mt-1">
+                        <h5>@Html.DisplayFor(model => item1.Name)</h5>
+                        <div class="d-flex flex-row">
+                           <!--IN MED RATING HÄR-->
+                        </div>
+                        <div>
+                            <p>@Html.DisplayFor(model => item1.Description)</p>
+                        </div>
+                        
+                    </div>
+                    <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                        <div class="d-flex flex-row align-items-center">
+                            <h4 class="mr-1">@Html.DisplayFor(model => item1.Price) :-</h4>
+                        </div>
+                        <h6 class="text-success"></h6>
+                        <div class="d-flex flex-column mt-4">
+                            <a class="btn btn-primary" href="/ProductView?id=@Html.DisplayFor(model => item1.Id)" role="button">Information</a><br />
+                            <a class="btn btn-primary" href="#" role="button">Lägg i kundvagn</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
