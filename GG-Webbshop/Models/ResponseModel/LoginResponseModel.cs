@@ -9,6 +9,6 @@ namespace GG_Webbshop.Models
     {
         public string Token { get; set; }
         public string Expires { get; set; }
-        public string UserName { get; set; }
+        public string UserID { get; set; }
     }
 }

@@ -10,54 +10,75 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post" autocomplete="off">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label class="control-label">Användarnamn</label>
-                <input asp-for="User.Username" class="form-control" />
-                <span asp-validation-for="User.Username" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="User.Email" class="control-label"></label>
-                <input asp-for="User.Email" class="form-control" />
-                <span asp-validation-for="User.Email" class="text-danger"></span>
-                @if (!string.IsNullOrEmpty(Model.ValidMailMessage)) {@Model.ValidMailMessage}
-            </div>
-            <div class="form-group">
-                <label class="control-label">Lösenord</label>
-                <input asp-for="User.Password" class="form-control" pattern=".{8,}" required title="Minst 8 tecken" />
-                <span asp-validation-for="User.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Fullständigt namn</label>
-                <input asp-for="User.FullName" class="form-control" />
-                <span asp-validation-for="User.FullName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Faktureringsadress</label>
-                <input asp-for="User.BillingAddress" class="form-control" />
-                <span asp-validation-for="User.BillingAddress" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Leveransadress</label>
-                <input asp-for="User.DefaultShippingAddress" class="form-control" />
-                <span asp-validation-for="User.DefaultShippingAddress" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Land</label>
-                <input asp-for="User.Country" class="form-control" />
-                <span asp-validation-for="User.Country" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Telefonnummer</label>
-                <input asp-for="User.Phone" class="form-control" />
-                <span asp-validation-for="User.Phone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Registrera" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <p class="text-danger">@Model.ErrorMessage</p>
+        }
+        else
+        {
+            <form method="post" autocomplete="off">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="control-label">Användarnamn</label>
+                    <input asp-for="User.Username" class="form-control" />
+                    <span asp-validation-for="User.Username" class="text-danger"></span>
+                    @if (!string.IsNullOrEmpty(Model.MessageUserName))
+                    {
+                        <p class="text-danger">@Model.MessageUserName</p>
+                    }
+                </div>
+                <div class="form-group">
+                    <label asp-for="User.Email" class="control-label"></label>
+                    <input asp-for="User.Email" class="form-control" />
+                    <span asp-validation-for="User.Email" class="text-danger"></span>
+                    @if (!string.IsNullOrEmpty(Model.ValidMailMessage))
+                    {@Model.ValidMailMessage}
+                </div>
+                <div class="form-group">
+                    <label class="control-label">E-post igen(bara dubbelkollar att du stavat allt ordentligt)</label>
+                    <input asp-for="MailMatch" class="form-control" />
+                    <span asp-validation-for="MailMatch" class="text-danger"></span>
+                    @if (!string.IsNullOrEmpty(Model.MessageMail))
+                    {
+                        <p class="text-danger">@Model.MessageMail</p>
+                    }
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Lösenord</label>
+                    <input asp-for="User.Password" class="form-control" pattern=".{8,}" required title="Minst 8 tecken" />
+                    <span asp-validation-for="User.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Fullständigt namn</label>
+                    <input asp-for="User.FullName" class="form-control" />
+                    <span asp-validation-for="User.FullName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Faktureringsadress</label>
+                    <input asp-for="User.BillingAddress" class="form-control" />
+                    <span asp-validation-for="User.BillingAddress" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Leveransadress</label>
+                    <input asp-for="User.DefaultShippingAddress" class="form-control" />
+                    <span asp-validation-for="User.DefaultShippingAddress" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Land</label>
+                    <input asp-for="User.Country" class="form-control" />
+                    <span asp-validation-for="User.Country" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Telefonnummer</label>
+                    <input asp-for="User.Phone" class="form-control" />
+                    <span asp-validation-for="User.Phone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Registrera" class="btn btn-primary" />
+                </div>
+            </form>
+        }
+        </div>
 </div>
 
 <div>

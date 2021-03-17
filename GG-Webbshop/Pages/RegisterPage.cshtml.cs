@@ -1,25 +1,52 @@
+using GG_Webbshop.Helper;
+using GG_Webbshop.Models.ResponseModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
 using RestSharp;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace GG_Webbshop.Pages
 {
     public class RegisterPageModel : PageModel
     {
+        ProductAPI _api = new ProductAPI();
+        public string ErrorMessage { get; set; }
+        public string MessageUserName { get; set; }
+        public string MessageMail { get; set; }
+        [BindProperty]
+        public string MailMatch { get; set; }
+        [BindProperty]
+        public RegisterModel User { get; set; }
         public void OnGet()
         {
         }
 
-        [BindProperty]
-        public User User { get; set; }
         public string ValidMailMessage { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            bool validMailFormat = ToolBox.IsValidEmail(User.Email);
+            if (!validMailFormat)
+            {
+                MessageMail = "Vänligen ange en giltig e-post";
+                return Page();
+            }
+
+            bool matchingMails = User.Email.ToUpper() == MailMatch.ToUpper() ? true : false;
+            if (!matchingMails)
+            {
+                MessageMail = "Fälten för e-postadress måste matcha, testa igen";
+                return Page();
+            }
+
+            HttpClient client = _api.Initial();
+
             var values = new Dictionary<string, string>()
                  {
                     {"username", $"{User.Username}"},
@@ -31,35 +58,44 @@ namespace GG_Webbshop.Pages
                     {"country", $"{User.Country}"},
                     {"phone", $"{User.Phone}"}
                  };
-            bool validMail = ToolBox.IsValidEmail(User.Email);
-            if(!validMail)
+            string payload = JsonConvert.SerializeObject(values);
+            var content = new StringContent(payload, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PostAsync("auth/register", content);
+
+            string request = response.Content.ReadAsStringAsync().Result;
+
+            if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
             {
-                ValidMailMessage = "Ange en riktig e-post, tack!";
-                return Page();
+                if (request == "Username in use")
+                {
+                    MessageUserName = "Användarnamnet används redan, testa ett annat";
+                    return Page();
+                }
+                if (request == "E-mail in use")
+                {
+                    MessageMail = "Mailen används redan, testa en annan";
+                    return Page();
+                }
+                if (request == "Registration failed")
+                {
+                    ErrorMessage = "Det gick inte att registrera en användare just nu," +
+                                   " vänligen försök igen senare eller kontakta " +
+                                   "systemadministratören på ggwebbshop@gmail.com så ordnar vi detta";
+                }
             }
-            RestClient client = new RestClient("https://localhost:44309/auth/register");
-            RestRequest request = new RestRequest
-            {
-                Method = Method.POST
-            };
-            request.Parameters.Clear();
-            request.AddJsonBody(values);
-
-            IRestResponse response = client.Execute(request);
-
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-
-                TokenChecker.UserStatus = true;
-                TokenChecker.UserName = User.Username;
-                return RedirectToPage("/Index");
+                ToolBox.userID = request;
+                return RedirectToPage("/RegisterConfirmation");
             }
             else
             {
-                TokenChecker.UserStatus = false;
-                return RedirectToPage("/index");
+                ErrorMessage = "Det gick inte att registrera en användare just nu," +
+                               " vänligen försök igen senare eller kontakta" +
+                               " systemadministratören på ggwebbshop@gmail.com så ordnar vi detta";
+                return Page();
             }
-
         }
     }
 

@@ -9,6 +9,8 @@ namespace GG_Webbshop
     public static class ToolBox
     {
         public static string TokenName = "_Token";
+        public static string LoggedInUserID { get; set; }
+        public static string userID { get; set; }
         public static bool IsValidEmail(string email)
         {
 

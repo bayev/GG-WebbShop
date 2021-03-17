@@ -20,9 +20,14 @@
                                     <div class="form-label-group">
                                         <label for="Password" class="control-label"></label>
                                         <input asp-for="Password" type="password" id="inputPassword" class="form-control" placeholder="Användarnamn" autocomplete="off">
-                                        @if (!string.IsNullOrEmpty(Model.Message)) 
+                                        @if (!string.IsNullOrEmpty(Model.Message))
                                         {
-                                            <p>@Model.Message</p> 
+                                            <p>@Model.Message</p>
+                                        }
+                                        @if (!string.IsNullOrEmpty(Model.MessageMail))
+                                        {
+                                            <p>@Model.MessageMail</p><br />
+                                            <p>Inte fått länken? Klicka <a href="https://localhost:44309/auth/ResendMail/@Model.StoredID">här</a> för att få en ny</p>
                                         }
                                     </div>
                                     <div class="custom-control custom-checkbox mb-3">

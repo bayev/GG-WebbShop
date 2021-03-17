@@ -22,6 +22,8 @@ namespace GG_Webbshop.Pages
         [BindProperty]
         public string Password { get; set; }      
         public string Message { get; set; }
+        public string MessageMail { get; set; }
+        public string StoredID { get; set; }
         public string SessionInfoToken { get; private set;}    
         public void OnGet()
         {
@@ -46,20 +48,28 @@ namespace GG_Webbshop.Pages
             HttpResponseMessage response = await client.PostAsync("auth/login", content);
 
             string request = response.Content.ReadAsStringAsync().Result;
+
             if(request == "No user or password matched, try again.")
             {
                 Message = "Fel e-post/användarnamn eller lösenord, försök igen.";
                 return Page();
             }
-            else if(request == "No such user exists")
+            if(request == "No such user exists")
             {
                 Message = "Ingen sådan användare finns registrerad.";
+                return Page();
+            }
+            if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            {
+                MessageMail = "Du har inte bekräftat din E-post än, kika i din mail!";
+                StoredID = request;
                 return Page();
             }
             else
             {
                 LoginResponseModel result = JsonConvert.DeserializeObject<LoginResponseModel>(request);
                 TokenChecker.UserName = userName;
+                ToolBox.LoggedInUserID = result.UserID;
                 // Set value in session
                 byte[] tokenInByte = Encoding.ASCII.GetBytes(result.Token);
                 HttpContext.Session.Set(ToolBox.TokenName, tokenInByte);
