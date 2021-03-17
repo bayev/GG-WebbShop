@@ -6,35 +6,47 @@
 
 <h4><i>information</i></h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post" autocomplete="off">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label class="control-label">Användarnamn</label>
-                <input asp-for="User.Username" class="form-control" />
-                <span asp-validation-for="User.Username" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="User.Email" class="control-label"></label>
-                <input asp-for="User.Email" class="form-control" />
-                <span asp-validation-for="User.Email" class="text-danger"></span>
-                @if (!string.IsNullOrEmpty(Model.ValidMailMessage))
-                {@Model.ValidMailMessage}
-            </div>
-            <div class="form-group">
-                <label class="control-label">Lösenord</label>
-                <input asp-for="User.Password" class="form-control" pattern=".{8,}" required title="Minst 8 tecken" />
-                <span asp-validation-for="User.Password" class="text-danger"></span>
-            </div>
+@if (!string.IsNullOrEmpty(Model.SuccessMessage))
+{
+    @Model.SuccessMessage
+    <br />
+    <a class="btn btn-success" href="https://localhost:44384/index">Klicka här för att komma åter till startsidan</a>
+    <a class="btn btn-success" href="https://localhost:44384/admin/index">Klicka här för att komma åter till startsidan för administratörer</a>
+}
 
-            <div class="form-group">
-                <input type="submit" value="Registrera" class="btn btn-primary" />
-            </div>
-        </form>
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post" autocomplete="off">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                    {@Model.ErrorMessage}
+                    <label class="control-label">Användarnamn</label>
+                    <input asp-for="User.Username" class="form-control" />
+                    <span asp-validation-for="User.Username" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="User.Email" class="control-label"></label>
+                    <input asp-for="User.Email" class="form-control" />
+                    <span asp-validation-for="User.Email" class="text-danger"></span>
+                    @if (!string.IsNullOrEmpty(Model.ValidMailMessage))
+                    {@Model.ValidMailMessage}
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Lösenord</label>
+                    <input asp-for="User.Password" class="form-control" pattern=".{8,}" required title="Minst 8 tecken" />
+                    <span asp-validation-for="User.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Registrera" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-page="Index">Tillbaks till startsidan för administratörer</a>
-</div>
+    <div>
+        <a class="btn btn-primary" asp-page="Index">Tillbaks till startsidan för administratörer</a>
+    </div>
+}
