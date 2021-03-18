@@ -90,9 +90,9 @@
                 @Html.DisplayFor(modelItem => item.Brand)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Ändra</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Detaljer</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Radera</a>
+                <a class="btn btn-outline-primary btn-sm" asp-page="./Edit" asp-route-id="@item.Id">Ändra</a>
+                <a class="btn btn-outline-primary btn-sm" asp-page="./Details" asp-route-id="@item.Id">Detaljer</a> 
+                <a class="btn btn-outline-danger btn-sm" asp-page="./Delete" asp-route-id="@item.Id">Radera</a>
             
             </td>
         </tr>

@@ -32,6 +32,8 @@ body {
 #search-btn {
     color: white;
     border-color: white;
+    padding 100px;
+    
 }
 
 #logg-in-icon {

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GG_Webbshop.Helper;
 using GG_Webbshop.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
@@ -27,6 +28,7 @@ namespace GG_Webbshop.Pages
         public string SessionInfoToken { get; private set;}    
         public void OnGet()
         {
+
         }
         public async Task<IActionResult>OnPostAsync(string userName, string password)
         {
@@ -72,7 +74,10 @@ namespace GG_Webbshop.Pages
                 ToolBox.LoggedInUserID = result.UserID;
                 // Set value in session
                 byte[] tokenInByte = Encoding.ASCII.GetBytes(result.Token);
+
                 HttpContext.Session.Set(ToolBox.TokenName, tokenInByte);
+                HttpContext.Session.SetString("Id", result.UserID);
+
             }
             if (response.IsSuccessStatusCode)
                 TokenChecker.UserStatus = true;
