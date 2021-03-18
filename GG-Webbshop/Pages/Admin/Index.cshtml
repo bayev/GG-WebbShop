@@ -14,88 +14,95 @@
     
     <a class="btn btn-outline-primary" asp-page="Create">Lägg till ny produkt</a>
 <br />
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Bild
-            </th>
-            <th>
-                Namn
-            </th>
-            <th>
-                Pris
-            </th>
-            <th>
-                Vikt
-            </th>
-            <th>
-                Beskrivning
-            </th>
-            <th>
-                Bildurl
-            </th>
-            <th>
-                Kategori
-            </th>
-            <th>
-                Skapad
-            </th>
-            <th>
-                Lagerstatus
-            </th>
-            <th>
-                Storlek
-            </th>
-            <th>
-                Märke
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Product) {
-        <tr>
-            <td>
-                <img class="img-fluid img-thumbnail rounded product-image" id="img-iconSize" src="~/img/@Html.DisplayFor(modelItem => item.Image)">
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Weight)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stock)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Size)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Brand)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Ändra</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Detaljer</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Radera</a>
-            
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="table-responsive-sm">
+    <div class="d-flex justify-content-start row">
+        <div class="col-md-10">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Bild
+                        </th>
+                        <th>
+                            Namn
+                        </th>
+                        <th>
+                            Pris
+                        </th>
+                        <th>
+                            Vikt
+                        </th>
+                        <th>
+                            Beskrivning
+                        </th>
+                        <th>
+                            Bildurl
+                        </th>
+                        <th>
+                            Kategori
+                        </th>
+                        <th>
+                            Skapad
+                        </th>
+                        <th>
+                            Lagerstatus
+                        </th>
+                        <th>
+                            Storlek
+                        </th>
+                        <th>
+                            Märke
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Product)
+                    {
+                        <tr>
+                            <td>
+                                <img class="img-fluid img-thumbnail rounded product-image" id="img-iconSize" src="~/img/@Html.DisplayFor(modelItem => item.Image)">
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Price)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Weight)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Image)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Category)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreateDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Stock)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Size)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Brand)
+                            </td>
+                            <td>
+                                <a asp-page="./Edit" asp-route-id="@item.Id">Ändra</a> |
+                                <a asp-page="./Details" asp-route-id="@item.Id">Detaljer</a> |
+                                <a asp-page="./Delete" asp-route-id="@item.Id">Radera</a>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

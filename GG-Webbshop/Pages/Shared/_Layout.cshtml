@@ -20,7 +20,7 @@
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto nav-fill w-100">
+                        <ul class="navbar-nav mr-auto">
                             <li class="nav-item dropdown">
                                 <div class="btn-group bg-dark">
 
@@ -35,17 +35,18 @@
                                     </div>
                                 </div>
                             </li>
-                                <li class="nav-item">
-                                    <div class="form-inline my-2 my-lg-0">
-                                        <input class="form-control mr-sm-2" id="searchInput" type="text" placeholder="Sök" aria-label="Search">
-                                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn" onclick="setUrl();">Sök</button>
-                                    </div>
-                                </li>
-                            <li class="nav-item">
-                                <a href="/CartView" class="nav-link" id="shopping-cart"><i class="bi bi-minecart"></i> Varukorg</a>
-                            </li>
+                            </ul>
+                        <div class="align-content-center">
+                            <div class="form-inline my-2 my-lg-0">
+                                <input class="form-control mr-sm-2" id="searchInput" type="text" placeholder="Sök" aria-label="Search">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn" onclick="setUrl();">Sök</button>
+                            </div>
+                        </div>
 
-                            <li class="nav-item">
+                                <a href="/CartView" class="nav-link" id="shopping-cart"><i class="bi bi-minecart"></i> Varukorg</a>
+
+
+
 
                                 @using GG_Webbshop.Pages
 
@@ -77,8 +78,8 @@
                                         </div>
                                     </div>
                                 }
-                                </li>
-                        </ul>
+
+                        
                     </div>
                 </div>
             </nav>
