@@ -36,7 +36,7 @@ else
                 </div>
                 <div class="form-group">
                     <label class="control-label">Lösenord</label>
-                    <input asp-for="User.Password" class="form-control" pattern=".{8,}" required title="Minst 8 tecken" />
+                    <input asp-for="User.Password" type="password" class="form-control" pattern=".{8,}" required title="Minst 8 tecken" />
                     <span asp-validation-for="User.Password" class="text-danger"></span>
                 </div>
                 <div class="form-group">

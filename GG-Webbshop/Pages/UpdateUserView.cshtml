@@ -41,7 +41,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label">Fullständigt namn</label>
-                <input asp-for="user.Fullname" class="form-control"  />
+                <input asp-for="user.Fullname" class="form-control" />
                 <span asp-validation-for="user.Fullname" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -66,7 +66,7 @@
             </div>
             @*<div class="form-group">
                 <label class="control-label">Ändra lösenord</label>
-                <input asp-for="@Model.Password1" class="form-control" pattern=".{8,}" required title="Minst 8 tecken" />
+                <input asp-for="@Model.Password1" type="password" class="form-control" pattern=".{8,}" required title="Minst 8 tecken" />
                 <span asp-validation-for="@Model.Password1" class="text-danger"></span>
                 @if (!string.IsNullOrEmpty(Model.PasswordMessage))
                 {
@@ -75,7 +75,7 @@
             </div>
         <div class="form-group">
             <label class="control-label">Nytt lösenord igen</label>
-            <input asp-for="@Model.Password2" class="form-control" pattern=".{8,}" required title="Minst 8 tecken" />
+            <input asp-for="@Model.Password2" type="password" class="form-control" pattern=".{8,}" required title="Minst 8 tecken" />
             <span asp-validation-for="@Model.Password2" class="text-danger"></span>
         </div>*@
             <div class="form-group">
