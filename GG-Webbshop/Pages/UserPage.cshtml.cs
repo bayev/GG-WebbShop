@@ -18,7 +18,7 @@ namespace GG_Webbshop.Pages
         public UserLoginResponseModel user { get; set; }
 
 
-        public async Task<IActionResult> OnGetAsync() //HÄMTA PRODUCT HÄR
+        public async Task<IActionResult> OnGetAsync() 
         {
             
 
@@ -26,12 +26,12 @@ namespace GG_Webbshop.Pages
             HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
             string token = Encoding.ASCII.GetString(tokenByte);
 
-            //string Id = HttpContext.Session.GetString("Id");
+            string Id = HttpContext.Session.GetString("Id");
             
 
             if (!String.IsNullOrEmpty(token))
             {
-                RestClient client = new RestClient($"https://localhost:44309/user/profile");
+                RestClient client = new RestClient($"https://localhost:44309/user/profile/{Id}");
                 RestRequest request = new RestRequest
                 {
                     Method = Method.GET

@@ -25,12 +25,17 @@ namespace GG_Webbshop.Pages
         {
         }
 
-        public string ValidMailMessage { get; set; }
+        
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            if (User.Email == null || MailMatch == null)
+            {
+                User.Email = "a";
+                MailMatch = "b";
+            }
             bool validMailFormat = ToolBox.IsValidEmail(User.Email);
             if (!validMailFormat)
             {
@@ -44,6 +49,8 @@ namespace GG_Webbshop.Pages
                 MessageMail = "Fälten för e-postadress måste matcha, testa igen";
                 return Page();
             }
+
+
 
             HttpClient client = _api.Initial();
 

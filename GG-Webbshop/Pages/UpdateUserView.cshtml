@@ -1,0 +1,91 @@
+﻿@page
+@model GG_Webbshop.Pages.UpdateUserViewModel
+@{
+}
+<h1><i>Uppdatera information</i></h1>
+
+<h4><i>Min information</i></h4>
+<hr />
+    <div class="row">
+        <div class="col-md-4">
+            @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+            {
+                <p class="text-danger">@Model.ErrorMessage</p>
+            }
+            else
+            {
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Användarnamn</label>
+                <input asp-for="user.Username" class="form-control" />
+                <span asp-validation-for="user.Username" class="text-danger"></span>
+                @if (!string.IsNullOrEmpty(Model.MessageUserName))
+                {
+                    <p class="text-danger">@Model.MessageUserName</p>
+                }
+            </div>
+            <div class="form-group">
+                <label class="control-label">E-post</label>
+                <input asp-for="user.Email" class="form-control" />
+                <span asp-validation-for="user.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">E-post igen(bara dubbelkollar att du stavat allt ordentligt)</label>
+                <input asp-for="@Model.MailMatch" class="form-control" />
+                <span asp-validation-for="@Model.MailMatch" class="text-danger"></span>
+                @if (!string.IsNullOrEmpty(Model.MessageMail))
+                {
+                    <p class="text-danger">@Model.MessageMail</p>
+                }
+            </div>
+            <div class="form-group">
+                <label class="control-label">Fullständigt namn</label>
+                <input asp-for="user.Fullname" class="form-control"  />
+                <span asp-validation-for="user.Fullname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Faktureringsadress</label>
+                <input asp-for="user.Billingaddress" class="form-control" />
+                <span asp-validation-for="user.Billingaddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Mottagaradress</label>
+                <input asp-for="user.Defaultshippingaddress" class="form-control" />
+                <span asp-validation-for="user.Defaultshippingaddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Land</label>
+                <input asp-for="user.Country" class="form-control" />
+                <span asp-validation-for="user.Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Telefonnummer</label>
+                <input asp-for="user.Phone" class="form-control" />
+                <span asp-validation-for="user.Phone" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label class="control-label">Ändra lösenord</label>
+                <input asp-for="@Model.Password1" class="form-control" pattern=".{8,}" required title="Minst 8 tecken" />
+                <span asp-validation-for="@Model.Password1" class="text-danger"></span>
+                @if (!string.IsNullOrEmpty(Model.PasswordMessage))
+                {
+                    <p class="text-danger">@Model.PasswordMessage</p>
+                }
+            </div>
+        <div class="form-group">
+            <label class="control-label">Nytt lösenord igen</label>
+            <input asp-for="@Model.Password2" class="form-control" pattern=".{8,}" required title="Minst 8 tecken" />
+            <span asp-validation-for="@Model.Password2" class="text-danger"></span>
+        </div>*@
+            <div class="form-group">
+                <input type="submit" value="Spara" class="btn btn-primary" />
+            </div>
+        </form>
+            }
+            </div>
+    </div>
+
+    <div>
+        <a class="btn btn-success" asp-page="UserPage">Tillbaka till mina sidor</a>
+    </div>

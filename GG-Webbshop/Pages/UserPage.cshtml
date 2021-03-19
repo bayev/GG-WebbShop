@@ -7,12 +7,6 @@
 
 <h4><i>Min information</i></h4>
 <hr />
-
-
-
-
-
-
     <div class="container emp-profile">
         <form method="post">
             <div class="row">
@@ -21,15 +15,7 @@
                         <h5>
                             @Model.user.Fullname
                         </h5>
-                    
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Om</a>
-                            </li>
-                            @*<li class="nav-item">
-                            
-                            </li>*@
-                        </ul>
+                        <h4>Om</h4>
                     </div>
                 </div>
             
@@ -92,14 +78,12 @@
             </div>
         </form>
     </div>
-
-
     <div>
         <a class="btn btn-outline-success" asp-page="Index">Tillbaka till startsidan</a>
 
-        <form method="post">
-            <input type="submit" class="btn btn-outline-primary" name="btnAddMore" value="Ändra profil" />
-        </form>
+        <a class="btn btn-outline-primary" asp-page="UpdateUserView">Ändra profil</a>
+
         <a class="btn btn-outline-danger" asp-page="DeleteUserView">Ta bort ditt konto</a>
-    
     </div>
+    
+    
