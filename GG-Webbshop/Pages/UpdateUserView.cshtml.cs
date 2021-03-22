@@ -1,10 +1,15 @@
+using GG_Webbshop.Helper;
+using GG_Webbshop.Models;
 using GG_Webbshop.Models.ResponseModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,6 +34,10 @@ namespace GG_Webbshop.Pages
         public string ErrorMessage { get; set; }
         public string MessageUserName { get; set; }
         public string MessageMail { get; set; }
+
+        ProductAPI _api = new ProductAPI();
+
+
         public async Task<IActionResult> OnGetAsync()
         {
             byte[] tokenByte;
@@ -62,6 +71,9 @@ namespace GG_Webbshop.Pages
             }
             return Page();
         }
+
+
+
         public async Task<IActionResult> OnPostAsync()
         {
             if(user.Email == null || MailMatch == null)
@@ -84,9 +96,7 @@ namespace GG_Webbshop.Pages
             }
 
 
-
-
-            var values = new Dictionary<string, string>()
+            var values = new Dictionary<string, string>() //Payload
                  {
                     {"username", $"{user.Username}"},
                     {"email", $"{user.Email}"},
@@ -97,22 +107,25 @@ namespace GG_Webbshop.Pages
                     {"country", $"{user.Country}"},
                     {"phone", $"{user.Phone}"}
                  };
-            byte[] tokenByte;
-            HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
-            string token = Encoding.ASCII.GetString(tokenByte);
 
-            RestClient client = new RestClient($"https://localhost:44309/user/userupdate");
-            RestRequest request = new RestRequest
+            
+
+            RestClient client1 = new RestClient($"https://localhost:44309/user/userupdate");
+            RestRequest request1 = new RestRequest
             {
                 Method = Method.PUT
             };
 
-            request.Parameters.Clear();
-            request.AddHeader("Authorization", $"bearer {token}");
-            request.AddJsonBody(values);
-            request.AddParameter("application/json", values, ParameterType.RequestBody);
+            byte[] updateTokenByte;
+            HttpContext.Session.TryGetValue(ToolBox.TokenName, out updateTokenByte);
+            string renewedToken = Encoding.ASCII.GetString(updateTokenByte);
 
-            IRestResponse response = client.Execute(request);
+            request1.Parameters.Clear();
+            request1.AddHeader("Authorization", $"bearer {renewedToken}");
+            request1.AddJsonBody(values);
+            request1.AddParameter("application/json", values, ParameterType.RequestBody);
+
+            IRestResponse response1 = client1.Execute(request1);
 
             //if(Password1 != null)
             //{
@@ -127,8 +140,18 @@ namespace GG_Webbshop.Pages
             //        return Page();
             //    }
             //}
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            if (response1.StatusCode == System.Net.HttpStatusCode.OK)
             {
+                string responseContent = response1.Content;
+
+                LoginResponseModel result = JsonConvert.DeserializeObject<LoginResponseModel>(responseContent);
+                byte[] tokenInByte1 = Encoding.ASCII.GetBytes(result.Token);
+                HttpContext.Session.Remove(ToolBox.TokenName);
+
+                HttpContext.Session.Set(ToolBox.TokenName, tokenInByte1);
+                HttpContext.Session.SetString("Id", ToolBox.LoggedInUserID);
+
+
                 TokenChecker.UserName = user.Username;
                 return RedirectToPage("./UserPage");
             }
