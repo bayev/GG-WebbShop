@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -31,7 +32,26 @@ namespace GG_Webbshop
                 options.Cookie.Name = ".GGwebshop.Session";
                 options.IdleTimeout = TimeSpan.FromMinutes(10);
                 options.Cookie.IsEssential = true;
+                
 
+            });
+
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = ".AspNet.Consent";
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.IsEssential = true;
+
+
+            });
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential 
+                // cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+         
+                // requires using Microsoft.AspNetCore.Http;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
         }
@@ -65,7 +85,8 @@ namespace GG_Webbshop
 
             app.UseAuthorization();
 
-
+            app.UseCookiePolicy();
+            
             app.UseSession();
 
             app.UseEndpoints(endpoints =>
