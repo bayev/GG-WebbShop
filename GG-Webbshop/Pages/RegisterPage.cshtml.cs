@@ -21,6 +21,8 @@ namespace GG_Webbshop.Pages
         public string MailMatch { get; set; }
         [BindProperty]
         public RegisterModel User { get; set; }
+
+        public bool PrivacyChecker { get; set; }
         public void OnGet()
         {
         }

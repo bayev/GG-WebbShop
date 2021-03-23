@@ -26,6 +26,8 @@ namespace GG_Webbshop.Pages
         public string MessageMail { get; set; }
         public string StoredID { get; set; }
         public string SessionInfoToken { get; private set;}    
+
+
         public void OnGet()
         {
 
@@ -72,6 +74,8 @@ namespace GG_Webbshop.Pages
                 LoginResponseModel result = JsonConvert.DeserializeObject<LoginResponseModel>(request);
                 TokenChecker.UserName = userName;
                 ToolBox.LoggedInUserID = result.UserID;
+                ToolBox.ActiveRole = result.Role;
+
                 // Set value in session
                 byte[] tokenInByte = Encoding.ASCII.GetBytes(result.Token);
 

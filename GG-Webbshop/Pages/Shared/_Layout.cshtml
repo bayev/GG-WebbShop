@@ -35,51 +35,69 @@
                                     </div>
                                 </div>
                             </li>
-                            </ul>
+                        </ul>
                         <div class="align-content-center">
                             <div class="form-inline my-2 my-lg-0">
-                                <input class="form-control mr-sm-2" id="searchInput" type="text" placeholder="Sök" aria-label="Search">
+                                <input class="form-control mr-sm-2" id="searchInput" type="text" placeholder="Sök" aria-label="Search" autocomplete="off">
                                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn" onclick="setUrl();">Sök</button>
                             </div>
                         </div>
 
-                                <a href="/CartView" class="nav-link" id="shopping-cart"><i class="bi bi-minecart"></i> Varukorg</a>
+                        <a href="/CartView" class="nav-link" id="shopping-cart"><i class="bi bi-minecart"></i> Varukorg</a>
 
 
 
 
-                                @using GG_Webbshop.Pages
+                        @using GG_Webbshop.Pages
 
-                                @{bool returnTokenValue = TokenChecker.UserStatus;}
+                        @{bool returnTokenValue = TokenChecker.UserStatus;}
 
 
-                                @if (returnTokenValue == false)
-                                {
-                                    <div class="btn-group bg-dark">
-                                        <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white bi bi-list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Menyval
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right bg-dark">
-                                            <a href="/LogInView" class="nav-link" id="logg-in-icon"><i class="bi bi-door-open"></i> Logga in</a>
-                                            <a href="/RegisterPage" class="nav-link" id="Register-icon"><i class="bi bi-person-plus"></i> Registrera dig</a>
-                                        </div>
+                        @if (returnTokenValue == false)
+                        {
+                            <div class="btn-group bg-dark">
+                                <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white bi bi-list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Menyval
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right bg-dark">
+                                    <a href="/LogInView" class="nav-link" id="logg-in-icon"><i class="bi bi-door-open"></i> Logga in</a>
+                                    <a href="/RegisterPage" class="nav-link" id="Register-icon"><i class="bi bi-person-plus"></i> Registrera dig</a>
+                                </div>
+                            </div>
+                        }
+                        @if (returnTokenValue == true)
+                        {
+                            @if (ToolBox.ActiveRole == "root")
+                            {
+                                <div class="btn-group bg-dark">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Välkommen @TokenChecker.UserName
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right bg-dark">
+                                        <a href="/Admin" class="dropdown-item text-white bg-dark" type="button">Admin</a>
+                                        <a href="/LogOut" class="dropdown-item text-white bg-dark" type="button">Logga ut</a>
+
                                     </div>
-                                }
-                                @if (returnTokenValue == true)
-                                {
-                                    <div class="btn-group bg-dark">
-                                        <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Välkommen @TokenChecker.UserName
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right bg-dark">
-                                            <a href="/UserPage" class="dropdown-item text-white bg-dark" type="button">Mina Sidor</a>
-                                            <a href="/LogOut" class="dropdown-item text-white bg-dark" type="button">Logga ut</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="btn-group bg-dark">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Välkommen @TokenChecker.UserName
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right bg-dark">
+                                        <a href="/UserPage" class="dropdown-item text-white bg-dark" type="button">Mina Sidor</a>
+                                        <a href="/LogOut" class="dropdown-item text-white bg-dark" type="button">Logga ut</a>
 
-                                        </div>
                                     </div>
-                                }
+                                </div>
 
-                        
+                            }
+
+                        }
+
+
                     </div>
                 </div>
             </nav>

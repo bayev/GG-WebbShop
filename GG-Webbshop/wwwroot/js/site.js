@@ -6,6 +6,8 @@ function setUrl() {
     window.location.href = 'SearchResult?id=' + document.getElementById('searchInput').value;
 };
 
+
+
 //function setUrlProductView() {
 //    window.location.href = 'ProductView?id=' + document.getElementById('product-id').value;
 //};

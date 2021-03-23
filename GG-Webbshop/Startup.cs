@@ -32,28 +32,17 @@ namespace GG_Webbshop
                 options.Cookie.Name = ".GGwebshop.Session";
                 options.IdleTimeout = TimeSpan.FromMinutes(10);
                 options.Cookie.IsEssential = true;
-                
-
             });
 
-            services.AddSession(options =>
-            {
-                options.Cookie.Name = ".AspNet.Consent";
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
-                options.Cookie.IsEssential = true;
 
-
-            });
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential 
                 // cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
-         
                 // requires using Microsoft.AspNetCore.Http;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -80,12 +69,13 @@ namespace GG_Webbshop
             // css/style.css
 
             app.UseRouting();
+ 
+            app.UseCookiePolicy();
 
             // login/profile
-
             app.UseAuthorization();
 
-            app.UseCookiePolicy();
+            
             
             app.UseSession();
 

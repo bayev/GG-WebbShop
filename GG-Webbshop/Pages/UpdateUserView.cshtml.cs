@@ -140,10 +140,11 @@ namespace GG_Webbshop.Pages
             //        return Page();
             //    }
             //}
+
+            string responseContent = response1.Content;
+
             if (response1.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                string responseContent = response1.Content;
-
                 LoginResponseModel result = JsonConvert.DeserializeObject<LoginResponseModel>(responseContent);
                 byte[] tokenInByte1 = Encoding.ASCII.GetBytes(result.Token);
                 HttpContext.Session.Remove(ToolBox.TokenName);
@@ -154,6 +155,31 @@ namespace GG_Webbshop.Pages
 
                 TokenChecker.UserName = user.Username;
                 return RedirectToPage("./UserPage");
+            }
+            
+            if (response1.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            {
+                string result = JsonConvert.DeserializeObject<string>(responseContent);
+
+                if (result == "Username in use")
+                {
+                    MessageUserName = "Användarnamnet används redan, välj ett annat.";
+                    return Page();
+                }
+                if (result == "E-mail in use")
+                {
+                    MessageMail = "E-posten används redan, välj en annan.";
+                    return Page();
+                }
+                if (result == "Error, user not found")
+                {
+                    ErrorMessage = "Det gick inte att registrera en användare just nu," +
+                              " vänligen försök igen senare eller kontakta" +
+                              " systemadministratören på ggwebbshop@gmail.com så ordnar vi detta";
+                    return Page();
+                }
+
+                return Page();
             }
             else
             {
