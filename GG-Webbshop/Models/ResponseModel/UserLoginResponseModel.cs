@@ -25,7 +25,7 @@ namespace GG_Webbshop.Models.ResponseModel
         [JsonProperty("fullname")]
         public string Fullname { get; set; }
 
-        [JsonProperty("billingaddress")]
+        [JsonProperty("BillingAdress")]
         public string Billingaddress { get; set; }
 
         [JsonProperty("defaultshippingaddress")]
@@ -34,7 +34,7 @@ namespace GG_Webbshop.Models.ResponseModel
         [JsonProperty("country")]
         public string Country { get; set; }
 
-        [JsonProperty("phone")]
+        [JsonProperty("PhoneNumber")]
         public string Phone { get; set; }
     }
 

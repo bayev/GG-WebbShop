@@ -15,102 +15,95 @@
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
                 <div class="container">
                     <a class="navbar-brand" href="/">Grevens Garderob</a>
-
-
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <div class="btn-group bg-dark">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item dropdown">
+                                <div class="btn-group bg-dark">
 
-                        <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white bi bi-list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Kategorier</button>
-                        
-                        <div class="dropdown-menu dropdown-menu-right bg-dark">
-                            <button class="dropdown-item text-white bg-dark" type="button">Tröjor</button>
-                            <button class="dropdown-item text-white bg-dark" type="button">Accessoarer</button>
-                            <button class="dropdown-item text-white bg-dark" type="button">Blazers</button>
-                            <button class="dropdown-item text-white bg-dark" type="button">Byxor</button>
-                            <button class="dropdown-item text-white bg-dark" type="button">T-shirts</button>
-                        </div>
-                    </div>
+                                    <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white bi bi-list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Kategorier</button>
 
-                    <div class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" id="searchInput" type="text" placeholder="Sök" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn" onclick="setUrl();">Sök</button>
-                    </div>
-
-                    <a href="/CartView" class="nav-link" id="shopping-cart"><i class="bi bi-minecart"></i> Varukorg</a>
-
-
-                    @using GG_Webbshop.Pages
-
-                    @{bool returnTokenValue = TokenChecker.UserStatus;}
-
-
-                    @if (returnTokenValue == false)
-                    {
-                        <div class="btn-group bg-dark">
-                            <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white bi bi-list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Menyval
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right bg-dark">
-                                <a href="/LogInView" class="nav-link" id="logg-in-icon"><i class="bi bi-door-open"></i> Logga in</a>
-                                <a href="/RegisterPage" class="nav-link" id="Register-icon"><i class="bi bi-person-plus"></i> Registrera dig</a>
+                                    <div class="dropdown-menu dropdown-menu-right bg-dark">
+                                        <button class="dropdown-item text-white bg-dark" type="button">Tröjor</button>
+                                        <button class="dropdown-item text-white bg-dark" type="button">Accessoarer</button>
+                                        <button class="dropdown-item text-white bg-dark" type="button">Blazers</button>
+                                        <button class="dropdown-item text-white bg-dark" type="button">Byxor</button>
+                                        <button class="dropdown-item text-white bg-dark" type="button">T-shirts</button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="align-content-center">
+                            <div class="form-inline my-2 my-lg-0">
+                                <input class="form-control mr-sm-2" id="searchInput" type="text" placeholder="Sök" aria-label="Search" autocomplete="off">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn" onclick="setUrl();">Sök</button>
                             </div>
                         </div>
-                     }
-                     @if (returnTokenValue == true)
-                     {
-                        <div class="btn-group bg-dark">
-                                    <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                          Välkommen @TokenChecker.UserName
-                                     </button>
-                              <div class="dropdown-menu dropdown-menu-right bg-dark">
-                                    <a href="/UserPage" class="dropdown-item text-white bg-dark" type="button">Mina Sidor</a>
-                                    <a href="/LogOut" class="dropdown-item text-white bg-dark" type="button">Logga ut</a>
 
+                        <a href="/CartView" class="nav-link" id="shopping-cart"><i class="bi bi-minecart"></i> Varukorg</a>
+
+
+
+
+                        @using GG_Webbshop.Pages
+
+                        @{bool returnTokenValue = TokenChecker.UserStatus;}
+
+
+                        @if (returnTokenValue == false)
+                        {
+                            <div class="btn-group bg-dark">
+                                <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white bi bi-list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Menyval
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right bg-dark">
+                                    <a href="/LogInView" class="nav-link" id="logg-in-icon"><i class="bi bi-door-open"></i> Logga in</a>
+                                    <a href="/RegisterPage" class="nav-link" id="Register-icon"><i class="bi bi-person-plus"></i> Registrera dig</a>
                                 </div>
-                        </div>
-                     }
-                                
+                            </div>
+                        }
+                        @if (returnTokenValue == true)
+                        {
+                            @if (ToolBox.ActiveRole == "root")
+                            {
+                                <div class="btn-group bg-dark">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Välkommen @TokenChecker.UserName
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right bg-dark">
+                                        <a href="/Admin" class="dropdown-item text-white bg-dark" type="button">Admin</a>
+                                        <a href="/LogOut" class="dropdown-item text-white bg-dark" type="button">Logga ut</a>
 
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="btn-group bg-dark">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Välkommen @TokenChecker.UserName
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right bg-dark">
+                                        <a href="/UserPage" class="dropdown-item text-white bg-dark" type="button">Mina Sidor</a>
+                                        <a href="/LogOut" class="dropdown-item text-white bg-dark" type="button">Logga ut</a>
 
-                        @*
-            <div class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" id="searchInput" type="text" placeholder="Sök" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn" onclick="setUrl();">Sök</button>
-            </div>
-            <div>
-                <a href="/RegisterPage" class="nav-link" id="Register-icon"><i class="bi bi-person-plus"></i> Registrera dig</a>
-            </div>
-            <a href="/CartView" class="nav-link" id="shopping-cart"><i class="bi bi-minecart"></i> Varukorg</a>
+                                    </div>
+                                </div>
 
-            @using GG_Webbshop.Pages
+                            }
 
-            @{bool returnTokenValue = TokenChecker.UserStatus;}
+                        }
 
-
-            @if (returnTokenValue == false)
-            {
-                <a href="/LogInView" class="nav-link" id="logg-in-icon"><i class="bi bi-door-open"></i> Logga in</a>
-            }
-            @if (returnTokenValue == true)
-            {
-                <div class="btn-group bg-dark">
-                    <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Välkommen @TokenChecker.UserName
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right bg-dark">
-                        <button class="dropdown-item text-white bg-dark" type="button">Mina Sidor</button>
-                        <a href="/LogOut"  class="dropdown-item text-white bg-dark" type="button">Logga ut</a>
 
                     </div>
                 </div>
-            }
-                        *@
-                    </div>
             </nav>
         </header>
         <div class="container">
+            <partial name="_CookieConsentPartial" />
             <main role="main" class="pb-3">
 
                 @RenderBody()

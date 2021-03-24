@@ -14,6 +14,8 @@ namespace GG_Webbshop.Pages.Admin
         [BindProperty]
         public User User { get; set; }
         public string ValidMailMessage { get; set; }
+        public string ErrorMessage { get; set; }
+        public string SuccessMessage { get; set; }
         public async Task<IActionResult> OnGetAsync()
         {
             try
@@ -79,15 +81,18 @@ namespace GG_Webbshop.Pages.Admin
                 request.AddJsonBody(values);
 
                 IRestResponse response = client.Execute(request);
-
+                if(response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    ErrorMessage = "Angiven e-post eller angivet admin-användarnamn används redan, försök igen";
+                    return Page();
+                }
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    TokenChecker.UserStatus = true;
-                    return RedirectToPage("./index");
+                    SuccessMessage = $"Registrering lyckades av ny administratör!";
+                    return Page();
                 }
                 else
                 {
-                    TokenChecker.UserStatus = false;
                     return RedirectToPage("/error");
                 }
             }

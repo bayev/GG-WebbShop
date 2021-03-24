@@ -7,15 +7,13 @@
 
 <h1>Startsida administratör</h1>
 <link rel="stylesheet" href="~/css/AdminStyling.css">
-<a  asp-page="./RegisterAdminView">Skapa adminstratörkonto</a>
-
-@ViewBag.Token
-<p>
-    <a asp-page="DeleteAdminView" class="text-warning">Ta bort konto</a>
-</p>
-<p>
-    <a asp-page="Create">Lägg till ny produkt</a>
-</p>
+<a class="btn btn-outline-primary" asp-page="./RegisterAdminView">Skapa adminstratörkonto</a>
+<a class="btn btn-outline-danger" asp-page="DeleteAdminView">Ta bort konto</a>
+<br />
+<hr />
+    
+    <a class="btn btn-outline-primary" asp-page="Create">Lägg till ny produkt</a>
+<br />
 <table class="table">
     <thead>
         <tr>
@@ -92,9 +90,9 @@
                 @Html.DisplayFor(modelItem => item.Brand)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Ändra</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Detaljer</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Radera</a>
+                <a class="btn btn-outline-primary btn-sm" asp-page="./Edit" asp-route-id="@item.Id">Ändra</a>
+                <a class="btn btn-outline-primary btn-sm" asp-page="./Details" asp-route-id="@item.Id">Detaljer</a> 
+                <a class="btn btn-outline-danger btn-sm" asp-page="./Delete" asp-route-id="@item.Id">Radera</a>
             
             </td>
         </tr>

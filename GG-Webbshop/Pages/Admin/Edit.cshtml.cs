@@ -26,7 +26,7 @@ namespace GG_Webbshop.Pages.Admin
 
         }
 
-        public async Task<IActionResult> OnGetAsync(string id) //HÄMTA PRODUCT HÄR
+        public async Task<IActionResult> OnGetAsync(string id)
         {
             try
             {

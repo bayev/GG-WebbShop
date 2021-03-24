@@ -1,50 +1,89 @@
 ﻿@page
 @model GG_Webbshop.Pages.UserPageModel
 @{
+
 }
 <h1><i>Min sida</i></h1>
 
 <h4><i>Min information</i></h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <p class="control-label">Användarnamn</p>
-                <p asp-for="User.Username"></p>
+    <div class="container emp-profile">
+        <form method="post">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="profile-head">
+                        <h5>
+                            @Model.user.Fullname
+                        </h5>
+                        <h4>Om</h4>
+                    </div>
+                </div>
+            
             </div>
-            <div class="form-group">
-                <p asp-for="User.Email" class="control-label"></p>
-                <p asp-for="User.Email" class="form-control" />
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Fullständigt namn</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>@Model.user.Fullname</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Användarnamn</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>@Model.user.Username</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Email</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>@Model.user.Email</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Telefonnummer</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>@Model.user.Phone</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Land</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>@Model.user.Country</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Adress</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>@Model.user.Billingaddress</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label class="control-label">Lösenord</label>
-                <p asp-for="User.Password" class="form-control"  />
-            </div>
-            <div class="form-group">
-                <label class="control-label">Fullständigt namn</label>
-                <p asp-for="User.FullName" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label class="control-label">Faktureringsadress</label>
-                <p asp-for="User.BillingAddress" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label class="control-label">Leveransadress</label>
-                <p asp-for="User.DefaultShippingAddress" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label class="control-label">Land</label>
-                <p asp-for="User.Country" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label class="control-label">Telefonnummer</label>
-                <p asp-for="User.Phone" class="form-control" />
-            </div>
+        </form>
     </div>
-</div>
+    <div>
+        <a class="btn btn-outline-success" asp-page="Index">Tillbaka till startsidan</a>
 
-<div>
-    <a asp-page="Index">Tillbaks till startsidan</a>
-</div>
+        <a class="btn btn-outline-primary" asp-page="UpdateUserView">Ändra profil</a>
+
+        <a class="btn btn-outline-danger" asp-page="DeleteUserView">Ta bort ditt konto</a>
+    </div>
+    
+    

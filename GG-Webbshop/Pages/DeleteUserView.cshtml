@@ -1,0 +1,10 @@
+﻿@page
+@model GG_Webbshop.Pages.DeleteUserViewModel
+@{
+}
+
+<p class="text-danger">Vill du verkligen ta bort ditt konto?</p>
+<form method="post">
+    <input type="submit" value="Radera" class="btn btn-danger" />
+    <a class="btn btn-success" asp-page="./UserPage">Tillbaka till din profil</a>
+</form>

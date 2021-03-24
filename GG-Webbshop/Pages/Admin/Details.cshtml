@@ -5,10 +5,10 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Detaljer</h1>
 
 <div>
-    <h4>Product</h4>
+    <h4>Produkt</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -74,6 +74,6 @@
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Product.Id">Ändra</a> |
-    <a asp-page="./Index">Tillbaka till startsidan för administratörer</a>
+    <a class="btn btn-danger" asp-page="./Edit" asp-route-id="@Model.Product.Id">Ändra</a> |
+    <a class="btn btn-success" asp-page="./Index">Tillbaka till startsidan för administratörer</a>
 </div>
