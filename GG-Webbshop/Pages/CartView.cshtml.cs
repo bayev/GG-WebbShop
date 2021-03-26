@@ -82,7 +82,7 @@ namespace GG_Webbshop.Pages
                 }
                 if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
                 {
-                    Message = "din varukorg är tom!";
+                    Message = "Din varukorg är tom!";
                     return Page();
                 }
                 if (response.StatusCode == System.Net.HttpStatusCode.NotFound)

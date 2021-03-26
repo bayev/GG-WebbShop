@@ -2,11 +2,17 @@
 @model GG_Webbshop.Pages.CartViewModel
 @{
 }
-
-
 @if (Model.Message != null)
 {
+    bool returnTokenValue = TokenChecker.UserStatus;
+
+
     <h2>@Model.Message</h2>
+    <a class="btn btn-dark" href="#" onclick="history.go(-1)">Tillbaka</a>
+    @if (returnTokenValue == false)
+    {
+        <a class="btn btn-primary" href="/LoginView">Logga in</a>
+    }
 }
 else
 {
