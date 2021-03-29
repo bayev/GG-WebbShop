@@ -8,12 +8,30 @@
 
 @if (showBanner)
 {
-    <div id="cookieConsent" class="alert alert-info alert-dismissible fade show" role="alert">
-        Use this space to summarize your privacy and cookie use policy. <a asp-page="/Privacy">Learn More</a>.
-        <button type="button" class="accept-policy close" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
-            <span aria-hidden="true">Accept</span>
-        </button>
+<div class="toast bg-dark text-white w-100 mw-100 alert alert-info alert-dismissible fade show" role="alert">
+    <div id="cookieConsent">
+        <div class="toast-body p-4 d-flex flex-row">
+        Genom att använda vår hemsida godkänner du användandet av cookies.
+            <div style="padding-left: 20px">
+                <a asp-page="/Privacy" target="_blank">Läs mer</a>
+            </div>
+        <div class="ml-auto" style="padding-left:20px" >
+            <button type="button" class="btn btn-light" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
+                <span aria-hidden="true">Godkänn</span>
+            </button>
+            <a href="/DenyCookiePage" type="button" class="btn btn-outline-light mr-3" id="btnDeny">
+                Avböj
+            </a>
+        </div>
+
+        </div>
+
     </div>
+
+</div>
+
+    
+
     <script>
         (function () {
             var button = document.querySelector("#cookieConsent button[data-cookie-string]");
@@ -23,4 +41,23 @@
         })();
     </script>
 }
+
+
+@*<div class="toast bg-dark text-white w-100 mw-100" role="alert" data-autohide="false">
+            <div class="toast-body p-4 d-flex flex-column">
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="ml-auto">
+
+    </div>*@
 
