@@ -74,10 +74,25 @@ namespace GG_Webbshop.Pages
 
                 IRestResponse response = client.Execute(request);
                 string responseContent = response.Content;
+                
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     var model = c2pResponseModel.FromJson(response.Content);
                     c2pRM = model;
+                    decimal tempPrice = 0;
+                    foreach (var item in c2pRM)
+                    {
+                        tempPrice = item.Price;
+                        for (int i = 1; i < item.Amount; i++)
+                        {
+                            if (item.Amount == 1)
+                                break;
+                            if (i == item.Amount)
+                                break;
+                            else
+                                item.Price += tempPrice;
+                        }
+                    }
                     return Page();
                 }
                 if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
