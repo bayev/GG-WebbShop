@@ -7,7 +7,6 @@
     @*<link rel="stylesheet" href="~/css/Site.css">*@
     <link rel="stylesheet" href="~/css/CheckoutStyle.css">
 </head>
-
 @if (Model.Message != null)
 {
     bool returnTokenValue = TokenChecker.UserStatus;
@@ -65,12 +64,12 @@ else
                                         <td class="border-0 align-middle" style="padding-left: 30px;">
                                             <div class="qty mt-5">
                                                 <a href="?PlusMinus=false&c2pIdUpdate=@c2p.C2PId" class="minus bg-dark">-</a>
-                                                @*<input type="number" class="count" name="qty" value="@c2p.Amount">*@
+                                                
                                                 @c2p.Amount
                                                 <a href="?PlusMinus=true&c2pIdUpdate=@c2p.C2PId" class="plus bg-dark">+</a>
                                             </div>
                                         </td>
-                                        @*<td class="border-0 align-middle" style="padding-left: 30px;"><strong>@c2p.Amount</strong></td>*@
+                                        
                                         <td class="border-0 align-middle"><a href="?id=@c2p.C2PId" class="text-dark" style="padding-left: 25px;"><i class="bi bi-trash"></i></a></td>
                                     </tr>
                                 }
@@ -115,17 +114,62 @@ else
                                 <strong class="text-muted">Total</strong>
                                 <h5 class="font-weight-bold">@Model.TotalPrice</h5>
                             </li>
-                        </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Betala</a>
+                        </ul><a id="gawgaga" onclick="infoDivShow()" class="btn btn-dark rounded-pill py-2 btn-block text-white">Betala</a>
                     </div>
                 </div>
                 <!--TOTAL SLUT -->
-
             </div>
-
         </div>
     </div>
- 
-    <div class="row justify-content-center">
+    <div style="display : none" id="infoDiv" class="row justify-content-center">
+        <h1><i>Dina uppgifter / leveransinformation</i></h1>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label class="control-label">Användarnamn</label>
+                        <input asp-for="user.Username" class="form-control" />
+                        <span asp-validation-for="user.Username" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">E-post</label>
+                        <input asp-for="user.Email" class="form-control" />
+                        <span asp-validation-for="user.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Fullständigt namn</label>
+                        <input asp-for="user.Fullname" class="form-control" />
+                        <span asp-validation-for="user.Fullname" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Faktureringsadress</label>
+                        <input asp-for="user.Billingaddress" class="form-control" />
+                        <span asp-validation-for="user.Billingaddress" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Mottagaradress</label>
+                        <input asp-for="user.Defaultshippingaddress" class="form-control" />
+                        <span asp-validation-for="user.Defaultshippingaddress" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Land</label>
+                        <input asp-for="user.Country" class="form-control" />
+                        <span asp-validation-for="user.Country" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Telefonnummer</label>
+                        <input asp-for="user.Phone" class="form-control" />
+                        <span asp-validation-for="user.Phone" class="text-danger"></span>
+                    </div>
+
+                    <a id="ShowAdressinfo" onclick="scrollDown()" class="btn btn-dark rounded-pill py-2 btn-block text-white">Ange betalningsuppgifter</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div style="display : none" id="PaymentDiv" class="row justify-content-center">
         <div class="col-lg-12">
             <div class="card">
                 <div class="row">
@@ -145,27 +189,26 @@ else
                     </div>
                     <div class="col-lg-5">
                         <div class="row px-2">
-                            <div class="form-group col-md-6"> <label class="form-control-label">Name on Card</label> <input type="text" id="cname" name="cname" placeholder="Johnny Doe"> </div>
-                            <div class="form-group col-md-6"> <label class="form-control-label">Card Number</label> <input type="text" id="cnum" name="cnum" placeholder="1111 2222 3333 4444"> </div>
+                            <div class="form-group col-md-6"> <label class="form-control-label">Fullständigt namn</label> <input type="text" id="cname" name="cname" placeholder="Namn"> </div>
+                            <div class="form-group col-md-6"> <label class="form-control-label">Kortnummer</label> <input type="text" id="cnum" name="cnum" placeholder="1111 2222 3333 4444"> </div>
                         </div>
                         <div class="row px-2">
-                            <div class="form-group col-md-6"> <label class="form-control-label">Expiration Date</label> <input type="text" id="exp" name="exp" placeholder="MM/YYYY"> </div>
+                            <div class="form-group col-md-6"> <label class="form-control-label">Utgångsdatum</label> <input type="text" id="exp" name="exp" placeholder="MM/YYYY"> </div>
                             <div class="form-group col-md-6"> <label class="form-control-label">CVV</label> <input type="text" id="cvv" name="cvv" placeholder="***"> </div>
                         </div>
                     </div>
                     <div class="col-lg-4 mt-2">
                         <div class="row d-flex justify-content-between px-4">
-                            <p class="mb-1 text-left">Subtotal</p>
-                            <h6 class="mb-1 text-right">$23.49</h6>
-                        </div>
-                        <div class="row d-flex justify-content-between px-4">
-                            <p class="mb-1 text-left">Shipping</p>
-                            <h6 class="mb-1 text-right">$2.99</h6>
+                            <p class="mb-1 text-left">Frakt</p>
+                            <h6 class="mb-1 text-right">55 SEK</h6>
                         </div>
                         <div class="row d-flex justify-content-between px-4" id="tax">
-                            <p class="mb-1 text-left">Total (tax included)</p>
-                            <h6 class="mb-1 text-right">$26.48</h6>
-                        </div> <button class="btn-block btn-blue"> <span> <span id="checkout">Checkout</span> <span id="check-amt">$26.48</span> </span> </button>
+                            <p class="mb-1 text-left">Att betala (moms inkluderad)</p>
+                            <h6 class="mb-1 text-right">@Model.TotalPrice SEK</h6>
+                        </div> 
+                        <form method="post">
+                            <button type="submit" class="btn btn-dark rounded-pill py-2 btn-block text-white"> <span> <span id="checkout">Genomför köp</span> <span id="check-amt">@Model.TotalPrice</span> </span> </button>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -5,10 +5,23 @@
 function setUrl() {
     window.location.href = 'SearchResult?id=' + document.getElementById('searchInput').value;
 };
+function scrollDown() {
+    var x = document.getElementById("PaymentDiv");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+    window.scrollBy(0, 500);
+}
+function infoDivShow() {
+    var x = document.getElementById("infoDiv");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+    window.scrollBy(0, 500);
+}
 
-
-
-//function setUrlProductView() {
-//    window.location.href = 'ProductView?id=' + document.getElementById('product-id').value;
-//};
 

@@ -88,8 +88,9 @@ namespace GG_Webbshop.Pages
                 IRestResponse response = client.Execute(request);
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                {  
-                    return RedirectToPage("./Index");
+                {
+                    Message = "Varan är tillagd i varukorgen!";
+                    return RedirectToPage("./CartView");
                 }
                 if(response.StatusCode == System.Net.HttpStatusCode.BadRequest)
                 {

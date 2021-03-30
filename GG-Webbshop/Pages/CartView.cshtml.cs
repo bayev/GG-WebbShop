@@ -2,7 +2,6 @@ using GG_Webbshop.Models.ResponseModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Text;
@@ -30,6 +29,8 @@ namespace GG_Webbshop.Pages
         public decimal TotalPrice { get; set; }
 
         public decimal VATprice { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public UserLoginResponseModel user { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -46,7 +47,27 @@ namespace GG_Webbshop.Pages
                 return Page();
             }
 
-            if (PlusMinus !=null)
+            string IdUser = HttpContext.Session.GetString("Id");
+            RestClient client1 = new RestClient($"https://localhost:44309/user/profile/{IdUser}");
+            RestRequest request1 = new RestRequest
+            {
+                Method = Method.GET
+            };
+            request1.Parameters.Clear();
+            request1.AddHeader("Authorization", $"bearer {token}");
+
+            IRestResponse response1 = client1.Execute(request1);
+
+            if (response1.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var model = UserLoginResponseModel.FromJsonSingle(response1.Content);
+                user = model;
+            }
+            else
+            {
+                return NotFound();
+            }
+            if (PlusMinus != null)
             {
 
                 RestClient client = new RestClient($"https://localhost:44309/cart/updateQuantity/{PlusMinus}/{c2pIdUpdate}");
@@ -64,7 +85,7 @@ namespace GG_Webbshop.Pages
                 }
                 if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
                 {
-                    Message2 = "Vi kunde inte radera produkten från din varukorg, vänligen kontakta administratören";
+                    Message = "Produkten är slut i lager";
                     return Page();
                 }
                 if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
@@ -85,16 +106,16 @@ namespace GG_Webbshop.Pages
 
                 IRestResponse response = client.Execute(request);
                 string responseContent = response.Content;
-                if(response.StatusCode == System.Net.HttpStatusCode.OK)
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     return RedirectToPage("./cartview");
                 }
-                if(response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
                 {
                     Message2 = "Vi kunde inte radera produkten från din varukorg, vänligen kontakta administratören";
                     return Page();
                 }
-                if(response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
                     Message = "Du som användare hittades inte i vår databas. Vänligen kontakta administratören";
                     return Page();
@@ -112,13 +133,13 @@ namespace GG_Webbshop.Pages
 
                 IRestResponse response = client.Execute(request);
                 string responseContent = response.Content;
-                
+
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     var model = c2pResponseModel.FromJson(response.Content);
                     c2pRM = model;
                     decimal tempPrice = 0;
-                    
+
                     foreach (var item in c2pRM)
                     {
                         tempPrice = item.Price;
@@ -135,11 +156,7 @@ namespace GG_Webbshop.Pages
                         TotalPrice += item.Price;
                     }
                     TotalPrice += 55;
-                    VATprice = Math.Round((decimal)TotalPrice * (decimal)0.75,2);
-                    
-                    
-                    
-                    
+                    VATprice = Math.Round((decimal)TotalPrice * (decimal)0.75, 2);
 
                     return Page();
                 }
@@ -159,6 +176,11 @@ namespace GG_Webbshop.Pages
                 }
             }
             return Page();
+
+            //public async Task<IActionResult> OnPostAsync()
+            //{
+
+            //}
         }
     }
 }
