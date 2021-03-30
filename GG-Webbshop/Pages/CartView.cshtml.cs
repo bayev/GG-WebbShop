@@ -20,9 +20,19 @@ namespace GG_Webbshop.Pages
         public string Message { get; set; }
         [BindProperty]
         public string Message2 { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string PlusMinus { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string c2pIdUpdate { get; set; }
+
+        public decimal TotalPrice { get; set; }
+
+        public decimal VATprice { get; set; }
+
         public async Task<IActionResult> OnGetAsync()
         {
-            
             string token = null;
             try
             {
@@ -34,6 +44,34 @@ namespace GG_Webbshop.Pages
             {
                 Message = "Du måste logga in för att kunna se dina valda varor.";
                 return Page();
+            }
+
+            if (PlusMinus !=null)
+            {
+
+                RestClient client = new RestClient($"https://localhost:44309/cart/updateQuantity/{PlusMinus}/{c2pIdUpdate}");
+                RestRequest request = new RestRequest
+                {
+                    Method = Method.PUT
+                };
+                request.Parameters.Clear();
+                request.AddHeader("Authorization", $"bearer {token}");
+                IRestResponse response = client.Execute(request);
+                string responseContent = response.Content;
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    return RedirectToPage("./cartview");
+                }
+                if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    Message2 = "Vi kunde inte radera produkten från din varukorg, vänligen kontakta administratören";
+                    return Page();
+                }
+                if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    Message = "Du som användare hittades inte i vår databas. Vänligen kontakta administratören";
+                    return Page();
+                }
             }
             if (Id != null)
             {
@@ -80,6 +118,7 @@ namespace GG_Webbshop.Pages
                     var model = c2pResponseModel.FromJson(response.Content);
                     c2pRM = model;
                     decimal tempPrice = 0;
+                    
                     foreach (var item in c2pRM)
                     {
                         tempPrice = item.Price;
@@ -91,8 +130,17 @@ namespace GG_Webbshop.Pages
                                 break;
                             else
                                 item.Price += tempPrice;
+
                         }
+                        TotalPrice += item.Price;
                     }
+                    TotalPrice += 55;
+                    VATprice = Math.Round((decimal)TotalPrice * (decimal)0.75,2);
+                    
+                    
+                    
+                    
+
                     return Page();
                 }
                 if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
