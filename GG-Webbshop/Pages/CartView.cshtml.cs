@@ -26,7 +26,6 @@ namespace GG_Webbshop.Pages
 
         [BindProperty(SupportsGet = true)]
         public string c2pIdUpdate { get; set; }
-
         
         public decimal TotalPrice { get; set; }
 
