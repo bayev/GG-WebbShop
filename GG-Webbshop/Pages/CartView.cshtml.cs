@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RestSharp;
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,7 +27,12 @@ namespace GG_Webbshop.Pages
         [BindProperty(SupportsGet = true)]
         public string c2pIdUpdate { get; set; }
 
+        
         public decimal TotalPrice { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string PaymentMethod { get; set; }
+
 
         public decimal VATprice { get; set; }
         [BindProperty(SupportsGet = true)]
@@ -182,5 +188,61 @@ namespace GG_Webbshop.Pages
 
             //}
         }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            string token = null;
+            try
+            {
+                byte[] tokenByte;
+                HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
+                token = Encoding.ASCII.GetString(tokenByte);
+            }
+            catch (Exception)
+            {
+                Message = "Du måste logga in för att kunna se dina valda varor.";
+                return Page();
+            }
+            
+            var values = new Dictionary<string, string>()
+                 {
+                    {"paymentMethod", $"{PaymentMethod}"},
+                    {"totalAmount", $"{TotalPrice}"}
+                    
+                 };
+
+            
+
+
+            string IdUser = HttpContext.Session.GetString("Id");
+            RestClient client = new RestClient($"https://localhost:44309/cart/placeOrder/");
+            RestRequest request = new RestRequest
+            {
+                Method = Method.POST
+            };
+            request.Parameters.Clear();
+            request.AddHeader("Authorization", $"bearer {token}");
+            request.AddJsonBody(values);
+
+
+            IRestResponse response = client.Execute(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                return RedirectToPage("./OrderView");
+            }
+            if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            {
+                Message = "Produkten är slut i lager";
+                return Page();
+            }
+            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                Message = "Du som användare hittades inte i vår databas. Vänligen kontakta administratören";
+                return Page();
+            }
+            return Page();
+        }
+
+
     }
 }

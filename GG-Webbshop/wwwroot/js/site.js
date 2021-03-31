@@ -24,10 +24,12 @@ function infoDivShow() {
     window.scrollBy(0, 500);
 }
 
-$(document).ready(function () {
+//$(document).ready(function () {
 
-    $('.radio-group .radio').click(function () {
-        $('.radio').addClass('gray');
-        $(this).removeClass('gray');
-    });
-});
+//    $('.radio-group .radio').click(function () {
+//        $('.radio').addClass('gray');
+//        $(this).removeClass('gray');
+//    });
+//});
+
+
