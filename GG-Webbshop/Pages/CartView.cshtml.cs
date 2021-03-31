@@ -26,7 +26,7 @@ namespace GG_Webbshop.Pages
 
         [BindProperty(SupportsGet = true)]
         public string c2pIdUpdate { get; set; }
-        
+
         public decimal TotalPrice { get; set; }
 
         [BindProperty(SupportsGet = true)]
@@ -181,11 +181,6 @@ namespace GG_Webbshop.Pages
                 }
             }
             return Page();
-
-            //public async Task<IActionResult> OnPostAsync()
-            //{
-
-            //}
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -202,16 +197,12 @@ namespace GG_Webbshop.Pages
                 Message = "Du måste logga in för att kunna se dina valda varor.";
                 return Page();
             }
-            
+
             var values = new Dictionary<string, string>()
-                 {
-                    {"paymentMethod", $"{PaymentMethod}"},
-                    {"totalAmount", $"{TotalPrice}"}
-                    
-                 };
-
-            
-
+            {
+                {"paymentMethod", $"{PaymentMethod}"},
+                {"totalAmount", $"{TotalPrice}"}
+            };
 
             string IdUser = HttpContext.Session.GetString("Id");
             RestClient client = new RestClient($"https://localhost:44309/cart/placeOrder/");

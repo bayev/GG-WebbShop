@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GG_Webbshop.Models;
 using GG_Webbshop.Models.ResponseModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,9 @@ namespace GG_Webbshop.Pages
     {
         [BindProperty(SupportsGet = true)]
         public UserLoginResponseModel user { get; set; }
+
+        [BindProperty]
+        public OrderResponseModel order { get; set; }
 
         [BindProperty]
         public string Message { get; set; }
@@ -47,8 +51,8 @@ namespace GG_Webbshop.Pages
 
             if (response1.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                var model = UserLoginResponseModel.FromJsonSingle(response1.Content);
-                user = model;
+                var model = OrderResponseModel.FromJsonSingle(response1.Content);
+                order = model;
             }
             else
             {
