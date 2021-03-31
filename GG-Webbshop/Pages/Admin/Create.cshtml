@@ -69,9 +69,9 @@
                 <input asp-for="Product.Brand" class="form-control" />
                 <span asp-validation-for="Product.Brand" class="text-danger"></span>
             </div>
-            <div class="form-group border-0 bg-light">
+            <div class="form-group ">
                 <label>Välj bild</label>
-                <input asp-for="UploadFile" class="form-control" type="file" />
+                <input asp-for="UploadFile" class="form-control border-0 bg-light" type="file" />
                 <span asp-validation-for="UploadFile" class="text-danger"></span>
                 @if (@Model.Message != null)
                 {
