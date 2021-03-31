@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using GG_Webbshop;
-using GG_Webbshop.Helper;
-using System.Net.Http;
-using Newtonsoft.Json;
-using System.Text;
 using RestSharp;
+using System;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace GG_Webbshop.Pages.Admin
 {
@@ -76,6 +71,11 @@ namespace GG_Webbshop.Pages.Admin
             byte[] tokenByte;
             HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
             string token = Encoding.ASCII.GetString(tokenByte);
+
+            var file = Directory.GetFiles("./wwwroot/img/").Select(x => Product.Image).FirstOrDefault();
+
+            if(file != null)
+                System.IO.File.Delete($"./wwwroot/img/{file}");
 
             if (!String.IsNullOrEmpty(token))
             {

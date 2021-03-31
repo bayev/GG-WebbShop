@@ -1,12 +1,11 @@
-﻿using GG_Webbshop.Helper;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
+using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,6 +13,10 @@ namespace GG_Webbshop.Pages.Admin
 {
     public class CreateModel : PageModel
     {
+        [BindProperty]
+        public IFormFile UploadFile { get; set; }
+        [BindProperty]
+        public string Message { get; set; }
         public CreateModel()
         {
 
@@ -61,6 +64,28 @@ namespace GG_Webbshop.Pages.Admin
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            if(UploadFile != null)
+            {
+                
+
+                var file = "./wwwroot/img/" + UploadFile.FileName;
+                var fileNameDoubleCheck = Directory.GetFiles("./wwwroot/img/");
+                foreach (var item in fileNameDoubleCheck)
+                {
+                    if (item == file)
+                    {
+                        Message = "Bilden är redan uppladdad! Byt filnamn eller välj en annan";
+                        return Page();
+                    }
+                }
+
+                using (var fileStream = new FileStream(file, FileMode.Create))
+                {
+                    Product.Image = UploadFile.FileName;
+                    await UploadFile.CopyToAsync(fileStream);
+                }
+            }
+            
             var values = new Dictionary<string, string>()
                  {
                     {"Id", $"{Product.Id}"},
@@ -82,6 +107,7 @@ namespace GG_Webbshop.Pages.Admin
 
             if (!String.IsNullOrEmpty(token))
             {
+                
                 RestClient client = new RestClient("https://localhost:44309/products/create");
                 RestRequest request = new RestRequest
                 {
