@@ -8,7 +8,6 @@ using GG_Webbshop.Models.ResponseModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 using RestSharp;
 
 namespace GG_Webbshop.Pages
@@ -57,16 +56,12 @@ namespace GG_Webbshop.Pages
                 var model = OrderResponseModel.FromJsonSingle(response1.Content);
                 order = model;
 
-                for (int i = 0; i < order.OrderDetails.Length; i++)
-                {
-                    orderdProducts.Add((OrderDetail)order.OrderDetails[i]);
-                }
-                
+
             }
-            else
-            {
-                return NotFound();
-            }
+            //else
+            //{
+            //    return NotFound();
+            //}
             return Page();
         }
     }

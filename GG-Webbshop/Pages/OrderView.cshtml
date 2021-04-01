@@ -1,56 +1,60 @@
 ﻿@page
-@model GG_Webbshop.Pages.OrderViewModel
+@model GG_Webbshop.Pages.OrderViewModel;
 @{
 }
+
+
 
 @if (!string.IsNullOrEmpty(Model.Message))
 {
     bool returnTokenValue = TokenChecker.UserStatus;
 
 
-    <h2>@Model.Message</h2>
-    <a class="btn btn-dark" href="#" onclick="history.go(-1)">Tillbaka</a>
-    @if (returnTokenValue == false)
+<h2>@Model.Message</h2>
+<a class="btn btn-dark" href="#" onclick="history.go(-1)">Tillbaka</a>
+@if (returnTokenValue == false)
     {
-        <a class="btn btn-primary" href="/LoginView">Logga in</a>
-        <a class="btn btn-success" href="/RegisterPage">Registrera ett konto</a>
+<a class="btn btn-primary" href="/LoginView">Logga in</a>
+<a class="btn btn-success" href="/RegisterPage">Registrera ett konto</a>
     }
 }
 else
 {
-    <h1>Orderbekräftelse</h1>
-    <h4>Tack för din beställning</h4>
+<h1>Orderbekräftelse</h1>
+<h4>Tack för din beställning</h4>
 
-    <div class="container mt-5 mb-5">
-        <div class="d-flex justify-content-start row">
-            <div class="col-md-10">
-                @foreach (var item in Model.orderdProducts)
-                {
-                    <div class="row p-2 bg-white border rounded">
-                        <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="~/img/@Html.DisplayFor(model => item.ProductImgUrl)"></div>
-                        <div class="col-md-6 mt-1">
-                            <h5>@Html.DisplayFor(model => item.ProductName)</h5>
-                            <div class="d-flex flex-row">
-                                <!--IN MED RATING HÄR-->
-                            </div>
-                            <div>
-                                <p>@Html.DisplayFor(model => item.Quantity)</p>
-                            </div>
-
-                        </div>
-                        <div class=" align-content-center col-md-3 border-left mt-1">
-                            <div class="d-flex flex-row ">
-                                <h4 class="mr-1">@Html.DisplayFor(model => item.Price) :-</h4>
-                            </div>
-                            @*<h6 class="text-success"></h6>
-                            <div class="d-flex flex-column mt-4">
-                                <a class="btn btn-primary" href="/ProductView?id=@Html.DisplayFor(model => item.Id)" role="button">Information</a><br />
-                                <a class="btn btn-primary" href="?ProductId=@Html.DisplayFor(model => item.Id)" role="button">Lägg i kundvagn</a>
-                            </div>*@
-                        </div>
+<div class="container mt-5 mb-5">
+    <div class="d-flex justify-content-start row">
+        <div class="col-md-10">
+            @*@foreach (var item in Model.orderdProducts)*@
+                @*{*@
+            <div class="row p-2 bg-white border rounded">
+                @*<div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="~/img/@Model.order.OrderDetails[0].ProductImgUrl"></div>*@
+                <div class="col-md-6 mt-1">
+                    <h5>@Model.order.Id</h5>
+                    <div class="d-flex flex-row">
+                        <!--IN MED RATING HÄR-->
                     </div>
-                }
+                    <div>
+                       
+                        <p>y</p>
+                    </div>
+
+                </div>
+                <div class=" align-content-center col-md-3 border-left mt-1">
+                    <div class="d-flex flex-row ">
+                      
+                        <h4 class="mr-1">@Model.order.Amount :-</h4>
+                    </div>
+                    @*<h6 class="text-success"></h6>
+                        <div class="d-flex flex-column mt-4">
+                            <a class="btn btn-primary" href="/ProductView?id=@Html.DisplayFor(model => item.Id)" role="button">Information</a><br />
+                            <a class="btn btn-primary" href="?ProductId=@Html.DisplayFor(model => item.Id)" role="button">Lägg i kundvagn</a>
+                        </div>*@
+                </div>
             </div>
+                @*}*@
         </div>
     </div>
+</div>
 }

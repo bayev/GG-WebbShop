@@ -13,11 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Pages\oderview.cshtml.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="Pages\oderview.cshtml" />
     <Content Remove="Pages\Ordderview.cshtml" />
   </ItemGroup>
 

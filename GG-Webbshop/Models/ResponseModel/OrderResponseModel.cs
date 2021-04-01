@@ -26,7 +26,7 @@
         public string PaymentMethod { get; set; }
 
         [JsonProperty("orderDetails")]
-        public object[] OrderDetails { get; set; }
+        public  OrderDetail [] OrderDetails { get; set; }
     }
 
     public partial class OrderResponseModel
