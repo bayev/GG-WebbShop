@@ -13,13 +13,16 @@ using RestSharp;
 
 namespace GG_Webbshop.Pages
 {
-    public class Index1Model : PageModel
+    public class OrderViewModel : PageModel
     {
         [BindProperty(SupportsGet = true)]
         public UserLoginResponseModel user { get; set; }
 
         [BindProperty]
         public OrderResponseModel order { get; set; }
+
+        [BindProperty]
+        public List<OrderDetail> orderdProducts { get; set; }
 
         [BindProperty]
         public string Message { get; set; }
@@ -53,6 +56,12 @@ namespace GG_Webbshop.Pages
             {
                 var model = OrderResponseModel.FromJsonSingle(response1.Content);
                 order = model;
+
+                for (int i = 0; i < order.OrderDetails.Length; i++)
+                {
+                    orderdProducts.Add((OrderDetail)order.OrderDetails[i]);
+                }
+                
             }
             else
             {
