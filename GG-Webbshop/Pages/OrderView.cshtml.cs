@@ -58,10 +58,11 @@ namespace GG_Webbshop.Pages
 
 
             }
-            //else
-            //{
-            //    return NotFound();
-            //}
+            else
+            {
+                Message = "Vi kunde inte hämta din order, vänligen kontakta administratören.";
+                return Page();
+            }
             return Page();
         }
     }
