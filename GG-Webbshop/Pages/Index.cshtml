@@ -23,9 +23,6 @@
                     <div class="carousel-item">
                         <img class="d-block img-fluid" src="~/img/SliderTwo.jpg" alt="Second slide">
                     </div>
-                    @*<div class="carousel-item">
-                        <img class="d-block img-fluid" src="~/img/SliderOne (1) (2).jpg" alt="Third slide">
-                    </div>*@
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -37,162 +34,54 @@
                 </a>
             </div>
 
-            <div class="col">
-                <h3>Våra mest populära produkter</h3>
+            @if (Model.ShowMostPopularProducts)
+            {
+                <h3>Mest populära produkter</h3>
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 mb-4">
-
-                        <div class="card h-100">
-                           
-                            <a href="/ProductView?Id=@Model.Product[0].Id"><img class="card-img-top" src="~/img/@Model.Product[0].Image" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="/ProductView?Id=@Model.Product[0].Id">@Model.Product[0].Name</a>
-                                </h4>
-                                <h5>@Model.Product[0].Price :-</h5>
-                                <p class="card-text">@Model.Product[0].Description</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="/ProductView?Id=@Model.Product[1].Id"><img class="card-img-top" src="~/img/@Model.Product[1].Image" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="/ProductView?Id=@Model.Product[1].Id">@Model.Product[1].Name</a>
-                                </h4>
-                                <h5>@Model.Product[1].Price :-</h5>
-                                <p class="card-text">@Model.Product[1].Description</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                    @foreach (var item in Model.MostPopularProducts)
+                    {
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="card h-100">
+                                <a href="/ProductView?Id=@item.Id"><img class="card-img-top" src="~/img/@item.Image" alt=""></a>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <a href="/ProductView?Id=@item.Id">@item.Name</a>
+                                    </h4>
+                                    <h5>@item.Price :-</h5>
+                                    <p class="card-text">@item.Description</p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="/ProductView?Id=@Model.Product[2].Id"><img class="card-img-top" src="~/img/@Model.Product[2].Image" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="/ProductView?Id=@Model.Product[2].Id">@Model.Product[2].Name</a>
-                                </h4>
-                                <h5> @Model.Product[2].Price :-</h5>
-                                <p class="card-text">@Model.Product[2].Description</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
+                    }
                 </div>
-                <h3>Våra nyheter</h3>
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="/ProductView?Id=@Model.Product[3].Id"><img class="card-img-top" src="~/img/@Model.Product[3].Image" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="/ProductView?Id=@Model.Product[3].Id">@Model.Product[3].Name</a>
-                                </h4>
-                                <h5>@Model.Product[3].Price :-</h5>
-                                <p class="card-text">@Model.Product[3].Description</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
+            }
+            @if (Model.ShowLatestProducts)
+            {
+            <h3>Senast tillagda produkter i sortimentet</h3>
+            <div class="row">
+                @foreach (var item in Model.LastestArrivals)
+                {
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <a href="/ProductView?Id=@item.Id"><img class="card-img-top" src="~/img/@item.Image" alt=""></a>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href="/ProductView?Id=@item.Id">@item.Name</a>
+                            </h4>
+                            <h5>@item.Price :-</h5>
+                            <p class="card-text">@item.Description</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
                         </div>
                     </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="/ProductView?Id=@Model.Product[4].Id"><img class="card-img-top" src="~/img/@Model.Product[4].Image" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="/ProductView?Id=@Model.Product[4].Id">@Model.Product[4].Name</a>
-                                </h4>
-                                <h5>@Model.Product[4].Price :-</h5>
-                                <p class="card-text">@Model.Product[4].Description</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="/ProductView?Id=@Model.Product[5].Id"><img class="card-img-top" src="~/img/@Model.Product[5].Image" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="/ProductView?Id=@Model.Product[5].Id">@Model.Product[5].Name</a>
-                                </h4>
-                                <h5>@Model.Product[5].Price :-</h5>
-                                <p class="card-text">@Model.Product[5].Description</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <h3>Rekommenderat för dig</h3>
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="/ProductView?Id=@Model.Product[6].Id"><img class="card-img-top" src="~/img/@Model.Product[6].Image" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="/ProductView?Id=@Model.Product[6].Id">@Model.Product[6].Name</a>
-                                </h4>
-                                <h5>@Model.Product[6].Price :-</h5>
-                                <p class="card-text">@Model.Product[6].Description</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="/ProductView?Id=@Model.Product[7].Id"><img class="card-img-top" src="~/img/@Model.Product[7].Image" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="/ProductView?Id=@Model.Product[7].Id">@Model.Product[7].Name</a>
-                                </h4>
-                                <h5>@Model.Product[7].Price :-</h5>
-                                <p class="card-text">@Model.Product[7].Description</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="/ProductView?Id=@Model.Product[8].Id"><img class="card-img-top" src="~/img/@Model.Product[8].Image" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="/ProductView?Id=@Model.Product[8].Id">@Model.Product[8].Name</a>
-                                </h4>
-                                <h5>@Model.Product[8].Price :-</h5>
-                                <p class="card-text">@Model.Product[8].Description</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-
+                </div> 
+                }
+            </div>
+            }
             </div>
             <!-- /.row -->
 
