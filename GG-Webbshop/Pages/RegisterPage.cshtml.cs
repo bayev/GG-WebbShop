@@ -76,6 +76,11 @@ namespace GG_Webbshop.Pages
 
             if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
             {
+                if(request == "wrong username")
+                {
+                    MessageUserName = "Vänligen välj ett användarnamn som inte innehåller mellanslag";
+                    return Page();
+                }
                 if (request == "Username in use")
                 {
                     MessageUserName = "Användarnamnet används redan, testa ett annat";

@@ -124,12 +124,13 @@ else
                 </div>
             </div>
         </div>
-        <div style="display : none" id="infoDiv" class="row justify-content-center">
-            <h1><i>Dina uppgifter / leveransinformation</i></h1>
-            <hr />
-            <div class="row">
-                <div class="col-md-4">
-                    <form method="post">
+        <form method="post">
+            <div style="display : none" id="infoDiv" class="row justify-content-center">
+                <h1><i>Dina uppgifter / leveransinformation</i></h1>
+                <hr />
+                <div class="row">
+                    <div class="col-md-4">
+
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
                             <label class="control-label">Användarnamn</label>
@@ -168,60 +169,62 @@ else
                         </div>
 
                         <a id="ShowAdressinfo" onclick="scrollDown()" class="btn btn-dark rounded-pill py-2 btn-block text-white">Ange betalningsuppgifter</a>
-                    </form>
+
+                    </div>
                 </div>
             </div>
-        </div>
-        <div style="display : none" id="PaymentDiv" class="row justify-content-center">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="row">
-                        <div class="col-lg-3 radio-group">
+            <div style="display : none" id="PaymentDiv" class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-lg-3 radio-group">
 
-                            <div class="row d-flex px-3  ">
-                                <img class="pay" src="https://i.imgur.com/WIAP9Ku.jpg">
-                                <input type="radio"  id="MasterCard" name="paymentMethod" value="MasterCard"/>
-                                <label for="MasterCard">Master Card</label>
+                                <div class="row d-flex px-3  ">
+                                    <img class="pay" src="https://i.imgur.com/WIAP9Ku.jpg">
+                                    <input type="radio" id="MasterCard" name="paymentMethod" value="MasterCard" />
+                                    <label for="MasterCard">Master Card</label>
+                                </div>
+                                <div class="row d-flex px-3  ">
+                                    <img class="pay" src="https://i.imgur.com/OdxcctP.jpg">
+                                    <input type="radio" id="Visa" name="paymentMethod" value="Visa" />
+                                    <label for="Visa">Visa</label>
+                                </div>
+                                <div class="row d-flex px-3   mb-3">
+                                    <img class="pay" src="https://i.imgur.com/cMk1MtK.jpg">
+                                    <input type="radio" id="PayPal" name="paymentMethod" value="Paypal" />
+                                    <label for="PayPal">Pay Pal</label>
+                                </div>
                             </div>
-                            <div class="row d-flex px-3  ">
-                                <img class="pay" src="https://i.imgur.com/OdxcctP.jpg">
-                                <input type="radio"  id="Visa" name="paymentMethod" value="Visa" />
-                                <label for="Visa">Visa</label>
+                            <div class="col-lg-5">
+                                <div class="row px-2">
+                                    <div class="form-group col-md-6"> <label class="form-control-label">Fullständigt namn</label> <input type="text" id="cname" name="cname" placeholder="Namn"> </div>
+                                    <div class="form-group col-md-6"> <label class="form-control-label">Kortnummer</label> <input type="text" id="cnum" name="cnum" placeholder="1111 2222 3333 4444"> </div>
+                                </div>
+                                <div class="row px-2">
+                                    <div class="form-group col-md-6"> <label class="form-control-label">Utgångsdatum</label> <input type="text" id="exp" name="exp" placeholder="MM/YYYY"> </div>
+                                    <div class="form-group col-md-6"> <label class="form-control-label">CVV</label> <input type="text" id="cvv" name="cvv" placeholder="***"> </div>
+                                </div>
                             </div>
-                            <div class="row d-flex px-3   mb-3">
-                                <img class="pay" src="https://i.imgur.com/cMk1MtK.jpg">
-                                <input type="radio"  id="PayPal" name="paymentMethod" value="Paypal" />
-                                <label for="PayPal">Pay Pal</label>
-                            </div>
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="row px-2">
-                                <div class="form-group col-md-6"> <label class="form-control-label">Fullständigt namn</label> <input type="text" id="cname" name="cname" placeholder="Namn"> </div>
-                                <div class="form-group col-md-6"> <label class="form-control-label">Kortnummer</label> <input type="text" id="cnum" name="cnum" placeholder="1111 2222 3333 4444"> </div>
-                            </div>
-                            <div class="row px-2">
-                                <div class="form-group col-md-6"> <label class="form-control-label">Utgångsdatum</label> <input type="text" id="exp" name="exp" placeholder="MM/YYYY"> </div>
-                                <div class="form-group col-md-6"> <label class="form-control-label">CVV</label> <input type="text" id="cvv" name="cvv" placeholder="***"> </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 mt-2">
-                            <div class="row d-flex justify-content-between px-4">
-                                <p class="mb-1 text-left">Frakt</p>
-                                <h6 class="mb-1 text-right">55 SEK</h6>
-                            </div>
-                            <div class="row d-flex justify-content-between px-4" id="tax">
-                                <p class="mb-1 text-left">Att betala (moms inkluderad)</p>
-                                <h6 class="mb-1 text-right">@Model.TotalPrice SEK</h6>
-                            </div>
-                            <form method="post">
+                            <div class="col-lg-4 mt-2">
+                                <div class="row d-flex justify-content-between px-4">
+                                    <p class="mb-1 text-left">Frakt</p>
+                                    <h6 class="mb-1 text-right">55 SEK</h6>
+                                </div>
+                                <div class="row d-flex justify-content-between px-4" id="tax">
+                                    <p class="mb-1 text-left">Att betala (moms inkluderad)</p>
+                                    <h6 class="mb-1 text-right">@Model.TotalPrice SEK</h6>
+                                </div>
+
                                 <button type="submit" class="btn btn-dark rounded-pill py-2 btn-block text-white"> <span> <span id="checkout">Genomför köp</span> <span id="check-amt">@Model.TotalPrice</span> </span> </button>
-                            </form>
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
+    
 
 
 

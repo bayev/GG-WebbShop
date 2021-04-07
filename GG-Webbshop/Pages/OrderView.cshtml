@@ -12,11 +12,11 @@
 
 <h2>@Model.Message</h2>
 <a class="btn btn-dark" href="#" onclick="history.go(-1)">Tillbaka</a>
-@if (returnTokenValue == false)
-    {
-<a class="btn btn-primary" href="/LoginView">Logga in</a>
-<a class="btn btn-success" href="/RegisterPage">Registrera ett konto</a>
-    }
+  @if (returnTokenValue == false)
+   { 
+      <a class="btn btn-primary" href="/LoginView">Logga in</a>
+      <a class="btn btn-success" href="/RegisterPage">Registrera ett konto</a>
+   }
 }
 else
 {
@@ -26,34 +26,36 @@ else
 <div class="container mt-5 mb-5">
     <div class="d-flex justify-content-start row">
         <div class="col-md-10">
-            @*@foreach (var item in Model.orderdProducts)*@
-                @*{*@
-            <div class="row p-2 bg-white border rounded">
-                @*<div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="~/img/@Model.order.OrderDetails[0].ProductImgUrl"></div>*@
-                <div class="col-md-6 mt-1">
-                    <h5>@Model.order.Id</h5>
-                    <div class="d-flex flex-row">
-                        <!--IN MED RATING HÄR-->
+            <h5>Order-ID: @Model.order.Id</h5>
+            <h5>Angiven E-post: @Model.order.OrderEmail</h5>
+            <h5>Betalmetod: @Model.order.PaymentMethod</h5>
+            <h5>Orderstatus: @Model.order.OrderStatus</h5>
+            <h5>Orderdatum: @Model.order.OrderDate</h5>
+            <h5>Orderdatum: @Model.order.ShippingAddress</h5>
+            @foreach (var item in Model.order.OrderDetails)
+            {
+                <div class="row p-2 bg-white border rounded">
+                    <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="~/img/@item.ProductImgUrl"></div>
+                    <div class="col-md-6 mt-1">
+                        <h5>Produktnamn: @item.ProductName</h5>
+                        <h5>Antal: @item.Quantity</h5>
+                        <div class="d-flex flex-row">
+                        </div>
+                        <div>
+                            <h5>Pris: @item.Price</h5>
+                        </div>
                     </div>
-                    <div>
-                       
-                        <p>y</p>
-                    </div>
+                    <div class=" align-content-center col-md-3 border-left mt-1">
+                        <div class="d-flex flex-row ">
 
-                </div>
-                <div class=" align-content-center col-md-3 border-left mt-1">
-                    <div class="d-flex flex-row ">
-                      
-                        <h4 class="mr-1">@Model.order.Amount :-</h4>
+                            <h4 class="mr-1">Antal: @Model.order.Amount</h4>
+                        </div>
                     </div>
-                    @*<h6 class="text-success"></h6>
-                        <div class="d-flex flex-column mt-4">
-                            <a class="btn btn-primary" href="/ProductView?id=@Html.DisplayFor(model => item.Id)" role="button">Information</a><br />
-                            <a class="btn btn-primary" href="?ProductId=@Html.DisplayFor(model => item.Id)" role="button">Lägg i kundvagn</a>
-                        </div>*@
                 </div>
-            </div>
-                @*}*@
+                <hr />
+            }
+            <a class="btn btn-outline-success" href="./UserPage">Till mina sidor</a>
+            <a class="btn btn-outline-primary" href="./Index">Till startsidan</a>
         </div>
     </div>
 </div>

@@ -16,6 +16,9 @@
         [JsonProperty("orderEmail")]
         public string OrderEmail { get; set; }
 
+        [JsonProperty("shippingAddress")]
+        public string ShippingAddress { get; set; }
+
         [JsonProperty("orderDate")]
         public DateTime OrderDate { get; set; }
 

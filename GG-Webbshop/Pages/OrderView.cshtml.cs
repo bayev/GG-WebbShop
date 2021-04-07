@@ -17,11 +17,8 @@ namespace GG_Webbshop.Pages
         [BindProperty(SupportsGet = true)]
         public UserLoginResponseModel user { get; set; }
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public OrderResponseModel order { get; set; }
-
-        [BindProperty]
-        public List<OrderDetail> orderdProducts { get; set; }
 
         [BindProperty]
         public string Message { get; set; }
@@ -55,8 +52,6 @@ namespace GG_Webbshop.Pages
             {
                 var model = OrderResponseModel.FromJsonSingle(response1.Content);
                 order = model;
-
-
             }
             else
             {

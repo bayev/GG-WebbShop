@@ -200,6 +200,7 @@ namespace GG_Webbshop.Pages
 
             var values = new Dictionary<string, string>()
             {
+                {"shippingAddress",$"{user.Billingaddress}"},
                 {"paymentMethod", $"{PaymentMethod}"},
                 {"totalAmount", $"{TotalPrice}"}
             };
