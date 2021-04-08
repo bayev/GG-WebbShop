@@ -31,7 +31,8 @@ else
             <h5>Betalmetod: @Model.order.PaymentMethod</h5>
             <h5>Orderstatus: @Model.order.OrderStatus</h5>
             <h5>Orderdatum: @Model.order.OrderDate</h5>
-            <h5>Orderdatum: @Model.order.ShippingAddress</h5>
+            <h5>Leveransadress: @Model.order.ShippingAddress</h5>
+            <h5>Summa: @Model.order.Amount</h5>
             @foreach (var item in Model.order.OrderDetails)
             {
                 <div class="row p-2 bg-white border rounded">
@@ -45,12 +46,12 @@ else
                             <h5>Pris: @item.Price</h5>
                         </div>
                     </div>
-                    <div class=" align-content-center col-md-3 border-left mt-1">
+                    @*<div class=" align-content-center col-md-3 border-left mt-1">
                         <div class="d-flex flex-row ">
 
                             <h4 class="mr-1">Antal: @Model.order.Amount</h4>
                         </div>
-                    </div>
+                    </div>*@
                 </div>
                 <hr />
             }
