@@ -98,9 +98,8 @@
                 <h5>Betalmetod: @item.PaymentMethod</h5>
                 <h5>Orderstatus: @item.OrderStatus</h5>
                 <h5>Orderdatum: @item.OrderDate</h5>
-                <h5>Orderdatum: @item.ShippingAddress</h5>
-
-                <h5>Antal: @item.Amount</h5>
+                <h5>Leveransadress: @item.ShippingAddress</h5>
+                <h5>Summa: @item.Amount</h5>
                 @foreach (var item2 in item.OrderDetails)
                 {
                     <div class="row p-2 bg-white border rounded">
@@ -114,12 +113,6 @@
                                 <h5>Pris: @item2.Price</h5>
                             </div>
                         </div>
-                        @*<div class=" align-content-center col-md-3 border-left mt-1">
-                    <div class="d-flex flex-row ">
-
-                        <h4 class="mr-1">Antal: @item.Amount</h4>
-                    </div>
-                </div>*@
                     </div>
                     <hr />
                 }
