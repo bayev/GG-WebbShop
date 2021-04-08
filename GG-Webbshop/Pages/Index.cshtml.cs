@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RestSharp;
 using System;
+using System.Text;
 
 namespace GG_Webbshop.Pages
 {
@@ -9,8 +10,10 @@ namespace GG_Webbshop.Pages
     {
         [BindProperty]
         public bool ShowMostPopularProducts { get; set; }
+
         [BindProperty]
         public bool ShowLatestProducts { get; set; }
+
         [BindProperty]
         public bool ShowRecommendedProducts { get; set; }
         public AllProductsResponseModel[] Product { get; set; }
@@ -24,9 +27,11 @@ namespace GG_Webbshop.Pages
 
         public IActionResult OnGet()
         {
+
             try
             {
-                RestClient client = new RestClient("https://localhost:44309/algorithm/MostPopularProducts");
+                RestClient client = new RestClient("https://localhost:44309/algorithm/NewestArrivedProducts");
+                
                 RestRequest request = new RestRequest
                 {
                     Method = Method.GET
@@ -37,11 +42,14 @@ namespace GG_Webbshop.Pages
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    var model = AllProductsResponseModel.FromJson(response.Content);
-                    MostPopularProducts = model;
-                    ShowMostPopularProducts = true;
+                    
 
-                    RestClient client1 = new RestClient("https://localhost:44309/algorithm/NewestArrivedProducts");
+                    var arrivals = AllProductsResponseModel.FromJson(response.Content);
+                    LastestArrivals = arrivals;
+                    ShowLatestProducts = true;
+
+                    RestClient client1 = new RestClient("https://localhost:44309/algorithm/MostPopularProducts");
+
                     RestRequest request1 = new RestRequest
                     {
                         Method = Method.GET
@@ -51,34 +59,58 @@ namespace GG_Webbshop.Pages
                     IRestResponse response1 = client1.Execute(request1);
                     if (response1.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        var arrivals = AllProductsResponseModel.FromJson(response1.Content);
-                        LastestArrivals = arrivals;
-                        ShowLatestProducts = true;
+                        var model = AllProductsResponseModel.FromJson(response1.Content);
+                        MostPopularProducts = model;
+                        ShowMostPopularProducts = true;
+
+                        try
+                        {
+                            string token = null;
+                            byte[] tokenByte;
+                            HttpContext.Session.TryGetValue(ToolBox.TokenName, out tokenByte);
+                            token = Encoding.ASCII.GetString(tokenByte);
+
+                            RestClient client2 = new RestClient("https://localhost:44309/algorithm/RecommendedProducts");
+                            RestRequest request2 = new RestRequest
+                            {
+                                Method = Method.GET
+                            };
+
+                            if (!String.IsNullOrEmpty(token))
+                            {
+                                request2.Parameters.Clear();
+                                request2.AddHeader("Authorization", $"bearer {token}");
+                                IRestResponse response2 = client2.Execute(request2);
+                                if (response2.StatusCode == System.Net.HttpStatusCode.OK)
+                                {
+                                    var recommended = AllProductsResponseModel.FromJson(response2.Content);
+                                    RecommendedProducts = recommended;
+                                    ShowRecommendedProducts = true;
+                                }
+                                else if (response2.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                                {
+                                    ShowRecommendedProducts = false;
+                                }
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            ShowRecommendedProducts = false;
+                            return Page();
+                        } 
                     }
-                    //// //// //// //// //// //// Recomended Products request
-                    //if (response1.StatusCode == System.Net.HttpStatusCode.OK)
-                    //{
-                    //    var model2 = AllProductsResponseModel.FromJson(response+.Content);
-                    //    RecommendedProducts = model2;
-                    //    ShowMostPopularProducts = true;
+                    else if (response1.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    {
+                        ShowLatestProducts = false;
 
-                    //    RestClient client2 = new RestClient("https://localhost:44309/algorithm/RecommendedProducts");
-                    //    RestRequest request2 = new RestRequest
-                    //    {
-                    //        Method = Method.GET
-                    //    };
-                    //    request2.Parameters.Clear();
-
-                    //    IRestResponse response2 = client2.Execute(request2);
-                    //    if (response2.StatusCode == System.Net.HttpStatusCode.OK)
-                    //    {
-                    //        var recommended = AllProductsResponseModel.FromJson(response2.Content);
-                    //        RecommendedProducts = recommended;
-                    //        ShowRecommendedProducts = true;
-                    //    }
-
-                    //}
+                    }
                     return Page();
+
+
+
+
+                    // //// //// //// //// //// Recomended Products request
+
                     //// //// //// //// //// ////NEDAN SKA BYTAS UT
                     //RestClient client = new RestClient("https://localhost:44309/Query/all");
                     //RestRequest request = new RestRequest
@@ -95,17 +127,15 @@ namespace GG_Webbshop.Pages
 
                     //Product = model;
 
+
+
                 }
                 else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
                 {
                     ShowMostPopularProducts = false;
                     return Page();
                 }
-                else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
-                {
-                    ShowLatestProducts = false;
-                    return Page();
-                }
+
             }
             catch (Exception)
             {
