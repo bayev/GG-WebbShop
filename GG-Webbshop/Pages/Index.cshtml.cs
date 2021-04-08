@@ -11,9 +11,12 @@ namespace GG_Webbshop.Pages
         public bool ShowMostPopularProducts { get; set; }
         [BindProperty]
         public bool ShowLatestProducts { get; set; }
+        [BindProperty]
+        public bool ShowRecommendedProducts { get; set; }
         public AllProductsResponseModel[] Product { get; set; }
         public AllProductsResponseModel[] MostPopularProducts { get; set; }
         public AllProductsResponseModel[] LastestArrivals { get; set; }
+        public AllProductsResponseModel[] RecommendedProducts { get; set; }
 
         public IndexModel()
         {
@@ -52,6 +55,29 @@ namespace GG_Webbshop.Pages
                         LastestArrivals = arrivals;
                         ShowLatestProducts = true;
                     }
+                    //// //// //// //// //// //// Recomended Products request
+                    //if (response1.StatusCode == System.Net.HttpStatusCode.OK)
+                    //{
+                    //    var model2 = AllProductsResponseModel.FromJson(response+.Content);
+                    //    RecommendedProducts = model2;
+                    //    ShowMostPopularProducts = true;
+
+                    //    RestClient client2 = new RestClient("https://localhost:44309/algorithm/RecommendedProducts");
+                    //    RestRequest request2 = new RestRequest
+                    //    {
+                    //        Method = Method.GET
+                    //    };
+                    //    request2.Parameters.Clear();
+
+                    //    IRestResponse response2 = client2.Execute(request2);
+                    //    if (response2.StatusCode == System.Net.HttpStatusCode.OK)
+                    //    {
+                    //        var recommended = AllProductsResponseModel.FromJson(response2.Content);
+                    //        RecommendedProducts = recommended;
+                    //        ShowRecommendedProducts = true;
+                    //    }
+
+                    //}
                     return Page();
                     //// //// //// //// //// ////NEDAN SKA BYTAS UT
                     //RestClient client = new RestClient("https://localhost:44309/Query/all");
