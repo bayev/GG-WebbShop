@@ -1,0 +1,78 @@
+﻿@page
+@model GG_Webbshop.Pages.Admin.AdminOrderViewModel
+@{
+}
+
+
+
+<h1>Hello from admin order view page :)</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Order ID
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Levransadress
+            </th>
+            <th>
+                Skapad
+            </th>
+            <th>
+                Totalpris(SEK)
+            </th>
+            <th>
+                Frakt(SEK)
+            </th>
+            <th>
+                Betalmetod
+            </th>
+            <th>
+                Orderstatus
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+                    @foreach (var item in Model.Orders)
+                    {
+                        <tr>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderEmail)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ShippingAddress)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Amount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ShippingFee)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PaymentMethod)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderStatus)
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-primary btn-sm" asp-for="" asp-route-id="@item.Id">Bekräfta</a>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
