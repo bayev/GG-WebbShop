@@ -49,10 +49,10 @@ namespace GG_Webbshop.Pages.Admin
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync() 
-        {
+        //public async Task<IActionResult> OnPostAsync() 
+        //{
 
-            return Page();
-        }
+        //    return Page();
+        //}
     }
 }
