@@ -13,6 +13,9 @@
         [JsonProperty("amount")]
         public decimal Amount { get; set; }
 
+        [JsonProperty("shippingFee")]
+        public decimal ShippingFee { get; set; }
+
         [JsonProperty("orderEmail")]
         public string OrderEmail { get; set; }
 

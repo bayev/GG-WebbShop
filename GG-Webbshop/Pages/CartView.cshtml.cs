@@ -37,6 +37,9 @@ namespace GG_Webbshop.Pages
         [BindProperty(SupportsGet = true)]
         public UserLoginResponseModel user { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public string ShippingFee { get;  set; }
+
         public async Task<IActionResult> OnGetAsync()
         {
             string token = null;
@@ -160,7 +163,7 @@ namespace GG_Webbshop.Pages
                         }
                         TotalPrice += item.Price;
                     }
-                    TotalPrice += 55;
+                    
                     VATprice = Math.Round((decimal)TotalPrice * (decimal)0.75, 2);
 
                     return Page();
@@ -202,7 +205,8 @@ namespace GG_Webbshop.Pages
             {
                 {"shippingAddress",$"{user.Billingaddress}"},
                 {"paymentMethod", $"{PaymentMethod}"},
-                {"totalAmount", $"{TotalPrice}"}
+                {"totalAmount", $"{TotalPrice}"},
+                { "shippingFee", $"{ShippingFee}"}
             };
 
             string IdUser = HttpContext.Session.GetString("Id");

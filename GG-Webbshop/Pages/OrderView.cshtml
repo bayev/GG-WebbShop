@@ -32,7 +32,9 @@ else
             <h5>Orderstatus: @Model.order.OrderStatus</h5>
             <h5>Orderdatum: @Model.order.OrderDate</h5>
             <h5>Leveransadress: @Model.order.ShippingAddress</h5>
-            <h5>Summa: @Model.order.Amount</h5>
+            <h5>Frakt: @Model.order.ShippingFee</h5>
+            <h5>Totalsumma: @Model.order.Amount</h5>
+          
             @foreach (var item in Model.order.OrderDetails)
             {
                 <div class="row p-2 bg-white border rounded">
