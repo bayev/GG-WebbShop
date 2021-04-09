@@ -40,39 +40,42 @@
     </thead>
     <tbody>
 
-
                     @foreach (var item in Model.Orders)
                     {
-                        <tr>
+        <tr>
 
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Id)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.OrderEmail)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ShippingAddress)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.OrderDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Amount)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ShippingFee)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.PaymentMethod)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.OrderStatus)
-                            </td>
-                            <td>
-                                <a class="btn btn-outline-primary btn-sm" asp-for="" asp-route-id="@item.Id">Bekräfta</a>
-                            </td>
-                        </tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShippingAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShippingFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentMethod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderStatus)
+            </td>
+            
+            @*<td> @{var message = Model.ConfirmOrderStatus ? "Packas" : "Bekräftad";} @message
+            <form method="post">
+            </form>
+                <a class="btn btn-outline-primary btn-sm" asp-for="@item.OrderStatus" asp-route-id="@item.Id">Bekräfta</a>
+
+            </td>*@
+        </tr>
                     }
                     </tbody>
                 </table>

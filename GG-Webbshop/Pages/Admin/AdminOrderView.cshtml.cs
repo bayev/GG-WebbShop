@@ -14,6 +14,10 @@ namespace GG_Webbshop.Pages.Admin
     {
         [BindProperty(SupportsGet = true)]
         public OrderResponseModel[] Orders { get; set; }
+
+        //[BindProperty]
+        //public bool ConfirmOrderStatus { get; set; }
+
         public async Task<IActionResult> OnGetAsync()
         {
 
@@ -40,9 +44,14 @@ namespace GG_Webbshop.Pages.Admin
             catch (Exception)
             {
 
-
                 return NotFound();
             }
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync() 
+        {
+
             return Page();
         }
     }
