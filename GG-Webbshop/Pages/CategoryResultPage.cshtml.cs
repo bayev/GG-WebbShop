@@ -12,7 +12,8 @@ namespace GG_Webbshop.Pages
     public class CategoryResultPageModel : PageModel
     {
         [BindProperty(SupportsGet = true)]
-        public string Id { get; set; }
+        public string QueryString { get; set; }
+
         [BindProperty(SupportsGet = true)]
         public AllProductsResponseModel[] Product { get; set; }
         [BindProperty(SupportsGet = true)]
@@ -20,8 +21,10 @@ namespace GG_Webbshop.Pages
         [BindProperty]
         public string Message { get; set; }
 
-        public async Task<IActionResult> OnGetAsync() //HÄMTA PRODUCT HÄR
+        public async Task<IActionResult> OnGetAsync(string QueryString) //HÄMTA PRODUCT HÄR
         {
+
+         
             if (ProductId != null)
             {
                 string token = null;
@@ -70,19 +73,24 @@ namespace GG_Webbshop.Pages
                 }
                 return Page();
             }
-
-            RestClient client = new RestClient($"https://localhost:44309/Algorithm/Category/{Id}");
-            RestRequest request = new RestRequest
+            if (QueryString != null)
             {
-                Method = Method.GET
-            };
-            request.Parameters.Clear();
+                
 
-            IRestResponse response = client.Execute(request);
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-            {
-                var model = AllProductsResponseModel.FromJson(response.Content);
-                Product = model;
+                RestClient client = new RestClient($"https://localhost:44309/Algorithm/category/{QueryString}");
+                RestRequest request = new RestRequest
+                {
+                    Method = Method.GET
+                };
+                request.Parameters.Clear();
+
+                IRestResponse response = client.Execute(request);
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    var model = AllProductsResponseModel.FromJson(response.Content);
+                    Product = model;
+                }
+
             }
             return Page();
         }

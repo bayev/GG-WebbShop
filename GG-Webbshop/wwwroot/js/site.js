@@ -6,6 +6,13 @@ function setUrl() {
     window.location.href = 'SearchResult?id=' + document.getElementById('searchInput').value;
 };
 
+function CatUrl() {
+    var x = document.getElementById("catInput").value;
+    console.log(x);
+    window.location.href = `https://localhost:44384/CategoryResultPage?=${x}`;
+    /*window.location.href = 'CategoryResultPage?QueryString=' + document.getElementByClassName('catInput').value;*/
+};
+
 function scrollDown() {
     var x = document.getElementById("PaymentDiv");
     if (x.style.display === "none") {

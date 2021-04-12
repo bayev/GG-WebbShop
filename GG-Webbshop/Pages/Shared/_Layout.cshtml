@@ -28,24 +28,27 @@
                                     <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white bi bi-list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Kategorier</button>
 
                                     <div class="dropdown-menu dropdown-menu-right bg-dark">
-                                        <form method="post">
-                                            <a href="/CategoryResultPage">
-                                                <button class="dropdown-item text-white bg-dark" type="button">Tröjor</button>
-                                            </a>
-                                            <a href="/CategoryResultPage">
-                                                <button class="dropdown-item text-white bg-dark" type="button">Accessoarer</button>
-                                            </a>
-                                            <a href="/CategoryResultPage">
-                                                <button class="dropdown-item text-white bg-dark" type="button">Blazers</button>
-                                            </a>
-                                            <a href="/CategoryResultPage">
-                                                <button class="dropdown-item text-white bg-dark" type="button">Byxor</button>
-                                            </a>
-                                            <a href="/CategoryResultPage">
-                                                <button class="dropdown-item text-white bg-dark" type="button">T-shirts</button>
-                                            </a>
-                                        </form>
+
                                         
+                                        <button class="dropdown-item text-white bg-dark" id="catInput" value="Sweater" onclick="CatUrl();" type="button">Tröjor</button>
+                                       
+                                        <a href="./CategoryResultPage?@ToolBox.CatagoryInput=Accessories">
+                                            <button class="dropdown-item text-white bg-dark" type="button">Accessoarer</button>
+                                        </a>
+                                        <a href="./CategoryResultPage?@ToolBox.CatagoryInput=Blazer">
+                                            <button class="dropdown-item text-white bg-dark" type="button">Blazer</button>
+                                        </a>
+                                        <a href="./CategoryResultPage?@ToolBox.CatagoryInput=Pants">
+                                            <button class="dropdown-item text-white bg-dark" type="button">Byxor</button>
+                                        </a>
+                                        <a href="./CategoryResultPage?@ToolBox.CatagoryInput=Shirt">
+                                            <button class="dropdown-item text-white bg-dark" type="button">T-shirts</button>
+                                        </a>
+
+                                        
+                                        @*<a class="btn btn-outline-success my-2 my-sm-0" id="Sweater" onclick="CatUrl();">Tröja</a>*@
+
+
                                     </div>
                                 </div>
                             </li>
@@ -130,6 +133,7 @@
         <script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
+
 
         @RenderSection("Scripts", required: false)
     </body>
