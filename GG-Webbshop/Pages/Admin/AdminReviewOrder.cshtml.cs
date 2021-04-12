@@ -20,10 +20,6 @@ namespace GG_Webbshop.Pages
         public string Id { get; set; }
 
 
-
-        
-
-
         //[BindProperty]
         //public bool ConfirmOrderStatus { get; set; }
 
@@ -68,7 +64,7 @@ namespace GG_Webbshop.Pages
         }
        
 
-        public async Task<IActionResult> OnPutAsync(string id)
+        public async Task<IActionResult> OnPostAsync(string id)
         {
             try
             {
@@ -92,7 +88,6 @@ namespace GG_Webbshop.Pages
                     request.AddHeader("Authorization", $"bearer {token}");
 
                     IRestResponse response = client.Execute(request);
-                    return RedirectToPage("/AdminOrderView");
                 }
             }
             catch (Exception)
@@ -100,7 +95,7 @@ namespace GG_Webbshop.Pages
 
                 return NotFound();
             }
-            return Page();
+            return RedirectToPage("./AdminOrderView");
 
         }
 

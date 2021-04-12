@@ -5,6 +5,7 @@
 function setUrl() {
     window.location.href = 'SearchResult?id=' + document.getElementById('searchInput').value;
 };
+
 function scrollDown() {
     var x = document.getElementById("PaymentDiv");
     if (x.style.display === "none") {

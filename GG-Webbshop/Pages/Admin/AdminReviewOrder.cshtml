@@ -14,9 +14,10 @@
             <p class="card-title">@item.Price</p>
         }
         <h6 class="card-title">@Model.orders.OrderStatus</h6>
-        @*<form method="post" asp-page-handler="async"> 
-            <button class="btn btn-primary" >Skicka Order</button>
-        </form*@>
+        
+        <form method="post">
+            <button type="submit" class="btn btn-primary">Skicka order</button>
+        </form>
         <a asp-page="./AdminOrderView" class="btn btn-primary">Tillbaka</a>
     </div>
 </div>
