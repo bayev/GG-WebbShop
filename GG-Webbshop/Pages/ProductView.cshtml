@@ -5,10 +5,16 @@
 
 @if (Model.Message2 != null)
 {
+    bool returnTokenValue = TokenChecker.UserStatus;
+
     <h2>@Model.Message2</h2>
     <a class="btn btn-dark" id="darkBtn" href="#" onclick="history.go(-1)">Tillbaka</a>
-    <a class="btn btn-primary" href="/LoginView">Logga in</a>
-    <a class="btn btn-success" href="/RegisterPage">Registrera ett konto</a>
+    if (returnTokenValue == false)
+    {
+        <a class="btn btn-primary" href="/LoginView">Logga in</a>
+        <a class="btn btn-success" href="/RegisterPage">Registrera ett konto</a>
+    }
+
 
 }
 else
@@ -26,8 +32,9 @@ else
 
                         <h4>@Model.Product.Price :-</h4>
                         <p class="card-text">@Model.Product.Description</p>
-                        <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-                        4.0 stars
+                        
+                        <b>I lager: @Model.Product.Stock</b>
+                        
                         <form method="post">
                             <button type="submit" class="btn btn-dark">Lägg i kundvagnen</button>
                         </form>

@@ -1,14 +1,22 @@
 ﻿@page
 @model GG_Webbshop.Pages.CartViewModel
+
 @{
 }
+
+<head>
+    <link rel="stylesheet" href="~/css/Site.css">
+    <link rel="stylesheet" href="~/css/CheckoutStyle.css">
+
+
+</head>
 @if (Model.Message != null)
 {
     bool returnTokenValue = TokenChecker.UserStatus;
 
 
     <h2>@Model.Message</h2>
-    <a class="btn btn-dark" href="#" onclick="history.go(-1)">Tillbaka</a>
+    <a class="btn btn-dark" href="/Index" onclick="history.go(-1)">Tillbaka</a>
     @if (returnTokenValue == false)
     {
         <a class="btn btn-primary" href="/LoginView">Logga in</a>
@@ -17,91 +25,218 @@
 }
 else
 {
-    <div class="px-4 px-lg-0">
-        <div class="pb-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+    <form method="post">
 
-                        <!-- Shopping cart table -->
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col" class="border-0 bg-light">
-                                            <div class="p-2 px-3 text-uppercase">Produkter</div>
-                                        </th>
-                                        <th scope="col" class="border-0 bg-light">
-                                            <div class="py-2 text-uppercase">Pris</div>
-                                        </th>
-                                        <th scope="col" class="border-0 bg-light">
-                                            <div class="py-2 text-uppercase">Antal</div>
-                                        </th>
-                                        <th scope="col" class="border-0 bg-light">
-                                            <div class="py-2 text-uppercase">Ta bort</div>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var c2p in Model.c2pRM)
-                                    {
+        <div class="px-4 px-lg-0">
+            <div class="pb-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+
+                            <!-- Shopping cart table -->
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
                                         <tr>
-                                            <th scope="row" class="border-0">
-                                                <div class="p-2">
-                                                    <img src="~/img/@c2p.Image" alt="" width="70" class="img-fluid rounded shadow-sm">
-                                                    <div class="ml-3 d-inline-block align-middle">
-                                                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">@c2p.Name</a></h5><span class="text-muted font-weight-normal font-italic d-block">Kategori: @c2p.Category</span>
-                                                    </div>
-                                                </div>
+                                            <th scope="col" class="border-0 bg-light">
+                                                <div class="p-2 px-3 text-uppercase">Produkter</div>
                                             </th>
-                                            <td class="border-0 align-middle"><strong>@c2p.Price</strong></td>
-                                            <td class="border-0 align-middle" style="padding-left: 30px;"><strong>@c2p.Amount</strong></td>
-                                            <td class="border-0 align-middle"><a href="?id=@c2p.C2PId" class="text-dark" style="padding-left: 25px;"><i class="bi bi-trash"></i></a></td>
+                                            <th scope="col" class="border-0 bg-light">
+                                                <div class="py-2 text-uppercase">Pris</div>
+                                            </th>
+                                            <th scope="col" class="border-0 bg-light">
+                                                <div class="py-2 text-uppercase">Antal</div>
+                                            </th>
+                                            <th scope="col" class="border-0 bg-light">
+                                                <div class="py-2 text-uppercase">Ta bort</div>
+                                            </th>
                                         </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- End -->
-                    </div>
-                </div>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var c2p in Model.c2pRM)
+                                        {
+                                            <tr>
+                                                <th scope="row" class="border-0">
+                                                    <div class="p-2">
+                                                        <img src="~/img/@c2p.Image" alt="" width="70" class="img-fluid rounded shadow-sm">
+                                                        <div class="ml-3 d-inline-block align-middle">
+                                                            <h5 class="mb-0"> <a href="/ProductView/?Id=@c2p.Id" class="text-dark d-inline-block align-middle">@c2p.Name</a></h5><span class="text-muted font-weight-normal font-italic d-block">Kategori: @c2p.Category</span>
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                                <td class="border-0 align-middle"><strong>@c2p.Price</strong></td>
+                                                <td class="border-0 align-middle" style="padding-left: 30px;">
+                                                    <div class="qty mt-5">
+                                                        <a href="?PlusMinus=false&c2pIdUpdate=@c2p.C2PId" class="minus bg-dark">-</a>
 
-                <div class="row py-5 p-4 bg-white rounded shadow-sm">
-                    <div class="col-lg-6">
-                        <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Rabatt kod</div>
-                        <div class="p-4">
-                            <p class="font-italic mb-4">Om du har en rabatt kod, vänligen skriv in den här</p>
-                            <div class="input-group mb-4 border rounded-pill p-2">
-                                <input type="text" placeholder="Apply coupon" aria-describedby="button-addon3" class="form-control border-0">
-                                <div class="input-group-append border-0">
-                                    <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Aktivera</button>
-                                </div>
+                                                        @c2p.Amount
+                                                        <a href="?PlusMinus=true&c2pIdUpdate=@c2p.C2PId" class="plus bg-dark">+</a>
+                                                    </div>
+                                                </td>
+
+                                                <td class="border-0 align-middle"><a href="?id=@c2p.C2PId" class="text-dark" style="padding-left: 25px;"><i class="bi bi-trash"></i></a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- End -->
+                        </div>
+                    </div>
+
+
+                    
+                    <div class="row py-5 p-4 bg-white rounded shadow-sm align-content-lg-center">
+                        <div class="col-lg-6">
+                            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold ">Välja fraktalternativ </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="defaultChecked" name="shippingFee" checked value="79">
+                                <label class="custom-control-label text-muted" for="defaultChecked">Hem leverans</label>
+                                <ul class="list-unstyled mb-4">
+                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Hem Leverans: @Model.user.Billingaddress (1-2 dagar)</strong><strong>79 SEK</strong></li>
+                                </ul>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="defaultUnchecked" name="shippingFee" value="0">
+                                <label class="custom-control-label text-muted" for="defaultUnchecked">Insta Box</label>
+                                <ul class="list-unstyled mb-4">
+                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Instabox Store: @Model.user.Billingaddress (imorgon - 15.50)</strong><strong>Gratis</strong></li>
+                                </ul>
+
+                            </div>
+
+
+                        </div>
+
+                        
+                        <!--TOTAL -->
+                        <div class="col-lg-6">
+                            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Total </div>
+                            <div class="p-4">
+                                <ul class="list-unstyled mb-4">
+                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Exkl. Moms </strong><strong>@Model.VATprice</strong></li>
+                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Frakt</strong><strong></strong></li>
+                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Moms</strong><strong>25%</strong></li>
+                                    <li class="d-flex justify-content-between py-3 border-bottom">
+                                        <strong class="text-muted">Total</strong>
+                                        <h5 class="font-weight-bold">@Model.TotalPrice</h5>
+                                    </li>
+                                </ul><a id="gawgaga" onclick="infoDivShow()" class="btn btn-dark rounded-pill py-2 btn-block text-white">Betala</a>
                             </div>
                         </div>
-                        <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Meddelande till oss</div>
-                        <div class="p-4">
-                            <p class="font-italic mb-4">Information till säljare, ange här</p>
-                            <textarea name="" cols="30" rows="2" class="form-control"></textarea>
-                        </div>
+                        <!--TOTAL SLUT -->
                     </div>
-                    <div class="col-lg-6">
-                        <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Total </div>
-                        <div class="p-4">
-                            <p class="font-italic mb-4">Fraktkostnaden tillkommer senare.</p>
-                            <ul class="list-unstyled mb-4">
-                                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Exkl. Moms </strong><strong>1590.00</strong></li>
-                                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Frakt</strong><strong>55.00</strong></li>
-                                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Moms</strong><strong>25%</strong></li>
-                                <li class="d-flex justify-content-between py-3 border-bottom">
-                                    <strong class="text-muted">Total</strong>
-                                    <h5 class="font-weight-bold">2200.00</h5>
-                                </li>
-                            </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Betala</a>
+                </div>
+            </div>
+
+
+
+            <div style="display : none" id="infoDiv" class="row justify-content-center">
+
+                <h1><i>Dina uppgifter / leveransinformation</i></h1>
+
+                <hr />
+                <div class="row">
+                    <div class="col-md-4">
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label class="control-label">Användarnamn</label>
+                            <input asp-for="user.Username" class="form-control" />
+                            <span asp-validation-for="user.Username" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">E-post</label>
+                            <input asp-for="user.Email" class="form-control" />
+                            <span asp-validation-for="user.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Fullständigt namn</label>
+                            <input asp-for="user.Fullname" class="form-control" />
+                            <span asp-validation-for="user.Fullname" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Faktureringsadress</label>
+                            <input asp-for="user.Billingaddress" class="form-control" />
+                            <span asp-validation-for="user.Billingaddress" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Mottagaradress</label>
+                            <input asp-for="user.Defaultshippingaddress" class="form-control" />
+                            <span asp-validation-for="user.Defaultshippingaddress" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Land</label>
+                            <input asp-for="user.Country" class="form-control" />
+                            <span asp-validation-for="user.Country" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Telefonnummer</label>
+                            <input asp-for="user.Phone" class="form-control" />
+                            <span asp-validation-for="user.Phone" class="text-danger"></span>
+                        </div>
+
+                        <a id="ShowAdressinfo" onclick="scrollDown()" class="btn btn-dark rounded-pill py-2 btn-block text-white">Ange betalningsuppgifter</a>
+
+
+                    </div>
+                </div>
+            </div>
+            <div style="display : none" id="PaymentDiv" class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-lg-3 radio-group">
+
+                                <div class="row d-flex px-3  ">
+                                    <img class="pay" src="https://i.imgur.com/WIAP9Ku.jpg">
+                                    <input type="radio" id="MasterCard" name="paymentMethod" value="MasterCard" />
+                                    <label for="MasterCard">Master Card</label>
+                                </div>
+                                <div class="row d-flex px-3  ">
+                                    <img class="pay" src="https://i.imgur.com/OdxcctP.jpg">
+                                    <input type="radio" id="Visa" name="paymentMethod" value="Visa" />
+                                    <label for="Visa">Visa</label>
+                                </div>
+                                <div class="row d-flex px-3   mb-3">
+                                    <img class="pay" src="https://i.imgur.com/cMk1MtK.jpg">
+                                    <input type="radio" id="PayPal" name="paymentMethod" value="Paypal" />
+                                    <label for="PayPal">Pay Pal</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="row px-2">
+                                    <div class="form-group col-md-6"> <label class="form-control-label">Fullständigt namn</label> <input type="text" id="cname" name="cname" placeholder="Namn"> </div>
+                                    <div class="form-group col-md-6"> <label class="form-control-label">Kortnummer</label> <input type="text" id="cnum" name="cnum" placeholder="1111 2222 3333 4444"> </div>
+                                </div>
+                                <div class="row px-2">
+                                    <div class="form-group col-md-6"> <label class="form-control-label">Utgångsdatum</label> <input type="text" id="exp" name="exp" placeholder="MM/YYYY"> </div>
+                                    <div class="form-group col-md-6"> <label class="form-control-label">CVV</label> <input type="text" id="cvv" name="cvv" placeholder="***"> </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 mt-2">
+                                <div class="row d-flex justify-content-between px-4">
+                                    <p class="mb-1 text-left">Frakt</p>
+                                    <h6 class="mb-1 text-right">55 SEK</h6>
+                                </div>
+                                <div class="row d-flex justify-content-between px-4" id="tax">
+                                    <p class="mb-1 text-left">Att betala (moms inkluderad)</p>
+                                    <h6 class="mb-1 text-right">@Model.TotalPrice SEK</h6>
+                                </div>
+
+                                <button type="submit" class="btn btn-dark rounded-pill py-2 btn-block text-white"> <span> <span id="checkout">Genomför köp</span> <span id="check-amt">@Model.TotalPrice</span> </span> </button>
+
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-    </div>
+    </form>
+
+    
+
+
+
+
 }

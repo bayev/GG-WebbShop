@@ -18,7 +18,7 @@ namespace GG_Webbshop
     public partial class AllProductsResponseModel
     {
         [JsonProperty("id")]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }

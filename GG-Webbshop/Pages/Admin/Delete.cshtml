@@ -75,8 +75,9 @@
     </dl>
     
     <form method="post" >
+        <input type="hidden" asp-for="Product.Image"/>
         <input type="hidden" asp-for="Product.Id" />
-        <input type="submit" value="Radera" class="btn btn-danger" />   |
+        <input style="width : 200px" type="submit" value="Radera" class="btn btn-danger" />   |
         <a class="btn btn-success" asp-page="./Index">Tillbaka till startsidan för administratörer</a>
     </form>
 </div>

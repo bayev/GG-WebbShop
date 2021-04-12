@@ -11,35 +11,31 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Product.Name" class="control-label"></label>
+                <label>Produktens namn</label>
                 <input asp-for="Product.Name" class="form-control" />
                 <span asp-validation-for="Product.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Product.Price" class="control-label"></label>
+                <label>Pris</label>
                 <input asp-for="Product.Price" class="form-control" />
                 <span asp-validation-for="Product.Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Product.Weight" class="control-label"></label>
+                <label>Vikt i gram</label>
                 <input asp-for="Product.Weight" class="form-control" />
                 <span asp-validation-for="Product.Weight" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Product.Description" class="control-label"></label>
+                <label>Beskrivning</label>
                 <input asp-for="Product.Description" class="form-control" />
                 <span asp-validation-for="Product.Description" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Product.Image" class="control-label"></label>
-                <input asp-for="Product.Image" class="form-control" />
-                <span asp-validation-for="Product.Image" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Category</label>
+                <label for="exampleFormControlSelect1">Kategori</label>
                 <select asp-for="Product.Category" class="form-control" id="exampleFormControlSelect1">
                     <option>T-Shirt</option>
                     <option>Sweatshirt</option>
@@ -49,17 +45,17 @@
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="Product.CreateDate" class="control-label"></label>
+                <label>Skapad</label>
                 <input asp-for="Product.CreateDate" class="form-control" />
                 <span asp-validation-for="Product.CreateDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Product.Stock" class="control-label"></label>
+                <label>Lagersaldo</label>
                 <input asp-for="Product.Stock" class="form-control" />
                 <span asp-validation-for="Product.Stock" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label for="exampleFormControlSelect1">Size</label>
+                <label for="exampleFormControlSelect1">Storlek</label>
                 <select asp-for="Product.Size" class="form-control" id="exampleFormControlSelect1">
                     <option>XS</option>
                     <option>S</option>
@@ -69,12 +65,21 @@
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="Product.Brand" class="control-label"></label>
+                <label>Märke</label>
                 <input asp-for="Product.Brand" class="form-control" />
                 <span asp-validation-for="Product.Brand" class="text-danger"></span>
             </div>
+            <div class="form-group ">
+                <label>Välj bild</label>
+                <input asp-for="UploadFile" class="form-control border-0 bg-light" type="file" />
+                <span asp-validation-for="UploadFile" class="text-danger"></span>
+                @if (@Model.Message != null)
+                {
+                    <p class="text-danger">@Model.Message</p>
+                }
+            </div>
             <div class="form-group">
-                <input type="submit" value="Skapa" class="btn btn-primary" />
+                <input style="width : 200px" type="submit" value="Skapa" class="btn btn-primary" />
             </div>
         </form>
     </div>
