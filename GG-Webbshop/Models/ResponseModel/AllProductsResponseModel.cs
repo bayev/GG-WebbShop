@@ -49,6 +49,9 @@ namespace GG_Webbshop
 
         [JsonProperty("brand")]
         public string Brand { get; set; }
+
+        [JsonProperty("discount")]
+        public double Discount { get; set; }
     }
 
     public partial class AllProductsResponseModel

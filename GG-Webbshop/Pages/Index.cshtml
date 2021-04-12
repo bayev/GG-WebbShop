@@ -47,7 +47,14 @@
                                     <h4 class="card-title">
                                         <a href="/ProductView?Id=@item.Id">@item.Name</a>
                                     </h4>
-                                    <h5>@item.Price :-</h5>
+                                    @if (item.Discount != default)
+                                    {
+                                        <h5><strike>@item.Price :-</strike></h5><h5 class="text-danger">Reapris @Math.Round((item.Price - (item.Price * (item.Discount / 100)))) :-</h5>
+                                    }
+                                    else
+                                    {
+                                        <h5>@item.Price :-</h5>
+                                    }
                                     <p class="card-text">@item.Description</p>
                                 </div>
                                 <div class="card-footer">
@@ -71,7 +78,14 @@
                                     <h4 class="card-title">
                                         <a href="/ProductView?Id=@item.Id">@item.Name</a>
                                     </h4>
-                                    <h5>@item.Price :-</h5>
+                                    @if (item.Discount != default)
+                                    {
+                                        <h5><strike>@item.Price :- </strike></h5><h5 class="text-danger">Reapris @Math.Round((item.Price - (item.Price * (item.Discount / 100)))) :-</h5>
+                                    }
+                                    else
+                                    {
+                                        <h5>@item.Price :-</h5>
+                                    }
                                     <p class="card-text">@item.Description</p>
                                 </div>
                                 <div class="card-footer">

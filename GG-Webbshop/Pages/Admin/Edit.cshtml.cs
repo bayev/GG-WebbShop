@@ -86,7 +86,8 @@ namespace GG_Webbshop.Pages.Admin
                     {"CreateDate", $"{Product.CreateDate}"},
                     {"Stock", $"{Product.Stock}"},
                     {"Size", $"{Product.Size}"},
-                    {"Brand", $"{Product.Brand}"}
+                    {"Brand", $"{Product.Brand}"},
+                    {"Discount", $"{Product.Discount}"}
                  };
 
             byte[] tokenByte;

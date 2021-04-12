@@ -55,27 +55,38 @@ else
                                     <tbody>
                                         @foreach (var c2p in Model.c2pRM)
                                         {
-                                            <tr>
-                                                <th scope="row" class="border-0">
-                                                    <div class="p-2">
-                                                        <img src="~/img/@c2p.Image" alt="" width="70" class="img-fluid rounded shadow-sm">
-                                                        <div class="ml-3 d-inline-block align-middle">
-                                                            <h5 class="mb-0"> <a href="/ProductView/?Id=@c2p.Id" class="text-dark d-inline-block align-middle">@c2p.Name</a></h5><span class="text-muted font-weight-normal font-italic d-block">Kategori: @c2p.Category</span>
-                                                        </div>
+                                        <tr>
+                                            <th scope="row" class="border-0">
+                                                <div class="p-2">
+                                                    <img src="~/img/@c2p.Image" alt="" width="70" class="img-fluid rounded shadow-sm">
+                                                    <div class="ml-3 d-inline-block align-middle">
+                                                        <h5 class="mb-0"> <a href="/ProductView/?Id=@c2p.Id" class="text-dark d-inline-block align-middle">@c2p.Name</a></h5><span class="text-muted font-weight-normal font-italic d-block">Kategori: @c2p.Category</span>
                                                     </div>
-                                                </th>
-                                                <td class="border-0 align-middle"><strong>@c2p.Price</strong></td>
-                                                <td class="border-0 align-middle" style="padding-left: 30px;">
-                                                    <div class="qty mt-5">
-                                                        <a href="?PlusMinus=false&c2pIdUpdate=@c2p.C2PId" class="minus bg-dark">-</a>
+                                                </div>
+                                            </th>
 
-                                                        @c2p.Amount
-                                                        <a href="?PlusMinus=true&c2pIdUpdate=@c2p.C2PId" class="plus bg-dark">+</a>
-                                                    </div>
-                                                </td>
+                                            @if (c2p.Discount != default)
+                                            {
+                                                <td class="border-0 align-middle">
+                                                    <strong><strike>@c2p.Price :-</strike></strong>
+                                                <strong class="text-danger">Reapris @Math.Round((c2p.Price - (c2p.Price * (c2p.Discount / 100))),2) :- </strong></td>
+                                            }
+                                            else
+                                            {
+                                                <td class="border-0 align-middle"><strong>@c2p.Price :-</strong></td>
+                                            }
+                                            @*<td class="border-0 align-middle"><strong>@c2p.Price</strong></td>*@
+                                            <td class="border-0 align-middle" style="padding-left: 30px;">
+                                                <div class="qty mt-5">
+                                                    <a href="?PlusMinus=false&c2pIdUpdate=@c2p.C2PId" class="minus bg-dark">-</a>
 
-                                                <td class="border-0 align-middle"><a href="?id=@c2p.C2PId" class="text-dark" style="padding-left: 25px;"><i class="bi bi-trash"></i></a></td>
-                                            </tr>
+                                                    @c2p.Amount
+                                                    <a href="?PlusMinus=true&c2pIdUpdate=@c2p.C2PId" class="plus bg-dark">+</a>
+                                                </div>
+                                            </td>
+
+                                            <td class="border-0 align-middle"><a href="?id=@c2p.C2PId" class="text-dark" style="padding-left: 25px;"><i class="bi bi-trash"></i></a></td>
+                                        </tr>
                                         }
                                     </tbody>
                                 </table>
@@ -84,30 +95,119 @@ else
                         </div>
                     </div>
 
+                    <script>
+                        function DynamicFee() {
+                            if (document.getElementById('defaultUnchecked').checked) {
+
+                                var text = document.createTextNode('79');
+
+                                var paragraf = document.getElementById("DisplayShippingFee");
+
+                                var checkoutFee = document.getElementById("checkoutShipping");
+
+                                var checkoutFeeText = document.createTextNode('79');
+
+                                checkoutFee.innerHTML = '';
+                                checkoutFee.appendChild(checkoutFeeText);
+
+                                paragraf.innerHTML = '';
+                                paragraf.appendChild(text);
+
+
+
+                                var totalPrice = document.getElementById("totalPrice").innerHTML;
+
+                                var shippingFee = document.getElementById("DisplayShippingFee").innerHTML;
+
+                                var total = parseFloat(shippingFee) + parseFloat(totalPrice);
+
+                                var total2 = document.createTextNode(total);
+                                var total3 = document.createTextNode(total);
+                                var total4 = document.createTextNode(total);
+
+                                totalPrice = document.getElementById("totalPrice");
+
+                                totalPrice.innerHTML = '';
+                                totalPrice.appendChild(total2);
+
+
+                                var checkoutprice = document.getElementById("checkoutTotalprice");
+
+                                checkoutprice.innerHTML = '';
+                                checkoutprice.appendChild(total3);
+
+                                var checkouttotal = document.getElementById("check-amt");
+                                checkouttotal.innerHTML = '';
+                                checkouttotal.appendChild(total4);
+
+
+
+
+                            }
+                            else if (document.getElementById("defaultChecked").checked) {
+
+
+                                var text = document.createTextNode("0");
+
+                                var paragraf = document.getElementById("DisplayShippingFee");
+
+                                paragraf.innerHTML = '';
+                                paragraf.appendChild(text);
+
+                                var checkoutFee = document.getElementById("checkoutShipping");
+                                var checkoutFeeText = document.createTextNode('0');
+
+                                checkoutFee.innerHTML = '';
+                                checkoutFee.appendChild(checkoutFeeText);
+
+                                var totalPrice = document.getElementById("totalPrice").innerHTML;
+
+                                var shippingFee = document.getElementById("DisplayShippingFee").innerHTML;
+
+                                var total = parseFloat(-79) + parseFloat(totalPrice);
+
+                                var total2 = document.createTextNode(total);
+                                var total3 = document.createTextNode(total);
+                                var total4 = document.createTextNode(total);
+
+                                totalPrice = document.getElementById("totalPrice");
+
+                                totalPrice.innerHTML = '';
+                                totalPrice.appendChild(total2);
+
+
+                                var checkoutprice = document.getElementById("checkoutTotalprice");
+
+                                checkoutprice.innerHTML = '';
+                                checkoutprice.appendChild(total3);
+
+
+                                var checkouttotal = document.getElementById("check-amt");
+                                checkouttotal.innerHTML = '';
+                                checkouttotal.appendChild(total4);
+                            }
+                        }
+                    </script>
 
                     
                     <div class="row py-5 p-4 bg-white rounded shadow-sm align-content-lg-center">
                         <div class="col-lg-6">
                             <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold ">Välja fraktalternativ </div>
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="defaultChecked" name="shippingFee" checked value="79">
-                                <label class="custom-control-label text-muted" for="defaultChecked">Hem leverans</label>
+                                <input type="radio" class="custom-control-input" id="defaultUnchecked" name="shippingFee" value="79" onclick="DynamicFee()">
+                                <label class="custom-control-label text-muted" for="defaultUnchecked">Hem leverans</label>
                                 <ul class="list-unstyled mb-4">
                                     <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Hem Leverans: @Model.user.Billingaddress (1-2 dagar)</strong><strong>79 SEK</strong></li>
                                 </ul>
                             </div>
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="defaultUnchecked" name="shippingFee" value="0">
-                                <label class="custom-control-label text-muted" for="defaultUnchecked">Insta Box</label>
+                                <input type="radio" class="custom-control-input" id="defaultChecked" name="shippingFee" checked value="0" onclick="DynamicFee()">
+                                <label class="custom-control-label text-muted" for="defaultChecked">Insta Box</label>
                                 <ul class="list-unstyled mb-4">
                                     <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Instabox Store: @Model.user.Billingaddress (imorgon - 15.50)</strong><strong>Gratis</strong></li>
                                 </ul>
-
                             </div>
-
-
                         </div>
-
                         
                         <!--TOTAL -->
                         <div class="col-lg-6">
@@ -115,15 +215,16 @@ else
                             <div class="p-4">
                                 <ul class="list-unstyled mb-4">
                                     <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Exkl. Moms </strong><strong>@Model.VATprice</strong></li>
-                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Frakt</strong><strong></strong></li>
+                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Totalrabatt</strong><strong class="text-danger">@Math.Round(Model.TotalDiscount,2)</strong></li>
+                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Frakt</strong><strong id="DisplayShippingFee"></strong></li>
                                     <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Moms</strong><strong>25%</strong></li>
                                     <li class="d-flex justify-content-between py-3 border-bottom">
                                         <strong class="text-muted">Total</strong>
-                                        <h5 class="font-weight-bold">@Model.TotalPrice</h5>
+                                        <h5 id="totalPrice" class="font-weight-bold">@Math.Round((Model.TotalPrice - Model.TotalDiscount), 2)</h5>
                                     </li>
                                 </ul><a id="gawgaga" onclick="infoDivShow()" class="btn btn-dark rounded-pill py-2 btn-block text-white">Betala</a>
                             </div>
-                        </div>
+                        </div> 
                         <!--TOTAL SLUT -->
                     </div>
                 </div>
@@ -217,15 +318,17 @@ else
                             <div class="col-lg-4 mt-2">
                                 <div class="row d-flex justify-content-between px-4">
                                     <p class="mb-1 text-left">Frakt</p>
-                                    <h6 class="mb-1 text-right">55 SEK</h6>
+                                    <h6 id="checkoutShipping" class="mb-1 text-right">55 SEK</h6>
                                 </div>
                                 <div class="row d-flex justify-content-between px-4" id="tax">
                                     <p class="mb-1 text-left">Att betala (moms inkluderad)</p>
-                                    <h6 class="mb-1 text-right">@Model.TotalPrice SEK</h6>
+                                    <h6 id="checkoutTotalprice" class="mb-1 text-right">@Model.TotalPrice SEK</h6>
                                 </div>
 
-                                <button type="submit" class="btn btn-dark rounded-pill py-2 btn-block text-white"> <span> <span id="checkout">Genomför köp</span> <span id="check-amt">@Model.TotalPrice</span> </span> </button>
+                                
 
+                                <button type="submit" class="btn btn-dark rounded-pill py-2 btn-block text-white"> <span> <span id="checkout">Genomför köp</span> <span id="check-amt">@Model.TotalPrice</span> </span> </button>
+                                
                             </div>
                         </div>
                     </div>

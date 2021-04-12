@@ -30,11 +30,18 @@ else
                     <div class="card-body">
                         <h3 class="card-title">@Model.Product.Name</h3>
 
-                        <h4>@Model.Product.Price :-</h4>
+                        @if (Model.Product.Discount != default)
+                        { 
+                            <h4><strike>@Model.Product.Price :-</strike></h4><h4 class="text-danger">Reapris @Math.Round((Model.Product.Price - (Model.Product.Price * (Model.Product.Discount / 100)))) :- </h4>
+                        }
+                        else
+                        {
+                            <h4>@Model.Product.Price :-</h4>
+                        }
                         <p class="card-text">@Model.Product.Description</p>
-                        
+
                         <b>I lager: @Model.Product.Stock</b>
-                        
+
                         <form method="post">
                             <button type="submit" class="btn btn-dark">Lägg i kundvagnen</button>
                         </form>
