@@ -18,6 +18,7 @@ namespace GG_Webbshop
         public string Size { get; set; }
         public string Brand { get; set; }
         public string Discount { get; set; }
+        public bool Highlighted { get; set; }
 
         public IList<ProductCategory> ProductCategories { get; set; }
         public IList<CartToProduct> CartToProducts { get; set; }

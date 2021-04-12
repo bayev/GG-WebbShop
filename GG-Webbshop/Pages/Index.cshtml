@@ -65,6 +65,37 @@
                     }
                 </div>
             }
+            @if (Model.ShowSelectedProducts)
+            {
+                <h3>Utvalda produkter</h3>
+                <div class="row">
+                    @foreach (var item in Model.HighlightedProducts)
+                    {
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="card h-100">
+                                <a href="/ProductView?Id=@item.Id"><img class="card-img-top" src="~/img/@item.Image" alt=""></a>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <a href="/ProductView?Id=@item.Id">@item.Name</a>
+                                    </h4>
+                                    @if (item.Discount != default)
+                                    {
+                                        <h5><strike>@item.Price :-</strike></h5><h5 class="text-danger">Reapris @Math.Round((item.Price - (item.Price * (item.Discount / 100)))) :-</h5>
+                                    }
+                                    else
+                                    {
+                                        <h5>@item.Price :-</h5>
+                                    }
+                                    <p class="card-text">@item.Description</p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
             @if (Model.ShowLatestProducts)
             {
                 <h3>Senast tillagda produkter i sortimentet</h3>

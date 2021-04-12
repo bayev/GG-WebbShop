@@ -17,6 +17,8 @@ namespace GG_Webbshop.Pages.Admin
         public IFormFile UploadFile { get; set; }
         [BindProperty]
         public string Message { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public string highlightedValue { get; set; }
         public CreateModel()
         {
 
@@ -64,7 +66,8 @@ namespace GG_Webbshop.Pages.Admin
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if(UploadFile != null)
+            
+            if (UploadFile != null)
             {
                 
 
@@ -85,7 +88,7 @@ namespace GG_Webbshop.Pages.Admin
                     await UploadFile.CopyToAsync(fileStream);
                 }
             }
-            
+            Product.Highlighted = highlightedValue == "Ja" ? true : false;
             var values = new Dictionary<string, string>()
                  {
                     {"Id", $"{Product.Id}"},
@@ -98,7 +101,8 @@ namespace GG_Webbshop.Pages.Admin
                     {"CreateDate", $"{Product.CreateDate}"},
                     {"Stock", $"{Product.Stock}"},
                     {"Size", $"{Product.Size}"},
-                    {"Brand", $"{Product.Brand}"}
+                    {"Brand", $"{Product.Brand}"},
+                    {"Highlighted", $"{Product.Highlighted}" }
                  };
 
             byte[] tokenByte;

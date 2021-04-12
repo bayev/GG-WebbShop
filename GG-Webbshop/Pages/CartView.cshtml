@@ -216,11 +216,11 @@ else
                                 <ul class="list-unstyled mb-4">
                                     <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Exkl. Moms </strong><strong>@Model.VATprice</strong></li>
                                     <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Totalrabatt</strong><strong class="text-danger">@Math.Round(Model.TotalDiscount,2)</strong></li>
-                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Frakt</strong><strong id="DisplayShippingFee"></strong></li>
+                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Frakt</strong><strong id="DisplayShippingFee">0</strong></li>
                                     <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Moms</strong><strong>25%</strong></li>
                                     <li class="d-flex justify-content-between py-3 border-bottom">
                                         <strong class="text-muted">Total</strong>
-                                        <h5 id="totalPrice" class="font-weight-bold">@Math.Round((Model.TotalPrice - Model.TotalDiscount), 2)</h5>
+                                        <h5 id="totalPrice" class="font-weight-bold">@Math.Round(Model.TotalPrice - Model.TotalDiscount)</h5>
                                     </li>
                                 </ul><a id="gawgaga" onclick="infoDivShow()" class="btn btn-dark rounded-pill py-2 btn-block text-white">Betala</a>
                             </div>
@@ -322,12 +322,12 @@ else
                                 </div>
                                 <div class="row d-flex justify-content-between px-4" id="tax">
                                     <p class="mb-1 text-left">Att betala (moms inkluderad)</p>
-                                    <h6 id="checkoutTotalprice" class="mb-1 text-right">@Model.TotalPrice SEK</h6>
+                                    <h6 id="checkoutTotalprice" class="mb-1 text-right">@(Model.TotalPrice - Model.TotalDiscount) SEK</h6>
                                 </div>
 
                                 
 
-                                <button type="submit" class="btn btn-dark rounded-pill py-2 btn-block text-white"> <span> <span id="checkout">Genomför köp</span> <span id="check-amt">@Model.TotalPrice</span> </span> </button>
+                                <button type="submit" class="btn btn-dark rounded-pill py-2 btn-block text-white"> <span> <span id="checkout">Genomför köp</span> <span id="check-amt">@(Model.TotalPrice - Model.TotalDiscount) SEK</span> </span> </button>
                                 
                             </div>
                         </div>

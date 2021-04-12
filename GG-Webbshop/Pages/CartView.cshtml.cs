@@ -148,7 +148,6 @@ namespace GG_Webbshop.Pages
                     var model = c2pResponseModel.FromJson(response.Content);
                     c2pRM = model;
                     decimal tempPrice = 0;
-                    decimal discountedPrice = 0;
 
                     foreach (var item in c2pRM)
                     {

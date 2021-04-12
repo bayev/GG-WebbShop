@@ -15,11 +15,15 @@ namespace GG_Webbshop.Pages
         public bool ShowLatestProducts { get; set; }
 
         [BindProperty]
+        public bool ShowSelectedProducts { get; set; }
+
+        [BindProperty]
         public bool ShowRecommendedProducts { get; set; }
         public AllProductsResponseModel[] Product { get; set; }
         public AllProductsResponseModel[] MostPopularProducts { get; set; }
         public AllProductsResponseModel[] LastestArrivals { get; set; }
         public AllProductsResponseModel[] RecommendedProducts { get; set; }
+        public AllProductsResponseModel[] HighlightedProducts { get; set; }
 
         public IndexModel()
         {
@@ -47,6 +51,24 @@ namespace GG_Webbshop.Pages
                     var arrivals = AllProductsResponseModel.FromJson(response.Content);
                     LastestArrivals = arrivals;
                     ShowLatestProducts = true;
+
+                    RestClient sClient = new RestClient("https://localhost:44309/algorithm/SelectedProducts");
+                    RestRequest sRequest = new RestRequest
+                    {
+                        Method = Method.GET
+                    };
+                    sRequest.Parameters.Clear();
+                    IRestResponse sResponse = sClient.Execute(sRequest);
+                    if(sResponse.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var highLighted = AllProductsResponseModel.FromJson(sResponse.Content);
+                        HighlightedProducts = highLighted;
+                        ShowSelectedProducts = true;
+                    }
+                    else
+                    {
+                        ShowSelectedProducts = false;
+                    }
 
                     RestClient client1 = new RestClient("https://localhost:44309/algorithm/MostPopularProducts");
 

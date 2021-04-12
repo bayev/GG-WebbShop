@@ -5,6 +5,9 @@
 function setUrl() {
     window.location.href = 'SearchResult?id=' + document.getElementById('searchInput').value;
 };
+function reaUrl() {
+    window.location.href = 'SearchResult?id=rea';
+};
 function scrollDown() {
     var x = document.getElementById("PaymentDiv");
     if (x.style.display === "none") {
@@ -24,12 +27,5 @@ function infoDivShow() {
     window.scrollBy(0, 500);
 }
 
-//$(document).ready(function () {
-
-//    $('.radio-group .radio').click(function () {
-//        $('.radio').addClass('gray');
-//        $(this).removeClass('gray');
-//    });
-//});
 
 
