@@ -99,7 +99,8 @@
                 <h5>Orderstatus: @item.OrderStatus</h5>
                 <h5>Orderdatum: @item.OrderDate</h5>
                 <h5>Leveransadress: @item.ShippingAddress</h5>
-                <h5>Summa: @item.Amount</h5>
+                <h5>Frakt: @Math.Round(item.ShippingFee) SEK</h5>
+                <h5>Summa: @Math.Round(item.Amount) SEK</h5>
                 @foreach (var item2 in item.OrderDetails)
                 {
                     <div class="row p-2 bg-white border rounded">
@@ -110,7 +111,7 @@
                             <div class="d-flex flex-row">
                             </div>
                             <div>
-                                <h5>Pris: @item2.Price</h5>
+                                <h5>Pris: @item2.Price SEK</h5>
                             </div>
                         </div>
                     </div>

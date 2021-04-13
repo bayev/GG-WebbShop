@@ -42,7 +42,15 @@ else
                         </div>
                         <div class=" align-content-center col-md-3 border-left mt-1">
                             <div class="d-flex flex-row ">
-                                <h4 class="mr-1">@Html.DisplayFor(model => item1.Price) :-</h4>
+                                @if (item1.Discount != default)
+                                {
+                                    <h5 class="mr-1"><strike>@item1.Price :-</strike></h5><h5 class="text-danger mr-1">Reapris @Math.Round((item1.Price - (item1.Price * (item1.Discount / 100)))) :-</h5>
+                                }
+                                else
+                                {
+                                    <h5 class="mr-1">@item1.Price :-</h5>
+                                }
+                                @*<h4 class="mr-1">@Html.DisplayFor(model => item1.Price) :-</h4>*@
                             </div>
                             <h6 class="text-success"></h6>
                             <div class="d-flex flex-column mt-4">

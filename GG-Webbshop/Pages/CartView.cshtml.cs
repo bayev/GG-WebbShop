@@ -32,13 +32,14 @@ namespace GG_Webbshop.Pages
         [BindProperty(SupportsGet = true)]
         public string PaymentMethod { get; set; }
 
+        public decimal TotalDiscount { get; set; }
 
         public decimal VATprice { get; set; }
         [BindProperty(SupportsGet = true)]
         public UserLoginResponseModel user { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public string ShippingFee { get;  set; }
+        public string ShippingFee { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -151,6 +152,8 @@ namespace GG_Webbshop.Pages
                     foreach (var item in c2pRM)
                     {
                         tempPrice = item.Price;
+
+
                         for (int i = 1; i < item.Amount; i++)
                         {
                             if (item.Amount == 1)
@@ -163,9 +166,17 @@ namespace GG_Webbshop.Pages
                         }
                         TotalPrice += item.Price;
                     }
-                    
-                    VATprice = Math.Round((decimal)TotalPrice * (decimal)0.75, 2);
 
+                    foreach (var item in c2pRM)
+                    {
+                        if (item.Discount != default)
+                        {
+                            TotalDiscount += item.Price * (item.Discount / 100);
+                        }
+                    }
+
+                    VATprice = Math.Round((decimal)(TotalPrice - TotalDiscount) * (decimal)0.75, 2);
+                    TotalPrice = Math.Round(TotalPrice, 2);
                     return Page();
                 }
                 if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)

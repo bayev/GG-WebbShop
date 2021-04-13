@@ -46,6 +46,9 @@ namespace GG_Webbshop.Models.ResponseModel
 
         [JsonProperty("c2pID")]
         public string C2PId { get; set; }
+
+        [JsonProperty("discount")]
+        public decimal Discount { get; set; }
     }
     public partial class c2pResponseModel
     {

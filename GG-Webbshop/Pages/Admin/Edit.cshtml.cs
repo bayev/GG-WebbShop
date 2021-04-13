@@ -21,6 +21,8 @@ namespace GG_Webbshop.Pages.Admin
         public string Id { get; set; }
         [BindProperty(SupportsGet = true)]
         public AllProductsResponseModel Product { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public string highlightedValue { get; set; }
         public EditModel()
         {
 
@@ -73,6 +75,7 @@ namespace GG_Webbshop.Pages.Admin
 
         public async Task<IActionResult> OnPostAsync(string id)
         {
+            Product.Highlighted = highlightedValue == "Ja" ? true : false;
             id = Id;
             var values = new Dictionary<string, string>()
                  {
@@ -86,7 +89,9 @@ namespace GG_Webbshop.Pages.Admin
                     {"CreateDate", $"{Product.CreateDate}"},
                     {"Stock", $"{Product.Stock}"},
                     {"Size", $"{Product.Size}"},
-                    {"Brand", $"{Product.Brand}"}
+                    {"Brand", $"{Product.Brand}"},
+                    {"Discount", $"{Product.Discount}"},
+                    {"Highlighted", $"{Product.Highlighted}" }
                  };
 
             byte[] tokenByte;

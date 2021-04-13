@@ -24,7 +24,6 @@ function CatUrl4() {
 function CatUrl5() {
     window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('Shirt').value;
 }
-
 function scrollDown() {
     var x = document.getElementById("PaymentDiv");
     if (x.style.display === "none") {
@@ -43,13 +42,9 @@ function infoDivShow() {
     }
     window.scrollBy(0, 500);
 }
+function reaUrl() {
+    window.location.href = 'SearchResult?id=rea';
+};
 
-//$(document).ready(function () {
-
-//    $('.radio-group .radio').click(function () {
-//        $('.radio').addClass('gray');
-//        $(this).removeClass('gray');
-//    });
-//});
 
 

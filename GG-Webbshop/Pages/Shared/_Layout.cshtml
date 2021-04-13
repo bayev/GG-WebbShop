@@ -39,13 +39,18 @@
                                 </div>
                             </li>
                         </ul>
+                        <div>
+                            <div class="form-inline my-2 my-lg-0" style="padding-right : 10px">
+                                <button id="reaButton" type="button" class="btn btn-secondary bg-danger text-white" onclick="reaUrl();">Rea</button>
+                            </div>
+                        </div>
                         <div class="align-content-center">
                             <div class="form-inline my-2 my-lg-0">
                                 <input class="form-control mr-sm-2" id="searchInput" type="text" placeholder="Sök" aria-label="Search" autocomplete="off">
                                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn" onclick="setUrl();">Sök</button>
                             </div>
                         </div>
-                            <a href="/CartView" class="nav-link" id="shopping-cart"><i class="bi bi-minecart"></i> Varukorg</a>
+                        <a href="/CartView" class="nav-link" id="shopping-cart"><i class="bi bi-minecart"></i> Varukorg</a>
                         @using GG_Webbshop.Pages
 
                         @{bool returnTokenValue = TokenChecker.UserStatus;}
@@ -58,8 +63,9 @@
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right bg-dark">
                                     <a href="/LogInView" class="nav-link" id="logg-in-icon"><i class="bi bi-door-open"></i> Logga in</a>
-                                    <a href="/RegisterPage" class="nav-link" id="Register-icon"><i class="bi bi-person-plus"></i> Registrera dig</a>
+                                    <a href="/RegisterPage" class="nav-link" id="Register-icon"><i class="bi bi-person-plus"></i> Registrera dig</a>                                   
                                     <a href="/AboutUsPage" class="nav-link" id="Register-icon"><i class="bi bi-info-circle"></i> Om oss</a>
+                                    <a href="/ExposedApiView" class="nav-link" id="Register-icon">För utvecklare</a>
                                 </div>
                             </div>
                         }
