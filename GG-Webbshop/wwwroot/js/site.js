@@ -7,11 +7,23 @@ function setUrl() {
 };
 
 function CatUrl() {
-    var x = document.getElementById("catInput").value;
-    console.log(x);
-    window.location.href = `https://localhost:44384/CategoryResultPage?=${x}`;
-    /*window.location.href = 'CategoryResultPage?QueryString=' + document.getElementByClassName('catInput').value;*/
-};
+    window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('searchInput').value;
+}
+function CatUrl1() {
+    window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('Sweater').value;
+}
+function CatUrl2() {
+    window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('Accessories').value;
+}
+function CatUrl3() {
+    window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('Blazer').value;
+}
+function CatUrl4() {
+    window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('Pants').value;
+}
+function CatUrl5() {
+    window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('Shirt').value;
+}
 
 function scrollDown() {
     var x = document.getElementById("PaymentDiv");

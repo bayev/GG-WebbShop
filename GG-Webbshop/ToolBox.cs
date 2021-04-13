@@ -12,7 +12,6 @@ namespace GG_Webbshop
         public static string LoggedInUserID { get; set; }
         public static string userID { get; set; }
         public static string ActiveRole { get; set; }
-        public static string CatagoryInput { get; set; }
         public static bool IsValidEmail(string email)
         {
 

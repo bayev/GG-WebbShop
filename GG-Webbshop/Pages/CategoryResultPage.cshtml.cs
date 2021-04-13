@@ -1,11 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RestSharp;
+using System;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace GG_Webbshop.Pages
 {
@@ -21,10 +19,31 @@ namespace GG_Webbshop.Pages
         [BindProperty]
         public string Message { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string QueryString) //HÄMTA PRODUCT HÄR
+        public async Task<IActionResult> OnGetAsync() //HÄMTA PRODUCT HÄR
         {
+            RestClient client;
+            if (string.IsNullOrEmpty(QueryString))
+            {
+                client = new RestClient($"https://localhost:44309/query/all");
+            }
+            else
+            {
+                client = new RestClient($"https://localhost:44309/Algorithm/category/{QueryString}");
+            }
 
-         
+            RestRequest request = new RestRequest
+            {
+                Method = Method.GET
+            };
+            request.Parameters.Clear();
+
+            IRestResponse response = client.Execute(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var model = AllProductsResponseModel.FromJson(response.Content);
+                Product = model;
+            }
+
             if (ProductId != null)
             {
                 string token = null;
@@ -72,25 +91,6 @@ namespace GG_Webbshop.Pages
                     return Page();
                 }
                 return Page();
-            }
-            if (QueryString != null)
-            {
-                
-
-                RestClient client = new RestClient($"https://localhost:44309/Algorithm/category/{QueryString}");
-                RestRequest request = new RestRequest
-                {
-                    Method = Method.GET
-                };
-                request.Parameters.Clear();
-
-                IRestResponse response = client.Execute(request);
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    var model = AllProductsResponseModel.FromJson(response.Content);
-                    Product = model;
-                }
-
             }
             return Page();
         }

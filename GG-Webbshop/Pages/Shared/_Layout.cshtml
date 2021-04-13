@@ -28,26 +28,12 @@
                                     <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white bi bi-list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Kategorier</button>
 
                                     <div class="dropdown-menu dropdown-menu-right bg-dark">
-
-                                        
-                                        <button class="dropdown-item text-white bg-dark" id="catInput" value="Sweater" onclick="CatUrl();" type="button">Tröjor</button>
-                                       
-                                        <a href="./CategoryResultPage?@ToolBox.CatagoryInput=Accessories">
-                                            <button class="dropdown-item text-white bg-dark" type="button">Accessoarer</button>
-                                        </a>
-                                        <a href="./CategoryResultPage?@ToolBox.CatagoryInput=Blazer">
-                                            <button class="dropdown-item text-white bg-dark" type="button">Blazer</button>
-                                        </a>
-                                        <a href="./CategoryResultPage?@ToolBox.CatagoryInput=Pants">
-                                            <button class="dropdown-item text-white bg-dark" type="button">Byxor</button>
-                                        </a>
-                                        <a href="./CategoryResultPage?@ToolBox.CatagoryInput=Shirt">
-                                            <button class="dropdown-item text-white bg-dark" type="button">T-shirts</button>
-                                        </a>
-
-                                        
-                                        @*<a class="btn btn-outline-success my-2 my-sm-0" id="Sweater" onclick="CatUrl();">Tröja</a>*@
-
+                                        <button class="dropdown-item text-white bg-dark" id="searchInput" value="" onclick="CatUrl();">Alla Produkter</button>
+                                        <button class="dropdown-item text-white bg-dark" id="Sweater" value="Sweater" onclick="CatUrl1();" type="button">Tröjor</button>
+                                        <button class="dropdown-item text-white bg-dark" id="Accessories" value="Accessories" onclick="CatUrl2();" type="button">Accessoarer</button>
+                                        <button class="dropdown-item text-white bg-dark" id="Blazer" value="Blazer" onclick="CatUrl3();" type="button">Blazer</button>
+                                        <button class="dropdown-item text-white bg-dark" id="Pants" value="Pants" onclick="CatUrl4();" type="button">Byxor</button>
+                                        <button class="dropdown-item text-white bg-dark" id="Shirt" value="Shirt" onclick="CatUrl5();" type="button">Skjortor</button>
 
                                     </div>
                                 </div>
