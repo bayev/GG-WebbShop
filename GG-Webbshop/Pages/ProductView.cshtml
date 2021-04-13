@@ -32,7 +32,7 @@ else
 
                         @if (Model.Product.Discount != default)
                         { 
-                            <h4><strike>@Model.Product.Price :-</strike></h4><h4 class="text-danger">Reapris @Math.Round((Model.Product.Price - (Model.Product.Price * (Model.Product.Discount / 100)))) :- </h4>
+                            <h4><strike>@Model.Product.Price :-</strike></h4><h4 class="text-danger"> Rea @Math.Round((Model.Product.Price - (Model.Product.Price * (Model.Product.Discount / 100)))) :- </h4>
                         }
                         else
                         {
