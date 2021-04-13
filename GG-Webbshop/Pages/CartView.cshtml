@@ -194,14 +194,14 @@ else
                         <div class="col-lg-6">
                             <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold ">Välja fraktalternativ </div>
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="defaultUnchecked" name="shippingFee" value="79" onclick="DynamicFee()">
+                                <input type="radio" class="custom-control-input" id="defaultUnchecked" name="shippingFee" value="79" onchange="DynamicFee()">
                                 <label class="custom-control-label text-muted" for="defaultUnchecked">Hem leverans</label>
                                 <ul class="list-unstyled mb-4">
                                     <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Hem Leverans: @Model.user.Billingaddress (1-2 dagar)</strong><strong>79 SEK</strong></li>
                                 </ul>
                             </div>
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="defaultChecked" name="shippingFee" checked value="0" onclick="DynamicFee()">
+                                <input type="radio" class="custom-control-input" id="defaultChecked" name="shippingFee" checked value="0" onchange="DynamicFee()">
                                 <label class="custom-control-label text-muted" for="defaultChecked">Insta Box</label>
                                 <ul class="list-unstyled mb-4">
                                     <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Instabox Store: @Model.user.Billingaddress (imorgon - 15.50)</strong><strong>Gratis</strong></li>
