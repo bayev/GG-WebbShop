@@ -51,61 +51,64 @@
                                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn" onclick="setUrl();">Sök</button>
                             </div>
                         </div>
-                        <a href="/CartView" class="nav-link" id="shopping-cart"><i class="bi bi-minecart"></i> Varukorg</a>
-                        @using GG_Webbshop.Pages
-
-                        @{bool returnTokenValue = TokenChecker.UserStatus;}
-
-                        @if (returnTokenValue == false)
+                        @if (ToolBox.ActiveRole != "root")
                         {
-                            <div class="btn-group bg-dark">
-                                <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white bi bi-list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Menyval
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right bg-dark">
-                                    <a href="/LogInView" class="nav-link" id="logg-in-icon"><i class="bi bi-door-open"></i> Logga in</a>
-                                    <a href="/RegisterPage" class="nav-link" id="Register-icon"><i class="bi bi-person-plus"></i> Registrera dig</a>                                   
-                                    <a href="/AboutUsPage" class="nav-link" id="Register-icon"><i class="bi bi-info-circle"></i> Om oss</a>
-                                    <a href="/ExposedApiView" class="nav-link" id="Register-icon"><i class="bi bi-code-square"></i> För utvecklare</a>
-                                </div>
-                            </div>
+                            <a href="/CartView" class="nav-link" id="shopping-cart"><i class="bi bi-minecart"></i> Varukorg</a>
                         }
-                        @if (returnTokenValue == true)
-                        {
-                            @if (ToolBox.ActiveRole == "root")
+                            @using GG_Webbshop.Pages
+
+                            @{bool returnTokenValue = TokenChecker.UserStatus;}
+
+                            @if (returnTokenValue == false)
                             {
                                 <div class="btn-group bg-dark">
-                                    <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Välkommen @TokenChecker.UserName
+                                    <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white bi bi-list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Menyval
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right bg-dark">
-                                        <a href="/Admin" class="nav-link" id="Register-icon" type="button"><i class="bi bi-person"></i> Admin</a>
-                                        <a href="/Admin/AdminOrderView"class="nav-link" id="Register-icon" type="button"><i class="bi bi-calendar2-check"></i> Granska Ordrar</a>
-                                        <a href="/LogOut" class="nav-link" id="Register-icon" type="button"><i class="bi bi-door-open"></i> Logga ut</a>
+                                        <a href="/LogInView" class="nav-link" id="logg-in-icon"><i class="bi bi-door-open"></i> Logga in</a>
+                                        <a href="/RegisterPage" class="nav-link" id="Register-icon"><i class="bi bi-person-plus"></i> Registrera dig</a>
                                         <a href="/AboutUsPage" class="nav-link" id="Register-icon"><i class="bi bi-info-circle"></i> Om oss</a>
-
+                                        <a href="/ExposedApiView" class="nav-link" id="Register-icon"><i class="bi bi-code-square"></i> För utvecklare</a>
                                     </div>
                                 </div>
                             }
-                            else
+                            @if (returnTokenValue == true)
                             {
-                                <div class="btn-group bg-dark">
-                                    <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Välkommen @TokenChecker.UserName
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right bg-dark">
-                                        <a href="/UserPage" class="nav-link" id="Register-icon" type="button"><i class="bi bi-person"></i> Mina Sidor</a>
-                                        <a href="/LogOut" class="nav-link" id="Register-icon" type="button"><i class="bi bi-door-open"></i> Logga ut</a>
-                                        <a href="/AboutUsPage" class="nav-link" id="Register-icon"><i class="bi bi-info-circle"></i> Om oss</a>
+                                @if (ToolBox.ActiveRole == "root")
+                                {
+                                    <div class="btn-group bg-dark">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Välkommen @TokenChecker.UserName
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right bg-dark">
+                                            <a href="/Admin" class="nav-link" id="Register-icon" type="button"><i class="bi bi-person"></i> Admin</a>
+                                            <a href="/Admin/AdminOrderView" class="nav-link" id="Register-icon" type="button"><i class="bi bi-calendar2-check"></i> Granska Ordrar</a>
+                                            <a href="/LogOut" class="nav-link" id="Register-icon" type="button"><i class="bi bi-door-open"></i> Logga ut</a>
+                                            <a href="/AboutUsPage" class="nav-link" id="Register-icon"><i class="bi bi-info-circle"></i> Om oss</a>
+
+                                        </div>
                                     </div>
-                                </div>
+                                }
+                                else
+                                {
+                                    <div class="btn-group bg-dark">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Välkommen @TokenChecker.UserName
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right bg-dark">
+                                            <a href="/UserPage" class="nav-link" id="Register-icon" type="button"><i class="bi bi-person"></i> Mina Sidor</a>
+                                            <a href="/LogOut" class="nav-link" id="Register-icon" type="button"><i class="bi bi-door-open"></i> Logga ut</a>
+                                            <a href="/AboutUsPage" class="nav-link" id="Register-icon"><i class="bi bi-info-circle"></i> Om oss</a>
+                                        </div>
+                                    </div>
+
+                                }
 
                             }
 
-                        }
 
-
-                    </div>
+                        </div>
                 </div>
             </nav>
         </header>
