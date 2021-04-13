@@ -69,12 +69,11 @@
                 @Html.DisplayFor(modelItem => item.OrderStatus)
             </td>
             
-            @*<td> @{var message = Model.ConfirmOrderStatus ? "Packas" : "Bekräftad";} @message
-            <form method="post">
-            </form>
-                <a class="btn btn-outline-primary btn-sm" asp-for="@item.OrderStatus" asp-route-id="@item.Id">Bekräfta</a>
+            <td> 
+          
+                <a class="btn btn-outline-primary btn-sm" asp-page="./AdminReviewOrder" asp-route-id="@item.Id">Bekräfta</a>
 
-            </td>*@
+            </td>
         </tr>
                     }
                     </tbody>

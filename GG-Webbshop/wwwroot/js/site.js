@@ -5,6 +5,26 @@
 function setUrl() {
     window.location.href = 'SearchResult?id=' + document.getElementById('searchInput').value;
 };
+
+function CatUrl() {
+    window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('searchInput').value;
+}
+function CatUrl1() {
+    window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('Sweater').value;
+}
+function CatUrl2() {
+    window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('Accessories').value;
+}
+function CatUrl3() {
+    window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('Blazer').value;
+}
+function CatUrl4() {
+    window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('Pants').value;
+}
+function CatUrl5() {
+    window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('Shirt').value;
+}
+
 function scrollDown() {
     var x = document.getElementById("PaymentDiv");
     if (x.style.display === "none") {
