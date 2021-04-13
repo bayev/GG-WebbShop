@@ -7,7 +7,7 @@ function setUrl() {
 };
 
 function CatUrl() {
-    window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('searchInput').value;
+    window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('AllProducts').value;s
 }
 function CatUrl1() {
     window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('Sweaters').value;
