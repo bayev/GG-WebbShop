@@ -14,6 +14,7 @@ namespace GG_Webbshop.Pages.Admin
     {
         [BindProperty(SupportsGet = true)]
         public OrderResponseModel[] Orders { get; set; }
+        
 
         //[BindProperty]
         //public bool ConfirmOrderStatus { get; set; }

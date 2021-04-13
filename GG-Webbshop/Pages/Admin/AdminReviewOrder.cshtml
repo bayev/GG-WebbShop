@@ -1,0 +1,31 @@
+﻿@page
+@model GG_Webbshop.Pages.AdminReviewOrderModel
+@{
+}
+
+<div class="card">
+    <h5 class="card-header">@Model.Id</h5>
+    <div class="card-body">
+        @foreach (var item in Model.orders.OrderDetails)
+        {
+
+            <h5 class="card-title">@item.ProductName</h5>
+            <p class="card-title">@item.Quantity</p>
+            <p class="card-title">@item.Price</p>
+        }
+        <h6 class="card-title">@Model.orders.OrderStatus</h6>
+        
+        <form method="post">
+            <button type="submit" class="btn btn-primary">Skicka order</button>
+        </form>
+        <a asp-page="./AdminOrderView" class="btn btn-primary">Tillbaka</a>
+    </div>
+</div>
+
+
+
+
+
+
+
+
