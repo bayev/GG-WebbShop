@@ -1,0 +1,18 @@
+﻿@page
+@model GG_Webbshop.Pages.ExposedApiViewModel
+@{
+}
+<div class="flex-lg-row text-center">
+    <div>
+        <bold>För att använda vårat API och därmed få hela vårt sortiment i Json-format kan du använda följande URL:</bold>
+        <p><a href="https://localhost:44309/products/ggproducts"></a>https://localhost:44309/products/ggproducts</p>
+    </div>
+    <div>
+        Method: <bold>GET</bold><br />
+        Response: <bold>Json</bold><br />
+        Expected behaviour: 200 OK with json array if everyhing went ok or 400 BadRequest if it did'nt.<br />
+    </div>
+    <div>
+        <a class="btn btn-dark" id="darkBtn" href="#" onclick="history.go(-1)">Tillbaka</a>
+    </div>
+</div>
