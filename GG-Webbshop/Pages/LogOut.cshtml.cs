@@ -11,6 +11,7 @@ namespace GG_Webbshop.Pages
     {
         public IActionResult OnGet()
         {
+            ToolBox.ActiveRole = null;
             TokenChecker.UserStatus = false;
             HttpContext.Session.Clear();
             return RedirectToPage("/index");

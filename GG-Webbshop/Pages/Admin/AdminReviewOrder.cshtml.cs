@@ -95,7 +95,7 @@ namespace GG_Webbshop.Pages
 
                 return NotFound();
             }
-            return RedirectToPage("./AdminOrderView");
+            return RedirectToPage("/AdminOrderView");
 
         }
 

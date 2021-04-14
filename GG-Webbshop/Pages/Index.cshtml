@@ -16,12 +16,16 @@
                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                 </ol>
-                <div class="carousel-inner rounded-lg" role="listbox">
+                <div class="carousel-inner rounded-lg" role="listbox" style="cursor: pointer;">
                     <div class="carousel-item active">
-                        <img class="d-block img-fluid" src="~/img/SliderOne (1) (2).jpg" alt="First slide">
+                        <a onclick="CatUrl();">
+                            <img class="d-block img-fluid" src="~/img/SliderOne (1) (2).jpg" alt="First slide">
+                        </a>
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block img-fluid" src="~/img/SliderTwo.jpg" alt="Second slide">
+                        <a onclick="reaUrl();">
+                            <img class="d-block img-fluid" src="~/img/SliderTwo.jpg" alt="Second slide">
+                        </a>
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -49,7 +53,7 @@
                                     </h4>
                                     @if (item.Discount != default)
                                     {
-                                        <h5><strike>@item.Price :-</strike></h5><h5 class="text-danger">Reapris @Math.Round((item.Price - (item.Price * (item.Discount / 100)))) :-</h5>
+                                        <h5><strike>@item.Price :-</strike></h5><h5 class="text-danger"> Rea @Math.Round((item.Price - (item.Price * (item.Discount / 100)))) :-</h5>
                                     }
                                     else
                                     {
@@ -80,7 +84,7 @@
                                     </h4>
                                     @if (item.Discount != default)
                                     {
-                                        <h5><strike>@item.Price :-</strike></h5><h5 class="text-danger">Reapris @Math.Round((item.Price - (item.Price * (item.Discount / 100)))) :-</h5>
+                                        <h5><strike>@item.Price :-</strike></h5><h5 class="text-danger"> Rea @Math.Round((item.Price - (item.Price * (item.Discount / 100)))) :-</h5>
                                     }
                                     else
                                     {
@@ -111,7 +115,7 @@
                                     </h4>
                                     @if (item.Discount != default)
                                     {
-                                        <h5><strike>@item.Price :- </strike></h5><h5 class="text-danger">Reapris @Math.Round((item.Price - (item.Price * (item.Discount / 100)))) :-</h5>
+                                        <h5><strike>@item.Price :- </strike></h5><h5 class="text-danger"> Rea @Math.Round((item.Price - (item.Price * (item.Discount / 100)))) :-</h5>
                                     }
                                     else
                                     {

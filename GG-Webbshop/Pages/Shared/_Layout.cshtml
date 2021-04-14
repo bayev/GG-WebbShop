@@ -28,13 +28,14 @@
                                     <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white bi bi-list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Kategorier</button>
 
                                     <div class="dropdown-menu dropdown-menu-right bg-dark">
-                                        <button class="dropdown-item text-white bg-dark" id="searchInput" value="" onclick="CatUrl();">Alla Produkter</button>
-                                        <button class="dropdown-item text-white bg-dark" id="Sweater" value="Sweater" onclick="CatUrl1();" type="button">Tröjor</button>
+                                        <button class="dropdown-item text-white bg-dark" id="AllProducts" value="" onclick="CatUrl();">Alla Produkter</button>
+                                        <button class="dropdown-item text-white bg-dark" id="Sweaters" value="Sweaters" onclick="CatUrl1();" type="button">Tröjor</button>
                                         <button class="dropdown-item text-white bg-dark" id="Accessories" value="Accessories" onclick="CatUrl2();" type="button">Accessoarer</button>
-                                        <button class="dropdown-item text-white bg-dark" id="Blazer" value="Blazer" onclick="CatUrl3();" type="button">Blazer</button>
+                                        <button class="dropdown-item text-white bg-dark" id="Blazers" value="Blazers" onclick="CatUrl3();" type="button">Blazers</button>
                                         <button class="dropdown-item text-white bg-dark" id="Pants" value="Pants" onclick="CatUrl4();" type="button">Byxor</button>
-                                        <button class="dropdown-item text-white bg-dark" id="Shirt" value="Shirt" onclick="CatUrl5();" type="button">Skjortor</button>
-
+                                        <button class="dropdown-item text-white bg-dark" id="Shirts" value="Shirts" onclick="CatUrl5();" type="button">Skjortor</button>
+                                        <button class="dropdown-item text-white bg-dark" id="T-shirts" value="T-shirts" onclick="CatUrl6();" type="button">T-shirts</button>
+                                        <button class="dropdown-item text-white bg-dark" id="Diverse" value="Diverse" onclick="CatUrl7();" type="button">Övrigt</button>
                                     </div>
                                 </div>
                             </li>
@@ -50,61 +51,64 @@
                                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn" onclick="setUrl();">Sök</button>
                             </div>
                         </div>
-                        <a href="/CartView" class="nav-link" id="shopping-cart"><i class="bi bi-minecart"></i> Varukorg</a>
-                        @using GG_Webbshop.Pages
-
-                        @{bool returnTokenValue = TokenChecker.UserStatus;}
-
-                        @if (returnTokenValue == false)
+                        @if (ToolBox.ActiveRole != "root")
                         {
-                            <div class="btn-group bg-dark">
-                                <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white bi bi-list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Menyval
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right bg-dark">
-                                    <a href="/LogInView" class="nav-link" id="logg-in-icon"><i class="bi bi-door-open"></i> Logga in</a>
-                                    <a href="/RegisterPage" class="nav-link" id="Register-icon"><i class="bi bi-person-plus"></i> Registrera dig</a>                                   
-                                    <a href="/AboutUsPage" class="nav-link" id="Register-icon"><i class="bi bi-info-circle"></i> Om oss</a>
-                                    <a href="/ExposedApiView" class="nav-link" id="Register-icon">För utvecklare</a>
-                                </div>
-                            </div>
+                            <a href="/CartView" class="nav-link" id="shopping-cart"><i class="bi bi-minecart"></i> Varukorg</a>
                         }
-                        @if (returnTokenValue == true)
-                        {
-                            @if (ToolBox.ActiveRole == "root")
+                            @using GG_Webbshop.Pages
+
+                            @{bool returnTokenValue = TokenChecker.UserStatus;}
+
+                            @if (returnTokenValue == false)
                             {
                                 <div class="btn-group bg-dark">
-                                    <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Välkommen @TokenChecker.UserName
+                                    <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white bi bi-list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Menyval
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right bg-dark">
-                                        <a href="/Admin" class="dropdown-item text-white bg-dark" type="button">Admin</a>
-                                        <a href="./Admin/AdminOrderView" class="dropdown-item text-white bg-dark" type="button">Granska Ordrar</a>
-                                        <a href="/LogOut" class="dropdown-item text-white bg-dark" type="button">Logga ut</a>
+                                        <a href="/LogInView" class="nav-link" id="logg-in-icon"><i class="bi bi-door-open"></i> Logga in</a>
+                                        <a href="/RegisterPage" class="nav-link" id="Register-icon"><i class="bi bi-person-plus"></i> Registrera dig</a>
                                         <a href="/AboutUsPage" class="nav-link" id="Register-icon"><i class="bi bi-info-circle"></i> Om oss</a>
-
+                                        <a href="/ExposedApiView" class="nav-link" id="Register-icon"><i class="bi bi-code-square"></i> För utvecklare</a>
                                     </div>
                                 </div>
                             }
-                            else
+                            @if (returnTokenValue == true)
                             {
-                                <div class="btn-group bg-dark">
-                                    <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Välkommen @TokenChecker.UserName
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right bg-dark">
-                                        <a href="/UserPage" class="dropdown-item text-white bg-dark" type="button">Mina Sidor</a>
-                                        <a href="/LogOut" class="dropdown-item text-white bg-dark" type="button">Logga ut</a>
-                                        <a href="/AboutUsPage" class="nav-link" id="Register-icon"><i class="bi bi-info-circle"></i> Om oss</a>
+                                @if (ToolBox.ActiveRole == "root")
+                                {
+                                    <div class="btn-group bg-dark">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Välkommen @TokenChecker.UserName
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right bg-dark">
+                                            <a href="/Admin" class="nav-link" id="Register-icon" type="button"><i class="bi bi-person"></i> Admin</a>
+                                            <a href="/AdminOrderView" class="nav-link" id="Register-icon" type="button"><i class="bi bi-calendar2-check"></i> Granska Ordrar</a>
+                                            <a href="/LogOut" class="nav-link" id="Register-icon" type="button"><i class="bi bi-door-open"></i> Logga ut</a>
+                                            <a href="/AboutUsPage" class="nav-link" id="Register-icon"><i class="bi bi-info-circle"></i> Om oss</a>
+
+                                        </div>
                                     </div>
-                                </div>
+                                }
+                                else
+                                {
+                                    <div class="btn-group bg-dark">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Välkommen @TokenChecker.UserName
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right bg-dark">
+                                            <a href="/UserPage" class="nav-link" id="Register-icon" type="button"><i class="bi bi-person"></i> Mina Sidor</a>
+                                            <a href="/LogOut" class="nav-link" id="Register-icon" type="button"><i class="bi bi-door-open"></i> Logga ut</a>
+                                            <a href="/AboutUsPage" class="nav-link" id="Register-icon"><i class="bi bi-info-circle"></i> Om oss</a>
+                                        </div>
+                                    </div>
+
+                                }
 
                             }
 
-                        }
 
-
-                    </div>
+                        </div>
                 </div>
             </nav>
         </header>

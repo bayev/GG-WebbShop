@@ -7,22 +7,28 @@ function setUrl() {
 };
 
 function CatUrl() {
-    window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('searchInput').value;
+    window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('AllProducts').value;s
 }
 function CatUrl1() {
-    window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('Sweater').value;
+    window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('Sweaters').value;
 }
 function CatUrl2() {
     window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('Accessories').value;
 }
 function CatUrl3() {
-    window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('Blazer').value;
+    window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('Blazers').value;
 }
 function CatUrl4() {
     window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('Pants').value;
 }
 function CatUrl5() {
-    window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('Shirt').value;
+    window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('Shirts').value;
+}
+function CatUrl6() {
+    window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('T-shirts').value;
+}
+function CatUrl7() {
+    window.location.href = 'CategoryResultPage?QueryString=' + document.getElementById('Diverse').value;
 }
 function scrollDown() {
     var x = document.getElementById("PaymentDiv");

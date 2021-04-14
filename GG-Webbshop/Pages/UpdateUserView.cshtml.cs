@@ -23,12 +23,7 @@ namespace GG_Webbshop.Pages
 
         [BindProperty(SupportsGet = true)]
         public RegisterModel UpdateUser { get; set; }
-        [BindProperty]
-        public string Password1 { get; set; }
-        [BindProperty]
-        public string Password2 { get; set; }
-        [BindProperty]
-        public string PasswordMessage { get; set; }
+        
         [BindProperty]
         public string MailMatch { get; set; }
         public string ErrorMessage { get; set; }
@@ -127,19 +122,7 @@ namespace GG_Webbshop.Pages
 
             IRestResponse response1 = client1.Execute(request1);
 
-            //if(Password1 != null)
-            //{
-            //    if(Password1 == Password2)
-            //    {
-            //        //kod för att ändra lösenord mot APIET
-            //        return RedirectToPage("/UserPage");
-            //    }
-            //    else
-            //    {
-            //        PasswordMessage = "Lösenorden matchade inte, testa igen! Allt annat är dock uppdaterat";
-            //        return Page();
-            //    }
-            //}
+            
 
             string responseContent = response1.Content;
 
@@ -154,6 +137,8 @@ namespace GG_Webbshop.Pages
 
 
                 TokenChecker.UserName = user.Username;
+
+                
                 return RedirectToPage("./UserPage");
             }
             
