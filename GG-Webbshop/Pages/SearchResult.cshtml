@@ -55,7 +55,11 @@ else
                             <h6 class="text-success"></h6>
                             <div class="d-flex flex-column mt-4">
                                 <a class="btn btn-primary" href="/ProductView?id=@Html.DisplayFor(model => item1.Id)" role="button">Information</a><br />
-                                <a class="btn btn-primary" href="?ProductId=@Html.DisplayFor(model => item1.Id)" role="button">Lägg i kundvagn</a>
+                                @if (ToolBox.ActiveRole != "root")
+                                {
+                                     <a class="btn btn-primary" href="?ProductId=@Html.DisplayFor(model => item1.Id)" role="button">Lägg i kundvagn</a>
+                                }
+                                
                             </div>
                         </div>
                     </div>

@@ -31,7 +31,7 @@ else
                         <h3 class="card-title">@Model.Product.Name</h3>
 
                         @if (Model.Product.Discount != default)
-                        { 
+                        {
                             <h4><strike>@Model.Product.Price :-</strike></h4><h4 class="text-danger"> Rea @Math.Round((Model.Product.Price - (Model.Product.Price * (Model.Product.Discount / 100)))) :- </h4>
                         }
                         else
@@ -41,10 +41,13 @@ else
                         <p class="card-text">@Model.Product.Description</p>
 
                         <b>I lager: @Model.Product.Stock</b>
-
-                        <form method="post">
-                            <button type="submit" class="btn btn-dark">Lägg i kundvagnen</button>
-                        </form>
+                        @if (ToolBox.ActiveRole != "root")
+                        {
+                            <form method="post">
+                                 <button type="submit" class="btn btn-dark">Lägg i kundvagnen</button>
+                             </form>
+                        }
+                        
                     </div>
                 </div>
 
