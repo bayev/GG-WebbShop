@@ -127,30 +127,6 @@ namespace GG_Webbshop.Pages
 
                     }
                     return Page();
-
-
-
-
-                    // //// //// //// //// //// Recomended Products request
-
-                    //// //// //// //// //// ////NEDAN SKA BYTAS UT
-                    //RestClient client = new RestClient("https://localhost:44309/Query/all");
-                    //RestRequest request = new RestRequest
-                    //{
-                    //    Method = Method.GET
-                    //};
-                    //request.Parameters.Clear();
-
-                    //IRestResponse response = client.Execute(request);
-
-                    //if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    //{
-                    //var model = AllProductsResponseModel.FromJson(response.Content);
-
-                    //Product = model;
-
-
-
                 }
                 else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
                 {

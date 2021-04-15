@@ -8,7 +8,6 @@ namespace GG_Webbshop
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        //public int AddressId { get; set; }
         public decimal Amount { get; set; }
         public string OrderEmail { get; set; }
         public DateTime OrderDate { get; set; }
@@ -16,8 +15,6 @@ namespace GG_Webbshop
         public string PaymentMethod { get; set; }
 
         public IList<OrderDetail> OrderDetails { get; set; }
-        //public Address Addresses { get; set; }
-
         public User User { get; set; }
 
     }

@@ -61,16 +61,10 @@ namespace GG_Webbshop.Pages.Admin
 
         [BindProperty]
         public Product Product { get; set; }
-
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
-        {
-            
+        {            
             if (UploadFile != null)
-            {
-                
-
+            {              
                 var file = "./wwwroot/img/" + UploadFile.FileName;
                 var fileNameDoubleCheck = Directory.GetFiles("./wwwroot/img/");
                 foreach (var item in fileNameDoubleCheck)

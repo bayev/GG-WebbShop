@@ -76,7 +76,6 @@ namespace GG_Webbshop.Pages
                 ToolBox.LoggedInUserID = result.UserID;
                 ToolBox.ActiveRole = result.Role;
 
-                // Set value in session
                 byte[] tokenInByte = Encoding.ASCII.GetBytes(result.Token);
 
                 HttpContext.Session.Set(ToolBox.TokenName, tokenInByte);

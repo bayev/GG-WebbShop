@@ -71,9 +71,5 @@ namespace GG_Webbshop.Pages
             }
             return Page();
         }
-        //public async Task<IActionResult> OnPostsAsync()
-        //{
-
-        //}
     }
 }

@@ -13,11 +13,7 @@ namespace GG_Webbshop.Pages.Admin
     public class AdminOrderViewModel : PageModel
     {
         [BindProperty(SupportsGet = true)]
-        public OrderResponseModel[] Orders { get; set; }
-        
-
-        //[BindProperty]
-        //public bool ConfirmOrderStatus { get; set; }
+        public OrderResponseModel[] Orders { get; set; }       
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -49,11 +45,5 @@ namespace GG_Webbshop.Pages.Admin
             }
             return Page();
         }
-
-        //public async Task<IActionResult> OnPostAsync() 
-        //{
-
-        //    return Page();
-        //}
     }
 }

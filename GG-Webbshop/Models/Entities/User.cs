@@ -16,10 +16,5 @@ namespace GG_Webbshop
         public string Country { get; set; }
         public string Phone { get; set; }
 
-        public IList<Address> Addresses { get; set; }
-
-        //Will be added later.
-        // public int RoleId { get; set; }
-
     }
 }

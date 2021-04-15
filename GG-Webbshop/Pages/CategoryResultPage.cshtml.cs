@@ -19,7 +19,7 @@ namespace GG_Webbshop.Pages
         [BindProperty]
         public string Message { get; set; }
 
-        public async Task<IActionResult> OnGetAsync() //HÄMTA PRODUCT HÄR
+        public async Task<IActionResult> OnGetAsync()
         {
             RestClient client;
             if (string.IsNullOrEmpty(QueryString))

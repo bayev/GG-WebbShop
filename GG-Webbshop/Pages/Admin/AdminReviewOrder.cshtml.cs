@@ -15,13 +15,8 @@ namespace GG_Webbshop.Pages
         [BindProperty(SupportsGet = true)]
         public OrderResponseModel orders { get; set; }
 
-
         [BindProperty(SupportsGet = true)]
         public string Id { get; set; }
-
-
-        //[BindProperty]
-        //public bool ConfirmOrderStatus { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -38,7 +33,6 @@ namespace GG_Webbshop.Pages
                 string token = Encoding.ASCII.GetString(tokenByte);
                 if (!String.IsNullOrEmpty(token))
                 {
-
                     RestClient client = new RestClient($"https://localhost:44309/admin/GetOrderStatus/{id}");
                     RestRequest request = new RestRequest
                     {
@@ -50,9 +44,6 @@ namespace GG_Webbshop.Pages
                     IRestResponse response = client.Execute(request);
                     var model = OrderResponseModel.FromJsonSingle(response.Content);
                     orders = model;
-
-
-
                 }
             }
             catch (Exception)

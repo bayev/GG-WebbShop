@@ -25,7 +25,7 @@ namespace GG_Webbshop.Pages
         {
         }
 
-        public async Task<IActionResult> OnGetAsync() //HÄMTA PRODUCT HÄR
+        public async Task<IActionResult> OnGetAsync() 
         {
             RestClient client;
 
